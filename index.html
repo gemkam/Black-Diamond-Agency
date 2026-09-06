@@ -1,305 +1,425 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-smooth dark">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Black Diamond | Executive Hub</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Black Diamond | Executive Portfolio & Catalog Hub</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600;1,800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkhub: {
+                            bg: '#0a0a0a',     /* Deep Rich Black */
+                            surface: '#141414',  /* Dark Charcoal Surface */
+                            card: '#1a1a1a',     /* Elevated Card Black */
+                            border: '#262626',   /* Subtle Dark Border */
+                            accent: '#d4af37',   /* Luxury Gold Accent */
+                            muted: '#a3a3a3'     /* Soft Gray */
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        heading: ['"Playfair Display"', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
     <style>
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #030712;
-            color: #f8fafc;
+            background-color: #0a0a0a;
+            background-image: radial-gradient(#1f1f1f 1px, transparent 1px);
+            background-size: 32px 32px;
+            -webkit-tap-highlight-color: transparent;
         }
-        .gold-gradient-text {
-            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
+        .card-image-container img {
+            transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .group:hover .card-image-container img {
+            transform: scale(1.06);
+        }
+
+        /* Slideshow Background Slide Styles */
+        .hero-slide {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out, transform 6s ease-in-out;
+            transform: scale(1);
+        }
+        .hero-slide.active {
+            opacity: 1;
+            transform: scale(1.08);
+        }
+
+        /* Pure Static Gold/White Gradient Text without moving shade */
+        .static-gold-title {
+            background: linear-gradient(135deg, #fde047 0%, #ca8a04 50%, #ffffff 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.95)) drop-shadow(0 1px 2px rgba(0, 0, 0, 1));
+            -webkit-text-stroke: 1px rgba(0, 0, 0, 0.4);
         }
-        .gold-border-glow {
-            box-shadow: 0 0 25px -5px rgba(245, 158, 11, 0.15);
+
+        /* Twinkling Sparkles Animation over "Black Diamond" */
+        @keyframes sparkleTwinkle {
+            0%, 100% {
+                opacity: 0.2;
+                transform: scale(0.6) rotate(0deg);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.2) rotate(180deg);
+            }
         }
-        .gold-border-glow:hover {
-            box-shadow: 0 0 30px 0px rgba(245, 158, 11, 0.35);
+
+        .sparkle-container {
+            position: relative;
+            display: inline-block;
         }
+
+        .sparkle {
+            position: absolute;
+            background: #fde047;
+            clip-path: polygon(50% 0%, 61% 35%, 100% 50%, 61% 65%, 50% 100%, 39% 65%, 0% 50%, 39% 35%);
+            animation: sparkleTwinkle 2.5s ease-in-out infinite;
+            pointer-events: none;
+            box-shadow: 0 0 8px #fde047;
+        }
+
+        .sparkle-1 { width: 14px; height: 14px; top: -10px; left: 15%; animation-delay: 0s; }
+        .sparkle-2 { width: 10px; height: 10px; top: -14px; right: 25%; animation-delay: 0.8s; background: #ffffff; box-shadow: 0 0 10px #ffffff; }
+        .sparkle-3 { width: 12px; height: 12px; bottom: -8px; left: 40%; animation-delay: 1.5s; }
+        .sparkle-4 { width: 9px; height: 9px; top: 30%; right: -12px; animation-delay: 0.4s; background: #ffffff; box-shadow: 0 0 8px #ffffff; }
     </style>
 </head>
-<body class="antialiased selection:bg-amber-500 selection:text-black min-h-screen flex flex-col justify-between">
+<body class="text-stone-200 antialiased selection:bg-darkhub-accent selection:text-stone-950">
 
-    <!-- NAVIGATION BAR -->
-    <header class="sticky top-0 z-50 backdrop-blur-md bg-gray-950/80 border-b border-gray-800/80">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <a href="#" onclick="playClickSFX()" class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-600 to-amber-400 flex items-center justify-center text-black font-black text-xl shadow-lg shadow-amber-500/20">
-                    <i class="fa-solid fa-gem text-lg"></i>
-                </div>
-                <span class="text-xl font-extrabold tracking-wider text-white uppercase">Black <span class="gold-gradient-text">Diamond</span></span>
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-50 bg-darkhub-bg/90 backdrop-blur-md border-b border-darkhub-border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
+            <a href="#" class="text-xl sm:text-2xl font-heading font-bold text-white tracking-tight flex items-center gap-2">
+                Black <span class="text-darkhub-accent font-normal italic">Diamond</span>
             </a>
+            
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex items-center gap-8 text-xs font-semibold uppercase tracking-widest text-darkhub-muted">
+                <a href="#overview" class="hover:text-darkhub-accent transition-colors">Overview</a>
+                <a href="#catalogs" class="hover:text-darkhub-accent transition-colors">All Catalogs</a>
+                <a href="mailto:contact@kstech.com" class="px-6 py-2.5 bg-darkhub-accent text-stone-950 rounded-lg font-bold hover:bg-yellow-500 transition-all shadow-lg">
+                    Contact Admin
+                </a>
+            </nav>
 
-            <!-- Global Audio Synth Controller Toggle -->
-            <button id="soundToggleBtn" onclick="toggleGlobalAudio()" class="px-4 py-2 rounded-full border border-amber-500/30 bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 text-xs font-semibold flex items-center gap-2 transition-all">
-                <i id="soundIcon" class="fa-solid fa-volume-high"></i>
-                <span id="soundText">Audio Effects ON</span>
+            <!-- Mobile Menu Button -->
+            <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-stone-300 hover:text-darkhub-accent focus:outline-none" aria-label="Toggle Menu">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
             </button>
+        </div>
+
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-darkhub-surface border-b border-darkhub-border px-6 py-5 space-y-4 text-xs font-semibold uppercase tracking-widest">
+            <a href="#overview" onclick="toggleMobileMenu()" class="block text-stone-300 hover:text-darkhub-accent">Overview</a>
+            <a href="#catalogs" onclick="toggleMobileMenu()" class="block text-stone-300 hover:text-darkhub-accent">All Catalogs</a>
+            <a href="mailto:contact@kstech.com" class="block text-center w-full py-3 bg-darkhub-accent text-stone-950 rounded-lg font-bold">Contact Admin</a>
         </div>
     </header>
 
-    <!-- MAIN HERO & CATALOG SECTION -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex-grow">
+    <!-- Full-Area Rotating Hero Section (Full Brightness Images) -->
+    <section id="overview" class="relative w-full h-[550px] sm:h-[650px] flex items-center justify-center text-center overflow-hidden">
         
-        <!-- HERO TITLE -->
-        <div class="text-center max-w-3xl mx-auto mb-16">
-            <span class="inline-block px-4 py-1.5 rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-400 text-xs font-bold uppercase tracking-widest mb-4">
-                Executive Showcase Hub
+        <!-- Rotating Slideshow Background Container -->
+        <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+            <div class="hero-slide active" style="background-image: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1920&q=80');"></div>
+            <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1920&q=80');"></div>
+            <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=80');"></div>
+            <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1920&q=80');"></div>
+            <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1920&q=80');"></div>
+            <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1920&q=80');"></div>
+            <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=1920&q=80');"></div>
+        </div>
+
+        <!-- Hero Content Overlay -->
+        <div class="relative z-20 max-w-5xl mx-auto px-4 sm:px-6">
+            <span class="inline-block px-3 sm:px-4 py-1.5 bg-darkhub-bg/80 text-darkhub-accent text-[10px] sm:text-xs font-bold tracking-widest uppercase rounded-full mb-4 sm:mb-6 border border-darkhub-accent/50 backdrop-blur-md shadow-lg">
+                Executive Digital Showroom
             </span>
-            <h1 class="text-4xl sm:text-6xl font-extrabold text-white tracking-tight mb-6">
-                Next-Gen Digital <span class="gold-gradient-text">Ecosystems</span>
+            <h1 class="text-4xl sm:text-6xl md:text-7xl font-heading font-extrabold leading-tight tracking-tight text-white drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)] mb-4 sm:mb-6">
+                The <span class="sparkle-container"><span class="static-gold-title italic font-extrabold">Black Diamond</span><span class="sparkle sparkle-1"></span><span class="sparkle sparkle-2"></span><span class="sparkle sparkle-3"></span><span class="sparkle sparkle-4"></span></span> Portfolio
             </h1>
-            <p class="text-gray-400 text-base sm:text-lg leading-relaxed">
-                Centralized gateway to custom-built digital storefronts, AI voice architectures, e-commerce templates, and enterprise web solutions.
+            <p class="text-sm sm:text-lg md:text-xl text-stone-100 max-w-xl sm:max-w-2xl mx-auto mb-8 sm:mb-10 font-medium leading-relaxed italic drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] px-2">
+                Centralized access point for all your live business catalogs, inventories, beauty services, and fashion collections.
             </p>
+            <a href="#catalogs" class="inline-flex items-center gap-3 px-6 sm:px-8 py-3.5 sm:py-4 bg-darkhub-accent text-stone-950 rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-yellow-400 transition-all shadow-[0_0_30px_rgba(212,175,55,0.4)] group active:scale-95">
+                Explore All Catalogs
+                <svg class="w-4 h-4 group-hover:translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+            </a>
         </div>
+    </section>
 
-        <!-- AMBIENT / BACKGROUND MUSIC PLAYER WIDGET -->
-        <div class="max-w-2xl mx-auto mb-16 p-6 rounded-2xl bg-gray-900/90 border border-gray-800 gold-border-glow flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div class="flex items-center gap-4">
-                <div class="w-12 h-12 rounded-full bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400">
-                    <i class="fa-solid fa-music text-xl"></i>
+    <!-- Catalog Grid Section -->
+    <section id="catalogs" class="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16 bg-darkhub-surface border border-darkhub-border rounded-2xl sm:rounded-3xl shadow-2xl my-12 sm:my-24 mx-3 sm:mx-auto">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+
+            <!-- 1. BaZariFy -->
+            <div class="group bg-darkhub-card rounded-2xl overflow-hidden border border-darkhub-accent/60 flex flex-col shadow-md hover:border-darkhub-accent transition-all duration-300 relative">
+                <span class="absolute top-3 right-3 z-10 text-[10px] uppercase tracking-widest font-bold px-2.5 py-1 bg-darkhub-accent text-stone-950 rounded-full shadow">Newest</span>
+                <div class="h-48 sm:h-52 w-full overflow-hidden card-image-container relative">
+                    <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80" alt="BaZariFy" class="w-full h-full object-cover filter brightness-90">
+                    <div class="absolute inset-0 bg-gradient-to-t from-darkhub-card via-transparent to-transparent"></div>
                 </div>
-                <div>
-                    <h4 class="text-sm font-bold text-white">Executive Hub Audio Deck</h4>
-                    <p class="text-xs text-gray-400" id="audioStatusText">Ready to Play</p>
+                <div class="p-5 sm:p-6 flex-1 flex flex-col justify-between">
+                    <div>
+                        <span class="text-[10px] uppercase tracking-widest text-darkhub-accent font-bold px-2 py-1 bg-darkhub-accent/10 rounded">E-commerce</span>
+                        <h2 class="font-heading text-xl font-bold text-white mt-3 mb-1">BaZariFy</h2>
+                        <p class="text-darkhub-muted text-xs font-light mb-6">Home, kitchen, beauty & electronics — quality products with Cash on Delivery nationwide.</p>
+                    </div>
+                    <a href="https://basera-bazar-lac.vercel.app/" target="_blank" class="w-full text-center py-3 bg-darkhub-bg border border-darkhub-border text-white rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-darkhub-accent hover:text-stone-950 hover:border-darkhub-accent transition-all active:scale-[0.98]">Open Live Store</a>
                 </div>
             </div>
-            
-            <div class="flex items-center gap-3">
-                <button onclick="playMusic()" class="px-4 py-2 bg-amber-500 hover:bg-amber-400 text-black font-bold text-xs rounded-xl transition-all flex items-center gap-2">
-                    <i class="fa-solid fa-play"></i> Play
-                </button>
-                <button onclick="pauseMusic()" class="px-4 py-2 bg-gray-800 hover:bg-gray-700 text-white font-bold text-xs rounded-xl transition-all flex items-center gap-2">
-                    <i class="fa-solid fa-pause"></i> Pause
-                </button>
+
+            <!-- 2. Bright Spot -->
+            <div class="group bg-darkhub-card rounded-2xl overflow-hidden border border-darkhub-accent/60 flex flex-col shadow-md hover:border-darkhub-accent transition-all duration-300 relative">
+                <span class="absolute top-3 right-3 z-10 text-[10px] uppercase tracking-widest font-bold px-2.5 py-1 bg-darkhub-accent text-stone-950 rounded-full shadow">Live</span>
+                <div class="h-48 sm:h-52 w-full overflow-hidden card-image-container relative">
+                    <img src="https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=800&q=80" alt="Bright Spot" class="w-full h-full object-cover filter brightness-90">
+                    <div class="absolute inset-0 bg-gradient-to-t from-darkhub-card via-transparent to-transparent"></div>
+                </div>
+                <div class="p-5 sm:p-6 flex-1 flex flex-col justify-between">
+                    <div>
+                        <span class="text-[10px] uppercase tracking-widest text-darkhub-accent font-bold px-2 py-1 bg-darkhub-accent/10 rounded">E-commerce</span>
+                        <h2 class="font-heading text-xl font-bold text-white mt-3 mb-1">Bright Spot</h2>
+                        <p class="text-darkhub-muted text-xs font-light mb-6">Multan-based general goods store — fashion, electronics, beauty, home & kitchen, kids, and wellness, with Cash on Delivery and WhatsApp ordering.</p>
+                    </div>
+                    <a href="https://bright-spot.vercel.app/" target="_blank" class="w-full text-center py-3 bg-darkhub-bg border border-darkhub-border text-white rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-darkhub-accent hover:text-stone-950 hover:border-darkhub-accent transition-all active:scale-[0.98]">Open Live Store</a>
+                </div>
             </div>
-            <!-- Audio Tag for background music or audio clips -->
-            <audio id="bgAudioPlayer" loop src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+
+            <!-- 3. Aura Karachi -->
+            <div class="group bg-darkhub-card rounded-2xl overflow-hidden border border-darkhub-border flex flex-col shadow-md hover:border-darkhub-accent/50 transition-all duration-300">
+                <div class="h-48 sm:h-52 w-full overflow-hidden card-image-container relative">
+                    <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=80" alt="Aura Karachi" class="w-full h-full object-cover filter brightness-90">
+                    <div class="absolute inset-0 bg-gradient-to-t from-darkhub-card via-transparent to-transparent"></div>
+                </div>
+                <div class="p-5 sm:p-6 flex-1 flex flex-col justify-between">
+                    <div>
+                        <span class="text-[10px] uppercase tracking-widest text-darkhub-accent font-bold px-2 py-1 bg-darkhub-accent/10 rounded">Beauty & Salon</span>
+                        <h2 class="font-heading text-xl font-bold text-white mt-3 mb-1">Aura Karachi</h2>
+                        <p class="text-darkhub-muted text-xs font-light mb-6">Facial masking, hair cutting, blow dryer, and bridal studio services.</p>
+                    </div>
+                    <a href="design/Aura Karachi.html" target="_blank" class="w-full text-center py-3 bg-darkhub-bg border border-darkhub-border text-white rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-darkhub-accent hover:text-stone-950 hover:border-darkhub-accent transition-all active:scale-[0.98]">Open Catalog</a>
+                </div>
+            </div>
+
+            <!-- 3. Bookshop -->
+            <div class="group bg-darkhub-card rounded-2xl overflow-hidden border border-darkhub-border flex flex-col shadow-md hover:border-darkhub-accent/50 transition-all duration-300">
+                <div class="h-48 sm:h-52 w-full overflow-hidden card-image-container relative">
+                    <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=800&q=80" alt="Bookshop" class="w-full h-full object-cover filter brightness-90">
+                    <div class="absolute inset-0 bg-gradient-to-t from-darkhub-card via-transparent to-transparent"></div>
+                </div>
+                <div class="p-5 sm:p-6 flex-1 flex flex-col justify-between">
+                    <div>
+                        <span class="text-[10px] uppercase tracking-widest text-darkhub-accent font-bold px-2 py-1 bg-darkhub-accent/10 rounded">Literature</span>
+                        <h2 class="font-heading text-xl font-bold text-white mt-3 mb-1">Bookshop Catalog</h2>
+                        <p class="text-darkhub-muted text-xs font-light mb-6">Digital books, parenting guides, and literary resources.</p>
+                    </div>
+                    <a href="design/bookshop.html" target="_blank" class="w-full text-center py-3 bg-darkhub-bg border border-darkhub-border text-white rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-darkhub-accent hover:text-stone-950 hover:border-darkhub-accent transition-all active:scale-[0.98]">Open Catalog</a>
+                </div>
+            </div>
+
+            <!-- 4. Lahore Bazar -->
+            <div class="group bg-darkhub-card rounded-2xl overflow-hidden border border-darkhub-border flex flex-col shadow-md hover:border-darkhub-accent/50 transition-all duration-300">
+                <div class="h-48 sm:h-52 w-full overflow-hidden card-image-container relative">
+                    <img src="https://images.unsplash.com/photo-1555529771-835f59fc5efe?auto=format&fit=crop&w=800&q=80" alt="Lahore Bazar" class="w-full h-full object-cover filter brightness-90">
+                    <div class="absolute inset-0 bg-gradient-to-t from-darkhub-card via-transparent to-transparent"></div>
+                </div>
+                <div class="p-5 sm:p-6 flex-1 flex flex-col justify-between">
+                    <div>
+                        <span class="text-[10px] uppercase tracking-widest text-darkhub-accent font-bold px-2 py-1 bg-darkhub-accent/10 rounded">Marketplace</span>
+                        <h2 class="font-heading text-xl font-bold text-white mt-3 mb-1">Lahore Bazar</h2>
+                        <p class="text-darkhub-muted text-xs font-light mb-6">Online digital store, multi-niche products, and retail catalog.</p>
+                    </div>
+                    <a href="design/lahore bazar.html" target="_blank" class="w-full text-center py-3 bg-darkhub-bg border border-darkhub-border text-white rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-darkhub-accent hover:text-stone-950 hover:border-darkhub-accent transition-all active:scale-[0.98]">Open Catalog</a>
+                </div>
+            </div>
+
+            <!-- 5. Multan Motors -->
+            <div class="group bg-darkhub-card rounded-2xl overflow-hidden border border-darkhub-border flex flex-col shadow-md hover:border-darkhub-accent/50 transition-all duration-300">
+                <div class="h-48 sm:h-52 w-full overflow-hidden card-image-container relative">
+                    <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80" alt="Multan Motors" class="w-full h-full object-cover filter brightness-90">
+                    <div class="absolute inset-0 bg-gradient-to-t from-darkhub-card via-transparent to-transparent"></div>
+                </div>
+                <div class="p-5 sm:p-6 flex-1 flex flex-col justify-between">
+                    <div>
+                        <span class="text-[10px] uppercase tracking-widest text-darkhub-accent font-bold px-2 py-1 bg-darkhub-accent/10 rounded">Automotive</span>
+                        <h2 class="font-heading text-xl font-bold text-white mt-3 mb-1">Multan Motors</h2>
+                        <p class="text-darkhub-muted text-xs font-light mb-6">Luxury vehicle inventory and high-performance 4x4 options.</p>
+                    </div>
+                    <a href="design/Multan Motors.html" target="_blank" class="w-full text-center py-3 bg-darkhub-bg border border-darkhub-border text-white rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-darkhub-accent hover:text-stone-950 hover:border-darkhub-accent transition-all active:scale-[0.98]">Open Catalog</a>
+                </div>
+            </div>
+
+            <!-- 6. Shalimar Guild -->
+            <div class="group bg-darkhub-card rounded-2xl overflow-hidden border border-darkhub-border flex flex-col shadow-md hover:border-darkhub-accent/50 transition-all duration-300">
+                <div class="h-48 sm:h-52 w-full overflow-hidden card-image-container relative">
+                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80" alt="Shalimar Guild" class="w-full h-full object-cover filter brightness-90">
+                    <div class="absolute inset-0 bg-gradient-to-t from-darkhub-card via-transparent to-transparent"></div>
+                </div>
+                <div class="p-5 sm:p-6 flex-1 flex flex-col justify-between">
+                    <div>
+                        <span class="text-[10px] uppercase tracking-widest text-darkhub-accent font-bold px-2 py-1 bg-darkhub-accent/10 rounded">Enterprise</span>
+                        <h2 class="font-heading text-xl font-bold text-white mt-3 mb-1">Shalimar Guild</h2>
+                        <p class="text-darkhub-muted text-xs font-light mb-6">Corporate portfolio and professional services interface.</p>
+                    </div>
+                    <a href="design/Shalimar Guild.html" target="_blank" class="w-full text-center py-3 bg-darkhub-bg border border-darkhub-border text-white rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-darkhub-accent hover:text-stone-950 hover:border-darkhub-accent transition-all active:scale-[0.98]">Open Catalog</a>
+                </div>
+            </div>
+
+            <!-- 7. Super Painters -->
+            <div class="group bg-darkhub-card rounded-2xl overflow-hidden border border-darkhub-border flex flex-col shadow-md hover:border-darkhub-accent/50 transition-all duration-300">
+                <div class="h-48 sm:h-52 w-full overflow-hidden card-image-container relative">
+                    <img src="https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=800&q=80" alt="Super Painters" class="w-full h-full object-cover filter brightness-90">
+                    <div class="absolute inset-0 bg-gradient-to-t from-darkhub-card via-transparent to-transparent"></div>
+                </div>
+                <div class="p-5 sm:p-6 flex-1 flex flex-col justify-between">
+                    <div>
+                        <span class="text-[10px] uppercase tracking-widest text-darkhub-accent font-bold px-2 py-1 bg-darkhub-accent/10 rounded">Services</span>
+                        <h2 class="font-heading text-xl font-bold text-white mt-3 mb-1">Super Painters</h2>
+                        <p class="text-darkhub-muted text-xs font-light mb-6">Professional commercial and residential painting services.</p>
+                    </div>
+                    <a href="design/Super Painters.html" target="_blank" class="w-full text-center py-3 bg-darkhub-bg border border-darkhub-border text-white rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-darkhub-accent hover:text-stone-950 hover:border-darkhub-accent transition-all active:scale-[0.98]">Open Catalog</a>
+                </div>
+            </div>
+
+            <!-- 8. Zohra Couture -->
+            <div class="group bg-darkhub-card rounded-2xl overflow-hidden border border-darkhub-border flex flex-col shadow-md hover:border-darkhub-accent/50 transition-all duration-300">
+                <div class="h-48 sm:h-52 w-full overflow-hidden card-image-container relative">
+                    <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=800&q=80" alt="Zohra Couture" class="w-full h-full object-cover filter brightness-90">
+                    <div class="absolute inset-0 bg-gradient-to-t from-darkhub-card via-transparent to-transparent"></div>
+                </div>
+                <div class="p-5 sm:p-6 flex-1 flex flex-col justify-between">
+                    <div>
+                        <span class="text-[10px] uppercase tracking-widest text-darkhub-accent font-bold px-2 py-1 bg-darkhub-accent/10 rounded">Fashion</span>
+                        <h2 class="font-heading text-xl font-bold text-white mt-3 mb-1">Zohra Couture</h2>
+                        <p class="text-darkhub-muted text-xs font-light mb-6">Shalwar Kameez, luxury formals, and seasonal designer wear.</p>
+                    </div>
+                    <a href="design/Zohra Couture.html" target="_blank" class="w-full text-center py-3 bg-darkhub-bg border border-darkhub-border text-white rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-darkhub-accent hover:text-stone-950 hover:border-darkhub-accent transition-all active:scale-[0.98]">Open Catalog</a>
+                </div>
+            </div>
+
         </div>
+    </section>
 
-        <!-- SHOWCASE GRID -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-
-            <!-- CARD 1: COVO PK SHOWCASE (NEWLY ADDED) -->
-            <div class="group bg-gray-900/60 border border-gray-800 hover:border-amber-500/50 rounded-2xl p-6 transition-all duration-300 flex flex-col justify-between gold-border-glow hover:-translate-y-1">
-                <div>
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="text-xs font-semibold px-3 py-1 bg-amber-500/10 text-amber-400 rounded-full border border-amber-500/20">
-                            E-Commerce Showcase
-                        </span>
-                        <span class="text-xs text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-1 rounded-md font-medium">
-                            <i class="fa-solid fa-circle text-[8px] mr-1"></i> Live Demo
-                        </span>
-                    </div>
-                    
-                    <h3 class="text-2xl font-bold text-white group-hover:text-amber-400 transition-colors mb-2">COVO PK</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
-                        Modern, high-converting digital storefront showcase engineered for ultra-fast performance, dynamic catalog browsing, and instant customer checkout.
-                    </p>
-
-                    <div class="flex flex-wrap gap-2 mb-6">
-                        <span class="text-[11px] bg-gray-800 text-gray-300 px-2.5 py-1 rounded-md border border-gray-700">Next.js</span>
-                        <span class="text-[11px] bg-gray-800 text-gray-300 px-2.5 py-1 rounded-md border border-gray-700">Storefront</span>
-                        <span class="text-[11px] bg-gray-800 text-gray-300 px-2.5 py-1 rounded-md border border-gray-700">Vercel Deployment</span>
-                    </div>
-                </div>
-
-                <div class="pt-4 border-t border-gray-800 flex items-center justify-between">
-                    <a href="https://covo-pk-demo.vercel.app/" target="_blank" rel="noopener noreferrer" onclick="playClickSFX()" onmouseenter="playHoverSFX()" class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-amber-500 hover:bg-amber-400 text-black font-bold text-sm rounded-xl transition-all shadow-md shadow-amber-500/10">
-                        <span>Launch COVO PK</span>
-                        <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
-                    </a>
-                </div>
-            </div>
-
-            <!-- CARD 2: BASERA BAZAAR -->
-            <div class="group bg-gray-900/60 border border-gray-800 hover:border-amber-500/50 rounded-2xl p-6 transition-all duration-300 flex flex-col justify-between gold-border-glow hover:-translate-y-1">
-                <div>
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="text-xs font-semibold px-3 py-1 bg-amber-500/10 text-amber-400 rounded-full border border-amber-500/20">
-                            Cash-on-Delivery Platform
-                        </span>
-                        <span class="text-xs text-gray-400 bg-gray-800 px-2.5 py-1 rounded-md">Live Store</span>
-                    </div>
-                    
-                    <h3 class="text-2xl font-bold text-white group-hover:text-amber-400 transition-colors mb-2">Basera Bazaar</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
-                        Dynamic e-commerce engine with dedicated Cash-on-Delivery admin control dashboard and real-time order processing.
-                    </p>
-
-                    <div class="flex flex-wrap gap-2 mb-6">
-                        <span class="text-[11px] bg-gray-800 text-gray-300 px-2.5 py-1 rounded-md border border-gray-700">React</span>
-                        <span class="text-[11px] bg-gray-800 text-gray-300 px-2.5 py-1 rounded-md border border-gray-700">Supabase</span>
-                        <span class="text-[11px] bg-gray-800 text-gray-300 px-2.5 py-1 rounded-md border border-gray-700">COD Dashboard</span>
-                    </div>
-                </div>
-
-                <div class="pt-4 border-t border-gray-800 flex items-center justify-between">
-                    <a href="https://basera-bazar-lac.vercel.app/" target="_blank" rel="noopener noreferrer" onclick="playClickSFX()" onmouseenter="playHoverSFX()" class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-gray-800 hover:bg-gray-700 text-amber-400 font-bold text-sm rounded-xl transition-all border border-gray-700">
-                        <span>Launch Storefront</span>
-                        <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
-                    </a>
-                </div>
-            </div>
-
-            <!-- CARD 3: KS TECH CORPORATE PORTFOLIO -->
-            <div class="group bg-gray-900/60 border border-gray-800 hover:border-amber-500/50 rounded-2xl p-6 transition-all duration-300 flex flex-col justify-between gold-border-glow hover:-translate-y-1">
-                <div>
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="text-xs font-semibold px-3 py-1 bg-amber-500/10 text-amber-400 rounded-full border border-amber-500/20">
-                            Corporate Agency
-                        </span>
-                        <span class="text-xs text-gray-400 bg-gray-800 px-2.5 py-1 rounded-md">Enterprise</span>
-                    </div>
-                    
-                    <h3 class="text-2xl font-bold text-white group-hover:text-amber-400 transition-colors mb-2">KS TECH LLC</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
-                        Corporate web portfolio and digital solution suite representing IT infrastructure and automated software services.
-                    </p>
-
-                    <div class="flex flex-wrap gap-2 mb-6">
-                        <span class="text-[11px] bg-gray-800 text-gray-300 px-2.5 py-1 rounded-md border border-gray-700">Tailwind</span>
-                        <span class="text-[11px] bg-gray-800 text-gray-300 px-2.5 py-1 rounded-md border border-gray-700">Automation</span>
-                        <span class="text-[11px] bg-gray-800 text-gray-300 px-2.5 py-1 rounded-md border border-gray-700">Cloud Host</span>
-                    </div>
-                </div>
-
-                <div class="pt-4 border-t border-gray-800 flex items-center justify-between">
-                    <a href="https://web-inquiry-form.vercel.app/" target="_blank" rel="noopener noreferrer" onclick="playClickSFX()" onmouseenter="playHoverSFX()" class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-gray-800 hover:bg-gray-700 text-amber-400 font-bold text-sm rounded-xl transition-all border border-gray-700">
-                        <span>Launch Agency Hub</span>
-                        <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
-                    </a>
-                </div>
-            </div>
-
-        </div>
-    </main>
-
-    <!-- FOOTER -->
-    <footer class="border-t border-gray-800/80 bg-gray-950 py-8 mt-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p class="text-gray-500 text-xs">
-                © 2026 Black Diamond Executive Hub. All rights reserved.
-            </p>
-            <p class="text-gray-500 text-xs flex items-center gap-2">
-                <i class="fa-solid fa-shield-halved text-amber-500"></i> Engineered with Native Audio & Cloud Architecture
-            </p>
-        </div>
+    <!-- Footer -->
+    <footer class="border-t border-darkhub-border py-12 bg-darkhub-bg text-center text-xs text-darkhub-muted font-light px-4">
+        <p>&copy; 2026 Black Diamond Portfolio Hub. All Rights Reserved.</p>
     </footer>
 
-    <!-- NATIVE AUDIO JAVASCRIPT DIRECTLY IN INDEX.HTML -->
+    <!-- Floating AI Assistant Widget -->
+    <div class="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50">
+        <button onclick="toggleChat()" class="flex items-center gap-2 px-4 py-3 sm:px-5 sm:py-3.5 bg-darkhub-accent text-stone-950 font-bold rounded-full shadow-2xl hover:bg-yellow-400 transition-all active:scale-95">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>
+            <span class="text-xs sm:text-sm">Ask AI Assistant</span>
+        </button>
+    </div>
+
+    <!-- Chat Window Drawer -->
+    <div id="chatWindow" class="fixed bottom-20 right-3 left-3 sm:left-auto sm:bottom-24 sm:right-6 z-50 w-auto sm:w-96 h-[460px] sm:h-[500px] bg-darkhub-surface border border-darkhub-border rounded-2xl shadow-2xl flex flex-col hidden overflow-hidden">
+        <!-- Chat Header -->
+        <div class="p-4 bg-darkhub-card border-b border-darkhub-border flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                <h3 class="font-heading font-bold text-white text-xs sm:text-sm">Black Diamond Assistant</h3>
+            </div>
+            <button onclick="toggleChat()" class="text-darkhub-muted hover:text-white text-xl font-bold px-2">&times;</button>
+        </div>
+
+        <!-- Chat Body / Messages -->
+        <div id="chatMessages" class="flex-1 p-4 overflow-y-auto space-y-3 text-xs text-stone-300">
+            <div class="bg-darkhub-card p-3 rounded-xl border border-darkhub-border max-w-[85%]">
+                Hello! I'm your virtual concierge. Ask me anything about our catalogs, e-commerce stores, automotive listings, or fashion lines!
+            </div>
+        </div>
+
+        <!-- Chat Input Form -->
+        <div class="p-3 bg-darkhub-card border-t border-darkhub-border flex gap-2">
+            <input type="text" id="chatInput" placeholder="Type your question..." onkeypress="handleKeyPress(event)" class="flex-1 bg-darkhub-bg border border-darkhub-border rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-darkhub-accent">
+            <button onclick="sendMessage()" class="px-4 py-2 bg-darkhub-accent text-stone-950 font-bold rounded-lg text-xs hover:bg-yellow-400 active:scale-95">Send</button>
+        </div>
+    </div>
+
+    <!-- Slideshow, Mobile Menu & Chatbot JavaScript -->
     <script>
-        // Web Audio API Synthesizer Context
-        let audioCtx = null;
-        let soundEnabled = true;
+        // Slideshow Logic
+        const slides = document.querySelectorAll('.hero-slide');
+        let currentSlide = 0;
 
-        // Initialize Audio Context on first user action
-        function initAudioContext() {
-            if (!audioCtx) {
-                const AudioContext = window.AudioContext || window.webkitAudioContext;
-                audioCtx = new AudioContext();
-            }
-            if (audioCtx.state === 'suspended') {
-                audioCtx.resume();
-            }
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+        setInterval(nextSlide, 4500);
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
         }
 
-        // Toggle Sound On/Off
-        function toggleGlobalAudio() {
-            soundEnabled = !soundEnabled;
-            const icon = document.getElementById('soundIcon');
-            const text = document.getElementById('soundText');
+        // Chatbot Toggle & Interactive Logic
+        function toggleChat() {
+            const chat = document.getElementById('chatWindow');
+            chat.classList.toggle('hidden');
+        }
 
-            if (soundEnabled) {
-                icon.className = 'fa-solid fa-volume-high';
-                text.innerText = 'Audio Effects ON';
-                playClickSFX();
-            } else {
-                icon.className = 'fa-solid fa-volume-xmark';
-                text.innerText = 'Audio Effects OFF';
+        function handleKeyPress(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
             }
         }
 
-        // Synthesize UI Click Sound Effect
-        function playClickSFX() {
-            if (!soundEnabled) return;
-            initAudioContext();
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const messages = document.getElementById('chatMessages');
+            if(!input.value.trim()) return;
 
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
+            // Append User Message
+            messages.innerHTML += `<div class="bg-darkhub-accent/20 text-white p-3 rounded-xl ml-auto max-w-[85%]">${input.value}</div>`;
+            
+            let userQuery = input.value.toLowerCase();
+            input.value = '';
+            messages.scrollTop = messages.scrollHeight;
 
-            osc.type = 'sine';
-            osc.frequency.setValueAtTime(800, audioCtx.currentTime);
-            osc.frequency.exponentialRampToValueAtTime(400, audioCtx.currentTime + 0.08);
+            // Simulated Site Expert Response Logic
+            setTimeout(() => {
+                let reply = "I can help guide you through our executive showcases like BaZariFy, Aura Karachi, or Multan Motors. Feel free to click any card above to explore directly!";
+                
+                if(userQuery.includes('car') || userQuery.includes('automotive') || userQuery.includes('multan motors')) {
+                    reply = "Our Multan Motors catalog features high-end vehicles and 4x4 options. Click 'Open Catalog' on the Multan Motors card to browse the full inventory!";
+                } else if(userQuery.includes('fashion') || userQuery.includes('clothes') || userQuery.includes('zohra')) {
+                    reply = "Zohra Couture showcases luxury formals, seasonal designer wear, and traditional ensembles.";
+                } else if(userQuery.includes('bazarily') || userQuery.includes('shop') || userQuery.includes('ecommerce')) {
+                    reply = "BaZariFy is our newest e-commerce catalog featuring home, kitchen, beauty, and electronics products with Cash on Delivery nationwide.";
+                } else if(userQuery.includes('beauty') || userQuery.includes('salon') || userQuery.includes('aura')) {
+                    reply = "Aura Karachi provides professional salon services including facial masking, hair styling, and bridal studio treatments.";
+                } else if(userQuery.includes('contact') || userQuery.includes('admin')) {
+                    reply = "You can reach out directly to the admin by clicking the 'Contact Admin' button in the top navigation header!";
+                }
 
-            gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.08);
-
-            osc.connect(gain);
-            gain.connect(audioCtx.destination);
-
-            osc.start();
-            osc.stop(audioCtx.currentTime + 0.08);
+                messages.innerHTML += `<div class="bg-darkhub-card p-3 rounded-xl border border-darkhub-border max-w-[85%]">${reply}</div>`;
+                messages.scrollTop = messages.scrollHeight;
+            }, 800);
         }
-
-        // Synthesize Button Hover Soft Sound Effect
-        function playHoverSFX() {
-            if (!soundEnabled) return;
-            initAudioContext();
-
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
-
-            osc.type = 'triangle';
-            osc.frequency.setValueAtTime(300, audioCtx.currentTime);
-            osc.frequency.exponentialRampToValueAtTime(450, audioCtx.currentTime + 0.05);
-
-            gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05);
-
-            osc.connect(gain);
-            gain.connect(audioCtx.destination);
-
-            osc.start();
-            osc.stop(audioCtx.currentTime + 0.05);
-        }
-
-        // HTML5 Background Music Player Controls
-        const musicPlayer = document.getElementById('bgAudioPlayer');
-        const statusText = document.getElementById('audioStatusText');
-
-        function playMusic() {
-            initAudioContext();
-            musicPlayer.play().then(() => {
-                statusText.innerText = "Playing Executive Audio Stream...";
-                statusText.classList.add('text-amber-400');
-            }).catch(e => {
-                statusText.innerText = "Audio play blocked. Click anywhere first.";
-            });
-        }
-
-        function pauseMusic() {
-            musicPlayer.pause();
-            statusText.innerText = "Audio Paused";
-            statusText.classList.remove('text-amber-400');
-        }
-
-        // Initialize Audio Context on document click
-        document.addEventListener('click', () => {
-            initAudioContext();
-        }, { once: true });
     </script>
+
 </body>
 </html>
