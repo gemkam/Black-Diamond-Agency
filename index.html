@@ -204,6 +204,23 @@
                 </div>
             </div>
 
+            <!-- Trendly (Shopify) -->
+            <div class="group bg-darkhub-card rounded-2xl overflow-hidden border border-darkhub-accent/60 flex flex-col shadow-md hover:border-darkhub-accent transition-all duration-300 relative">
+                <span class="absolute top-3 right-3 z-10 text-[10px] uppercase tracking-widest font-bold px-2.5 py-1 bg-darkhub-accent text-stone-950 rounded-full shadow">Live</span>
+                <div class="h-48 sm:h-52 w-full overflow-hidden card-image-container relative">
+                    <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=800&q=80" alt="Trendly" class="w-full h-full object-cover filter brightness-90">
+                    <div class="absolute inset-0 bg-gradient-to-t from-darkhub-card via-transparent to-transparent"></div>
+                </div>
+                <div class="p-5 sm:p-6 flex-1 flex flex-col justify-between">
+                    <div>
+                        <span class="text-[10px] uppercase tracking-widest text-darkhub-accent font-bold px-2 py-1 bg-darkhub-accent/10 rounded">Shopify Store</span>
+                        <h2 class="font-heading text-xl font-bold text-white mt-3 mb-1">Trendly</h2>
+                        <p class="text-darkhub-muted text-xs font-light mb-6">Full Shopify storefront — multi-category product catalog with collections, cart, and checkout built on the Impulse theme.</p>
+                    </div>
+                    <a href="https://nxtgenbzr.myshopify.com/" target="_blank" class="w-full text-center py-3 bg-darkhub-bg border border-darkhub-border text-white rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-darkhub-accent hover:text-stone-950 hover:border-darkhub-accent transition-all active:scale-[0.98]">Open Live Store</a>
+                </div>
+            </div>
+
             <!-- BaZariFy -->
             <div class="group bg-darkhub-card rounded-2xl overflow-hidden border border-darkhub-accent/60 flex flex-col shadow-md hover:border-darkhub-accent transition-all duration-300 relative">
                 <span class="absolute top-3 right-3 z-10 text-[10px] uppercase tracking-widest font-bold px-2.5 py-1 bg-darkhub-accent text-stone-950 rounded-full shadow">Featured</span>
@@ -442,6 +459,8 @@
                     reply = "Covo is our newest catalog, a Karachi specialty coffee shop showcasing its menu, signature brews, and cafe experience. Click 'Open Live Store' on the Covo card!";
                 } else if(userQuery.includes('account') || userQuery.includes('gaming') || userQuery.includes('dashboard')) {
                     reply = "Account Ops is a dual-admin dashboard for gaming account inventory and lead management, with secure login. Click 'Open Live App' on the Account Ops card!";
+                } else if(userQuery.includes('trendly') || userQuery.includes('shopify')) {
+                    reply = "Trendly is our live Shopify storefront, a multi-category catalog with collections, cart, and checkout. Click 'Open Live Store' on the Trendly card!";
                 } else if(userQuery.includes('car') || userQuery.includes('automotive') || userQuery.includes('multan motors')) {
                     reply = "Our Multan Motors catalog features high-end vehicles and 4x4 options. Click 'Open Catalog' on the Multan Motors card to browse the full inventory!";
                 } else if(userQuery.includes('fashion') || userQuery.includes('clothes') || userQuery.includes('zohra')) {
