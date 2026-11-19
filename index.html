@@ -255,6 +255,23 @@
                 </div>
             </div>
 
+            <!-- Daftar Office System -->
+            <div class="group bg-darkhub-card rounded-2xl overflow-hidden border border-darkhub-accent/60 flex flex-col shadow-md hover:border-darkhub-accent transition-all duration-300 relative">
+                <span class="absolute top-3 right-3 z-10 text-[10px] uppercase tracking-widest font-bold px-2.5 py-1 bg-darkhub-accent text-stone-950 rounded-full shadow">Live</span>
+                <div class="h-48 sm:h-52 w-full overflow-hidden card-image-container relative">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="Daftar Office System" class="w-full h-full object-cover filter brightness-90">
+                    <div class="absolute inset-0 bg-gradient-to-t from-darkhub-card via-transparent to-transparent"></div>
+                </div>
+                <div class="p-5 sm:p-6 flex-1 flex flex-col justify-between">
+                    <div>
+                        <span class="text-[10px] uppercase tracking-widest text-darkhub-accent font-bold px-2 py-1 bg-darkhub-accent/10 rounded">Office System</span>
+                        <h2 class="font-heading text-xl font-bold text-white mt-3 mb-1">Daftar Office System</h2>
+                        <p class="text-darkhub-muted text-xs font-light mb-6">All-in-one office app for multi-company groups: bills and approvals, salaries and attendance, inventory, transport trips, company documents, and an AI assistant in English, Arabic and Urdu.</p>
+                    </div>
+                    <a href="https://daftar-office.vercel.app/" target="_blank" class="w-full text-center py-3 bg-darkhub-bg border border-darkhub-border text-white rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-darkhub-accent hover:text-stone-950 hover:border-darkhub-accent transition-all active:scale-[0.98]">Open Live App</a>
+                </div>
+            </div>
+
             <!-- Aura Karachi -->
             <div class="group bg-darkhub-card rounded-2xl overflow-hidden border border-darkhub-border flex flex-col shadow-md hover:border-darkhub-accent/50 transition-all duration-300">
                 <div class="h-48 sm:h-52 w-full overflow-hidden card-image-container relative">
@@ -465,6 +482,8 @@
                     reply = "Our Multan Motors catalog features high-end vehicles and 4x4 options. Click 'Open Catalog' on the Multan Motors card to browse the full inventory!";
                 } else if(userQuery.includes('fashion') || userQuery.includes('clothes') || userQuery.includes('zohra')) {
                     reply = "Zohra Couture showcases luxury formals, seasonal designer wear, and traditional ensembles.";
+                } else if(userQuery.includes('daftar') || userQuery.includes('office') || userQuery.includes('erp') || userQuery.includes('inventory')) {
+                    reply = "Daftar Office System is our office app for multi-company groups: bills and approvals, salaries, inventory, transport and documents, with an AI assistant in English, Arabic and Urdu.";
                 } else if(userQuery.includes('bazarify') || userQuery.includes('bazarily') || userQuery.includes('shop') || userQuery.includes('ecommerce')) {
                     reply = "BaZariFy is one of our featured e-commerce catalogs, offering home, kitchen, beauty, and electronics products with Cash on Delivery nationwide.";
                 } else if(userQuery.includes('beauty') || userQuery.includes('salon') || userQuery.includes('aura')) {
