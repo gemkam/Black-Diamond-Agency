@@ -2,26 +2,27 @@
 <html lang="en" class="scroll-smooth dark">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Black Diamond | Executive Portfolio & Catalog Hub</title>
-    <meta name="description" content="Black Diamond: a curated showroom of live stores, business apps and design catalogs.">
-    <meta name="theme-color" content="#0a0a0a">
     <!-- Link preview (WhatsApp, Facebook, LinkedIn, X) -->
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Black Diamond">
     <meta property="og:url" content="https://black-diamond-seven.vercel.app/">
     <meta property="og:title" content="Black Diamond | Executive Digital Showroom">
     <meta property="og:description" content="Live stores, business apps, beauty, fashion and lifestyle catalogs, crafted to impress at first sight. By KS TECH LLC, Muscat.">
-    <meta property="og:image" content="https://black-diamond-seven.vercel.app/og-image.jpg?v=2">
-    <meta property="og:image:secure_url" content="https://black-diamond-seven.vercel.app/og-image.jpg?v=2">
+    <meta property="og:image" content="https://black-diamond-seven.vercel.app/og-image.jpg?v=3">
+    <meta property="og:image:secure_url" content="https://black-diamond-seven.vercel.app/og-image.jpg?v=3">
     <meta property="og:image:type" content="image/jpeg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="Black Diamond gold diamond logo with showroom photo">
+    <meta itemprop="image" content="https://black-diamond-seven.vercel.app/og-image.jpg?v=3">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Black Diamond | Executive Digital Showroom">
     <meta name="twitter:description" content="Live stores, business apps, beauty, fashion and lifestyle catalogs. By KS TECH LLC, Muscat.">
-    <meta name="twitter:image" content="https://black-diamond-seven.vercel.app/og-image.jpg?v=2">
+    <meta name="twitter:image" content="https://black-diamond-seven.vercel.app/og-image.jpg?v=3">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Black Diamond | Executive Portfolio & Catalog Hub</title>
+    <meta name="description" content="Black Diamond: a curated showroom of live stores, business apps and design catalogs.">
+    <meta name="theme-color" content="#0a0a0a">
     <!-- Diamond icons -->
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
     <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png">
@@ -408,7 +409,7 @@
             { name: 'Super Painters', tag: 'Services', group: 'Services', btn: 'Open Catalog',
               desc: 'Professional commercial and residential painting services.',
               img: 'https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=800&q=80',
-              url: 'design/Super Painters.html' }
+              url: 'design/super-painters.html' }
         ];
 
         // ===== Render cards =====
@@ -419,6 +420,9 @@
             return `
             <div class="bd-card reveal group bg-darkhub-card rounded-2xl overflow-hidden border ${ring} hover:border-darkhub-accent flex flex-col shadow-md" data-group="${c.group}" style="transition-delay:${(i % 3) * 90}ms">
                 ${badge}
+                <button onclick="shareCard(${i})" class="absolute top-3 left-3 z-10 w-9 h-9 rounded-full bg-black/55 backdrop-blur text-white flex items-center justify-center hover:bg-darkhub-accent hover:text-stone-950 transition-all active:scale-90" aria-label="Share ${c.name}" title="Share">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path stroke-linecap="round" d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>
+                </button>
                 <div class="h-48 sm:h-56 w-full overflow-hidden relative">
                     <img src="${c.img}" alt="${c.name}" loading="lazy" class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-gradient-to-t from-darkhub-card via-transparent to-transparent"></div>
@@ -461,6 +465,18 @@
         function showGroup(g) {
             const chip = filters.querySelector(`.chip[data-g="${g}"]`);
             if (chip) chip.click();
+        }
+
+        // ===== Share a card (phone share sheet, falls back to WhatsApp) =====
+        function shareCard(i) {
+            const c = catalogs[i];
+            const url = new URL(encodeURI(c.url), location.href).href;
+            const text = c.name + ': ' + c.desc;
+            if (navigator.share) {
+                navigator.share({ title: c.name, text: text, url: url }).catch(() => {});
+            } else {
+                window.open('https://wa.me/?text=' + encodeURIComponent(text + '\n' + url), '_blank');
+            }
         }
 
         // ===== Stats counters =====
