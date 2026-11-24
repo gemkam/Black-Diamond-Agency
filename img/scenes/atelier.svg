@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="Georgia, serif">
+<defs><linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fdf6ec"/><stop offset="1" stop-color="#f0dcc2"/></linearGradient></defs>
+<style>
+ .p{stroke-dasharray:700;animation:paint 6s ease-in-out infinite}
+ @keyframes paint{0%{stroke-dashoffset:700}50%,90%{stroke-dashoffset:0}100%{stroke-dashoffset:700}}
+ .brush{animation:brush 6s ease-in-out infinite}
+ @keyframes brush{0%{transform:translate(0,0)}12%{transform:translate(120px,-40px)}25%{transform:translate(40px,40px)}37%{transform:translate(160px,60px)}50%{transform:translate(80px,-20px)}62%,100%{transform:translate(0,0)}}
+ .f{transform-box:fill-box;transform-origin:center;animation:bloom 6s ease-in-out infinite}
+ @keyframes bloom{0%,40%{transform:scale(0)}55%,90%{transform:scale(1)}100%{transform:scale(0)}}
+</style>
+<rect width="800" height="500" fill="url(#bg)"/>
+<rect y="440" width="800" height="60" fill="#d9b88f"/>
+<!-- easel -->
+<g stroke="#8b5e34" stroke-width="10" stroke-linecap="round"><line x1="300" y1="440" x2="360" y2="70"/><line x1="560" y1="440" x2="500" y2="70"/><line x1="430" y1="60" x2="430" y2="440"/></g>
+<rect x="270" y="340" width="320" height="14" rx="4" fill="#8b5e34"/>
+<!-- canvas -->
+<rect x="285" y="90" width="290" height="250" rx="4" fill="#fffdf8" stroke="#d6c3a5" stroke-width="4"/>
+<g fill="none" stroke-linecap="round" stroke-width="10">
+ <path class="p" d="M310 300 Q360 200 430 240 T560 180" stroke="#1e6f8c"/>
+ <path class="p" style="animation-delay:.4s" d="M320 140 Q380 120 430 150 T550 130" stroke="#e3a72f"/>
+ <path class="p" style="animation-delay:.8s" d="M330 320 L380 270 L430 320 L480 270 L530 320" stroke="#b03a6f"/>
+</g>
+<g class="f"><circle cx="430" cy="210" r="22" fill="#c0392b"/><circle cx="430" cy="210" r="9" fill="#f5d06f"/></g>
+<g class="f" style="animation-delay:.3s"><circle cx="360" cy="190" r="14" fill="#2f7d4f"/></g>
+<g class="f" style="animation-delay:.6s"><circle cx="510" cy="230" r="14" fill="#6c3fb0"/></g>
+<!-- palette -->
+<path d="M90 380 q-40 -70 40 -100 q90 -30 130 30 q20 40 -20 50 q-30 5 -20 30 q10 30 -50 30 q-60 0 -80 -40z" fill="#c69c6d"/>
+<g><circle cx="130" cy="320" r="13" fill="#c0392b"/><circle cx="170" cy="305" r="13" fill="#e3a72f"/><circle cx="210" cy="320" r="13" fill="#1e6f8c"/><circle cx="135" cy="360" r="13" fill="#2f7d4f"/><circle cx="175" cy="380" r="10" fill="#6c3fb0"/></g>
+<!-- brush -->
+<g class="brush"><g transform="rotate(35 340 290)"><rect x="330" y="290" width="14" height="150" rx="6" fill="#7a4526"/><rect x="329" y="275" width="16" height="22" fill="#bfbfbf"/><path d="M329 275 q8 -30 16 0z" fill="#b03a6f"/></g></g>
+<text x="400" y="482" text-anchor="middle" font-size="22" fill="#6b3b22" font-style="italic">Atelier Guild · Folk Art &amp; Craft</text>
+</svg>

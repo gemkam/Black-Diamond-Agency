@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="Arial, sans-serif">
+<defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0f1a33"/><stop offset="1" stop-color="#3a2a52"/></linearGradient>
+<linearGradient id="car" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e8c04a"/><stop offset="1" stop-color="#a87a14"/></linearGradient>
+<linearGradient id="beam" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff6c8" stop-opacity=".8"/><stop offset="1" stop-color="#fff6c8" stop-opacity="0"/></linearGradient></defs>
+<style>
+ .far{animation:mv 14s linear infinite}.near{animation:mv 5s linear infinite}@keyframes mv{to{transform:translateX(-800px)}}
+ .dash{animation:dash .5s linear infinite}@keyframes dash{to{transform:translateX(-100px)}}
+ .wheel{transform-box:fill-box;transform-origin:center;animation:spin .4s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
+ .body{animation:bob .35s ease-in-out infinite alternate}@keyframes bob{to{transform:translateY(-2px)}}
+ .beam{animation:fl 2s ease-in-out infinite}@keyframes fl{50%{opacity:.6}}
+ .wind{animation:wind .7s linear infinite}@keyframes wind{from{transform:translateX(60px);opacity:0}30%{opacity:.8}to{transform:translateX(-160px);opacity:0}}
+</style>
+<rect width="800" height="500" fill="url(#sky)"/>
+<g fill="#fff" opacity=".7"><circle cx="100" cy="60" r="2"/><circle cx="300" cy="40" r="1.5"/><circle cx="520" cy="80" r="2"/><circle cx="700" cy="50" r="1.5"/><circle cx="640" cy="120" r="1.2"/></g>
+<circle cx="660" cy="90" r="34" fill="#fff4cf" opacity=".9"/>
+<g class="far" fill="#24304f"><path d="M0 330 L60 250 L120 300 L200 220 L290 310 L380 240 L470 320 L560 230 L660 300 L740 250 L800 330 Z"/><path d="M800 330 L860 250 L920 300 L1000 220 L1090 310 L1180 240 L1270 320 L1360 230 L1460 300 L1540 250 L1600 330 Z"/></g>
+<g class="near" fill="#1a2238"><rect x="20" y="250" width="50" height="100"/><rect x="90" y="220" width="40" height="130"/><rect x="160" y="270" width="70" height="80"/><rect x="260" y="230" width="44" height="120"/><rect x="340" y="260" width="60" height="90"/><rect x="430" y="210" width="40" height="140"/><rect x="500" y="250" width="70" height="100"/><rect x="600" y="235" width="50" height="115"/><rect x="690" y="265" width="70" height="85"/>
+ <rect x="820" y="250" width="50" height="100"/><rect x="890" y="220" width="40" height="130"/><rect x="960" y="270" width="70" height="80"/><rect x="1060" y="230" width="44" height="120"/><rect x="1140" y="260" width="60" height="90"/><rect x="1230" y="210" width="40" height="140"/><rect x="1300" y="250" width="70" height="100"/><rect x="1400" y="235" width="50" height="115"/><rect x="1490" y="265" width="70" height="85"/></g>
+<rect y="350" width="800" height="150" fill="#2b2b33"/>
+<g class="dash" fill="#e8c04a"><rect x="0" y="425" width="50" height="7"/><rect x="100" y="425" width="50" height="7"/><rect x="200" y="425" width="50" height="7"/><rect x="300" y="425" width="50" height="7"/><rect x="400" y="425" width="50" height="7"/><rect x="500" y="425" width="50" height="7"/><rect x="600" y="425" width="50" height="7"/><rect x="700" y="425" width="50" height="7"/><rect x="800" y="425" width="50" height="7"/></g>
+<path class="beam" d="M610 360 L800 320 L800 420 Z" fill="url(#beam)"/>
+<g stroke="#cfd8ff" stroke-width="3" stroke-linecap="round"><line class="wind" x1="160" y1="320" x2="220" y2="320"/><line class="wind" style="animation-delay:.25s" x1="140" y1="350" x2="210" y2="350"/><line class="wind" style="animation-delay:.5s" x1="170" y1="380" x2="220" y2="380"/></g>
+<!-- sports car -->
+<g class="body">
+ <path d="M220 380 Q225 340 300 330 L380 300 Q430 284 500 296 L570 322 Q620 330 625 360 L625 385 L220 385 Z" fill="url(#car)"/>
+ <path d="M392 306 Q430 292 488 300 L540 324 L370 326 Z" fill="#1d2b44"/>
+ <line x1="455" y1="300" x2="452" y2="326" stroke="#a87a14" stroke-width="4"/>
+ <rect x="600" y="350" width="22" height="10" rx="4" fill="#fff6c8"/><rect x="222" y="352" width="16" height="9" rx="3" fill="#ff4d4d"/>
+ <path d="M260 362 h330" stroke="#fff" stroke-opacity=".35" stroke-width="3"/>
+</g>
+<g class="wheel"><circle cx="300" cy="388" r="30" fill="#111"/><circle cx="300" cy="388" r="16" fill="#c9c9d1"/><g stroke="#555" stroke-width="4"><line x1="300" y1="372" x2="300" y2="404"/><line x1="284" y1="388" x2="316" y2="388"/></g></g>
+<g class="wheel"><circle cx="548" cy="388" r="30" fill="#111"/><circle cx="548" cy="388" r="16" fill="#c9c9d1"/><g stroke="#555" stroke-width="4"><line x1="548" y1="372" x2="548" y2="404"/><line x1="532" y1="388" x2="564" y2="388"/></g></g>
+<text x="40" y="70" font-size="34" font-weight="bold" fill="#e8c04a" letter-spacing="3">PRESTIGE MOTORS</text>
+<text x="40" y="100" font-size="16" fill="#cfd8ff">Luxury cars · 4x4 · Sports</text>
+</svg>

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="Arial, sans-serif">
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0b0f1a"/><stop offset="1" stop-color="#1e2a14"/></linearGradient></defs>
+<style>
+ .cross{animation:aim 4s ease-in-out infinite}@keyframes aim{0%,100%{transform:translate(0,0)}30%{transform:translate(60px,-30px)}60%{transform:translate(-40px,20px)}}
+ .ping{animation:ping 4s ease-out infinite;transform-box:fill-box;transform-origin:center}@keyframes ping{0%,28%{transform:scale(.2);opacity:0}32%{opacity:1}50%,100%{transform:scale(2.2);opacity:0}}
+ .row{animation:slide 4s cubic-bezier(.2,.8,.2,1) infinite}@keyframes slide{0%{transform:translateX(60px);opacity:0}12%,90%{transform:none;opacity:1}100%{opacity:0}}
+ .stamp{animation:stamp 4s ease infinite;transform-box:fill-box;transform-origin:center}@keyframes stamp{0%,55%{transform:scale(2.5) rotate(-12deg);opacity:0}62%,92%{transform:scale(1) rotate(-12deg);opacity:1}100%{opacity:0}}
+ .glow{animation:gl 2s ease-in-out infinite}@keyframes gl{50%{opacity:.5}}
+</style>
+<rect width="800" height="500" fill="url(#bg)"/>
+<!-- game screen -->
+<rect x="40" y="60" width="400" height="300" rx="18" fill="#2b3b22" stroke="#f2a900" stroke-width="4"/>
+<path d="M40 280 L130 210 L210 250 L300 180 L440 260 L440 342 a18 18 0 0 1 -18 18 H58 a18 18 0 0 1 -18 -18z" fill="#3e5230"/>
+<rect x="250" y="200" width="60" height="40" fill="#5b4a33"/><path d="M245 200 l35 -25 35 25z" fill="#7a3b2a"/>
+<g class="cross"><g transform="translate(240 200)" stroke="#ff3b3b" stroke-width="3" fill="none"><circle r="26"/><line x1="-40" y1="0" x2="-12" y2="0"/><line x1="12" y1="0" x2="40" y2="0"/><line x1="0" y1="-40" x2="0" y2="-12"/><line x1="0" y1="12" x2="0" y2="40"/></g>
+ <circle class="ping" cx="240" cy="200" r="20" fill="none" stroke="#ff3b3b" stroke-width="3"/></g>
+<rect x="60" y="76" width="120" height="12" rx="6" fill="#222"/><rect x="60" y="76" width="90" height="12" rx="6" fill="#2ecc71"/>
+<text x="420" y="92" text-anchor="end" font-size="16" font-weight="bold" fill="#f2a900">ALIVE 23</text>
+<!-- controller -->
+<path d="M110 400 q20 -30 70 -30 h120 q50 0 70 30 l20 50 q5 25 -20 25 q-20 0 -40 -30 h-180 q-20 30 -40 30 q-25 0 -20 -25z" fill="#2d2f3a"/>
+<circle cx="175" cy="415" r="14" fill="#555"/><g fill="#f2a900"><circle cx="330" cy="400" r="8"/><circle cx="350" cy="420" r="8"/><circle cx="310" cy="420" r="8"/><circle cx="330" cy="440" r="8"/></g>
+<!-- accounts panel -->
+<rect x="470" y="60" width="290" height="390" rx="18" fill="#141a26" stroke="#2a3550"/>
+<text x="490" y="98" font-size="20" font-weight="bold" fill="#fff">PUBG Ops</text><circle cx="735" cy="92" r="7" fill="#2ecc71" class="glow"/>
+<g class="row"><rect x="488" y="120" width="254" height="70" rx="12" fill="#1f2a40"/><rect x="500" y="132" width="46" height="46" rx="10" fill="#f2a900"/><text x="523" y="163" text-anchor="middle" font-size="18" font-weight="bold" fill="#111">AC</text>
+ <text x="558" y="150" font-size="15" font-weight="bold" fill="#fff">Conqueror · Lv 78</text><text x="558" y="172" font-size="13" fill="#9fb3d1">Skins 140 · OMR 85</text></g>
+<g class="row" style="animation-delay:.25s"><rect x="488" y="205" width="254" height="70" rx="12" fill="#1f2a40"/><rect x="500" y="217" width="46" height="46" rx="10" fill="#5ac8fa"/><text x="523" y="248" text-anchor="middle" font-size="18" font-weight="bold" fill="#111">CR</text>
+ <text x="558" y="235" font-size="15" font-weight="bold" fill="#fff">Crown · Lv 55</text><text x="558" y="257" font-size="13" fill="#9fb3d1">Skins 62 · OMR 40</text></g>
+<g class="row" style="animation-delay:.5s"><rect x="488" y="290" width="254" height="70" rx="12" fill="#1f2a40"/><rect x="500" y="302" width="46" height="46" rx="10" fill="#bf5af2"/><text x="523" y="333" text-anchor="middle" font-size="18" font-weight="bold" fill="#111">AS</text>
+ <text x="558" y="320" font-size="15" font-weight="bold" fill="#fff">Ace · Lv 64</text><text x="558" y="342" font-size="13" fill="#9fb3d1">Skins 98 · OMR 60</text></g>
+<g class="stamp"><rect x="600" y="132" width="110" height="40" rx="6" fill="none" stroke="#2ecc71" stroke-width="4"/><text x="655" y="160" text-anchor="middle" font-size="22" font-weight="bold" fill="#2ecc71">SOLD</text></g>
+<text x="615" y="400" text-anchor="middle" font-size="14" fill="#9fb3d1">Inventory · Buyer leads · Sales</text>
+</svg>

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="Arial, sans-serif">
+<defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e8f4ff"/><stop offset="1" stop-color="#fdf3e3"/></linearGradient></defs>
+<style>
+ .road{animation:road .8s linear infinite}@keyframes road{to{transform:translateX(-120px)}}
+ .city{animation:city 12s linear infinite}@keyframes city{to{transform:translateX(-400px)}}
+ .truck{animation:bob .5s ease-in-out infinite alternate}@keyframes bob{to{transform:translateY(-3px)}}
+ .wheel{transform-box:fill-box;transform-origin:center;animation:spin .6s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
+ .box{animation:drop 3s ease-in infinite}@keyframes drop{0%{transform:translate(0,-140px);opacity:0}15%{opacity:1}40%{transform:translate(0,0)}46%{transform:translate(0,-10px)}52%,85%{transform:translate(0,0);opacity:1}100%{opacity:0}}
+ .cod{animation:pulse 1.6s ease-in-out infinite;transform-box:fill-box;transform-origin:center}@keyframes pulse{50%{transform:scale(1.08)}}
+</style>
+<rect width="800" height="500" fill="url(#sky)"/>
+<g class="city" fill="#c9d8ea"><rect x="0" y="230" width="70" height="140"/><rect x="90" y="190" width="60" height="180"/><rect x="170" y="250" width="80" height="120"/><rect x="270" y="210" width="50" height="160"/><rect x="340" y="240" width="70" height="130"/>
+ <rect x="400" y="230" width="70" height="140"/><rect x="490" y="190" width="60" height="180"/><rect x="570" y="250" width="80" height="120"/><rect x="670" y="210" width="50" height="160"/><rect x="740" y="240" width="70" height="130"/>
+ <rect x="800" y="230" width="70" height="140"/><rect x="890" y="190" width="60" height="180"/><rect x="970" y="250" width="80" height="120"/><rect x="1070" y="210" width="50" height="160"/><rect x="1140" y="240" width="70" height="130"/></g>
+<rect y="370" width="800" height="130" fill="#4b4f5c"/>
+<g class="road" fill="#f5d76e"><rect x="0" y="430" width="60" height="8"/><rect x="120" y="430" width="60" height="8"/><rect x="240" y="430" width="60" height="8"/><rect x="360" y="430" width="60" height="8"/><rect x="480" y="430" width="60" height="8"/><rect x="600" y="430" width="60" height="8"/><rect x="720" y="430" width="60" height="8"/><rect x="840" y="430" width="60" height="8"/></g>
+<!-- delivery van -->
+<g class="truck">
+ <rect x="230" y="250" width="240" height="130" rx="12" fill="#ff6b35"/>
+ <path d="M470 280 L540 280 L580 330 L580 380 L470 380 Z" fill="#ff8c5a"/><path d="M482 292 L532 292 L562 330 L482 330 Z" fill="#cfe8ff"/>
+ <text x="350" y="310" text-anchor="middle" font-size="30" font-weight="bold" fill="#fff">BaZariFy</text>
+ <text x="350" y="345" text-anchor="middle" font-size="16" fill="#fff">Home · Kitchen · Beauty</text>
+ <g class="wheel"><circle cx="290" cy="385" r="28" fill="#222"/><circle cx="290" cy="385" r="11" fill="#bbb"/><rect x="287" y="360" width="6" height="50" fill="#555"/></g>
+ <g class="wheel"><circle cx="520" cy="385" r="28" fill="#222"/><circle cx="520" cy="385" r="11" fill="#bbb"/><rect x="517" y="360" width="6" height="50" fill="#555"/></g>
+</g>
+<!-- parcels at door -->
+<g class="box"><rect x="640" y="320" width="70" height="56" rx="4" fill="#c8915a"/><rect x="670" y="320" width="10" height="56" fill="#a0703f"/></g>
+<g class="box" style="animation-delay:.4s"><rect x="650" y="268" width="50" height="46" rx="4" fill="#d9a46d"/><rect x="670" y="268" width="10" height="46" fill="#a0703f"/></g>
+<g class="cod"><rect x="560" y="90" width="210" height="60" rx="30" fill="#2ecc71"/><text x="665" y="128" text-anchor="middle" font-size="22" font-weight="bold" fill="#fff">Cash on Delivery</text></g>
+<text x="40" y="110" font-size="30" font-weight="bold" fill="#c2410c">Delivered to</text><text x="40" y="146" font-size="30" font-weight="bold" fill="#c2410c">your door</text>
+</svg>

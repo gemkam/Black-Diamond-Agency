@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="Georgia, serif">
+<defs>
+ <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbf3e8"/><stop offset="1" stop-color="#efdcc4"/></linearGradient>
+ <radialGradient id="spot" cx="50%" cy="0%" r="80%"><stop offset="0" stop-color="#fff8d8" stop-opacity=".9"/><stop offset="1" stop-color="#fff8d8" stop-opacity="0"/></radialGradient>
+ <linearGradient id="dress" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b3124f"/><stop offset="1" stop-color="#6d0a35"/></linearGradient>
+</defs>
+<style>
+ .skirt{transform-origin:400px 240px;animation:sway 3s ease-in-out infinite}
+ @keyframes sway{0%,100%{transform:skewX(4deg)}50%{transform:skewX(-4deg)}}
+ .h{transform-box:view-box;animation:swing 2.6s ease-in-out infinite}
+ @keyframes swing{0%,100%{transform:rotate(-7deg)}50%{transform:rotate(7deg)}}
+ .spot{animation:glow 4s ease-in-out infinite}
+ @keyframes glow{0%,100%{opacity:.7}50%{opacity:1}}
+ .tag{transform-origin:520px 330px;animation:swing 2s ease-in-out infinite}
+ .gem{animation:tw 2s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+ @keyframes tw{0%,100%{opacity:.3;transform:scale(.6)}50%{opacity:1;transform:scale(1.15)}}
+</style>
+<rect width="800" height="500" fill="url(#bg)"/>
+<path class="spot" d="M330 0 L470 0 L560 440 L240 440 Z" fill="url(#spot)"/>
+<rect y="440" width="800" height="60" fill="#d8bb98"/>
+<!-- left rack -->
+<line x1="40" y1="120" x2="240" y2="120" stroke="#8a6a3c" stroke-width="6"/>
+<line x1="50" y1="120" x2="50" y2="440" stroke="#8a6a3c" stroke-width="6"/><line x1="230" y1="120" x2="230" y2="440" stroke="#8a6a3c" stroke-width="6"/>
+<g class="h" style="transform-origin:90px 120px"><path d="M90 120 v12 M70 140 L90 130 L110 140" stroke="#555" stroke-width="3" fill="none"/><path d="M70 140 L110 140 L118 260 L62 260 Z" fill="#2f6f73"/></g>
+<g class="h" style="transform-origin:145px 120px;animation-delay:.5s"><path d="M145 120 v12 M125 140 L145 130 L165 140" stroke="#555" stroke-width="3" fill="none"/><path d="M125 140 L165 140 L175 280 L115 280 Z" fill="#e9a23b"/></g>
+<g class="h" style="transform-origin:200px 120px;animation-delay:1s"><path d="M200 120 v12 M180 140 L200 130 L220 140" stroke="#555" stroke-width="3" fill="none"/><path d="M180 140 L220 140 L226 250 L174 250 Z" fill="#8e7cc3"/></g>
+<!-- mannequin + dress -->
+<circle cx="400" cy="110" r="26" fill="#e8d3b8"/>
+<rect x="392" y="134" width="16" height="22" fill="#e8d3b8"/>
+<path d="M360 160 Q400 145 440 160 L432 240 L368 240 Z" fill="url(#dress)"/>
+<path d="M372 190 Q400 210 428 190" stroke="#f3c969" stroke-width="3" fill="none"/>
+<g fill="#f3c969"><circle cx="385" cy="205" r="3"/><circle cx="400" cy="212" r="3"/><circle cx="415" cy="205" r="3"/></g>
+<g class="skirt"><path d="M368 240 L432 240 L500 430 L300 430 Z" fill="url(#dress)"/>
+ <path d="M320 410 Q400 425 480 410" stroke="#f3c969" stroke-width="4" fill="none"/>
+ <path d="M340 380 Q400 392 460 380" stroke="#f3c969" stroke-width="2" fill="none" opacity=".7"/></g>
+<rect x="396" y="430" width="8" height="10" fill="#8a6a3c"/>
+<!-- shopping bags + tag -->
+<rect x="560" y="340" width="90" height="100" rx="6" fill="#111"/><path d="M582 340 Q605 300 628 340" stroke="#111" stroke-width="5" fill="none"/>
+<text x="605" y="400" text-anchor="middle" font-size="22" fill="#f3c969" font-style="italic">ME</text>
+<rect x="660" y="370" width="70" height="70" rx="6" fill="#d94f8a"/><path d="M675 370 Q695 340 715 370" stroke="#d94f8a" stroke-width="4" fill="none"/>
+<g class="tag"><line x1="520" y1="330" x2="520" y2="350" stroke="#777" stroke-width="2"/><rect x="505" y="350" width="34" height="46" rx="5" fill="#fff" stroke="#c9a46a" stroke-width="2"/><text x="522" y="378" text-anchor="middle" font-size="11" fill="#6d0a35">OMR</text></g>
+<path class="gem" d="M300 90 l6 14 14 6 -14 6 -6 14 -6 -14 -14 -6 14 -6z" fill="#f3c969"/>
+<path class="gem" style="animation-delay:.9s" d="M500 70 l5 11 11 5 -11 5 -5 11 -5 -11 -11 -5 11 -5z" fill="#f3c969"/>
+<text x="400" y="482" text-anchor="middle" font-size="22" fill="#6d0a35" font-style="italic">Maison Elara · Ladies Boutique</text>
+</svg>
