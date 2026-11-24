@@ -148,7 +148,17 @@
             box-shadow: 0 24px 50px -18px rgb(var(--glow) / .45);
         }
         .bd-card img { transition: transform .9s cubic-bezier(.25,1,.5,1); }
-        .bd-card:hover img { transform: scale(1.08); }
+        /* Photos drift slowly like a film camera (Ken Burns); animated SVG cards keep their own motion */
+        .bd-card img:not([src$=".svg"]) { animation: kenburns 16s ease-in-out infinite alternate; animation-delay: var(--kb, 0s); }
+        @keyframes kenburns {
+            0%   { transform: scale(1.02) translate(0, 0); }
+            100% { transform: scale(1.14) translate(-2.5%, -2%); }
+        }
+        .bd-card:nth-child(even) img:not([src$=".svg"]) { animation-name: kenburns2; }
+        @keyframes kenburns2 {
+            0%   { transform: scale(1.14) translate(2%, 1.5%); }
+            100% { transform: scale(1.02) translate(0, 0); }
+        }
         /* Light sweep across the image on hover */
         .bd-card .sweep {
             position: absolute; inset: 0; pointer-events: none;
@@ -156,6 +166,9 @@
             transform: translateX(-120%);
         }
         .bd-card:hover .sweep { transform: translateX(120%); transition: transform 1.1s ease; }
+        /* Light sweep also passes on its own every few seconds, staggered card by card */
+        .bd-card.in .sweep { animation: autosweep 7s ease-in-out infinite; animation-delay: var(--sw, 1s); }
+        @keyframes autosweep { 0%, 70% { transform: translateX(-120%); } 85%, 100% { transform: translateX(120%); } }
 
         /* Scroll reveal */
         .reveal { opacity: 0; transform: translateY(28px); transition: opacity .8s ease, transform .8s cubic-bezier(.2,.8,.2,1); }
@@ -380,11 +393,11 @@
               url: 'https://bright-spot.vercel.app/' },
             { name: 'Daftar Office System', tag: 'Office System', group: 'Business Apps', badge: 'Live', live: true, btn: 'Try It Free',
               desc: 'All-in-one office app for multi-company groups: bills and approvals, salaries, inventory, transport, documents and an AI assistant in English, Arabic and Urdu. Create a free account and try it live.',
-              img: 'img/daftar-dashboard.jpg',
+              img: 'img/daftar-dashboard.svg',
               url: 'https://daftar-gemkam.vercel.app/' },
             { name: 'The Snooker Cafe', tag: 'Gaming App', group: 'Gaming', badge: 'Live', live: true, btn: 'View Live Tables',
               desc: 'Live table status for a Muscat snooker club: snooker, billiards, table tennis and PS5, updated in real time.',
-              img: 'img/snooker-cafe.jpg',
+              img: 'img/snooker-cafe.svg',
               url: 'https://the-snooker-cafe.vercel.app/' },
             { name: 'PUBG Ops', tag: 'Gaming App', group: 'Gaming', badge: 'Live', live: true, btn: 'Open Live App',
               desc: 'PUBG account management app: account inventory, buyer leads and sales tracking on a dual-admin dashboard with secure login.',
@@ -418,7 +431,7 @@
             const ring = c.live ? 'border-darkhub-accent/60' : 'border-darkhub-border';
             const badge = c.badge ? `<span class="absolute top-3 right-3 z-10 text-[10px] uppercase tracking-widest font-bold px-2.5 py-1 bg-darkhub-accent text-stone-950 rounded-full shadow flex items-center gap-1.5">${c.live ? '<span class="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse"></span>' : ''}${c.badge}</span>` : '';
             return `
-            <div class="bd-card reveal group bg-darkhub-card rounded-2xl overflow-hidden border ${ring} hover:border-darkhub-accent flex flex-col shadow-md" data-group="${c.group}" style="transition-delay:${(i % 3) * 90}ms">
+            <div class="bd-card reveal group bg-darkhub-card rounded-2xl overflow-hidden border ${ring} hover:border-darkhub-accent flex flex-col shadow-md" data-group="${c.group}" style="transition-delay:${(i % 3) * 90}ms; --kb:-${(i * 2.3) % 16}s; --sw:${1 + (i % 5) * 1.3}s">
                 ${badge}
                 <button onclick="shareCard(${i})" class="absolute top-3 left-3 z-10 w-9 h-9 rounded-full bg-black/55 backdrop-blur text-white flex items-center justify-center hover:bg-darkhub-accent hover:text-stone-950 transition-all active:scale-90" aria-label="Share ${c.name}" title="Share">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path stroke-linecap="round" d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>

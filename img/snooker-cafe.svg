@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs>
+    <radialGradient id="felt" cx="50%" cy="50%" r="65%">
+      <stop offset="0" stop-color="#22a061"/><stop offset="1" stop-color="#0f6b3d"/>
+    </radialGradient>
+    <radialGradient id="shine" cx="35%" cy="30%" r="60%">
+      <stop offset="0" stop-color="#fff" stop-opacity=".85"/><stop offset=".35" stop-color="#fff" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="sh" x="-50%" y="-50%" width="200%" height="200%"><feDropShadow dx="3" dy="5" stdDeviation="3" flood-opacity=".45"/></filter>
+    <g id="b"><circle r="17"/><circle r="17" fill="url(#shine)"/></g>
+  </defs>
+  <style>
+    .lamp{animation:lamp 6s ease-in-out infinite}
+    @keyframes lamp{0%,100%{opacity:.18}50%{opacity:.3}}
+  </style>
+  <rect width="800" height="500" fill="#140c08"/>
+  <rect x="20" y="20" width="760" height="460" rx="28" fill="#5c3418"/>
+  <rect x="50" y="50" width="700" height="400" rx="6" fill="url(#felt)"/>
+  <ellipse class="lamp" cx="400" cy="250" rx="330" ry="170" fill="#fff6c8"/>
+  <g fill="#080604">
+    <circle cx="50" cy="50" r="20"/><circle cx="400" cy="44" r="20"/><circle cx="750" cy="50" r="20"/>
+    <circle cx="50" cy="450" r="20"/><circle cx="400" cy="456" r="20"/><circle cx="750" cy="450" r="20"/>
+  </g>
+  <line x1="250" y1="50" x2="250" y2="450" stroke="#c8e6d2" stroke-width="2" opacity=".7"/>
+  <path d="M250 170 A80 80 0 0 0 250 330" fill="none" stroke="#c8e6d2" stroke-width="2" opacity=".7"/>
+  <g filter="url(#sh)">
+    <use href="#b" x="250" y="190" fill="#f2c62a"/>
+    <use href="#b" x="250" y="250" fill="#8a5428"/>
+    <use href="#b" x="250" y="310" fill="#2e8c45"/>
+    <use href="#b" x="400" y="250" fill="#2456c0"/>
+    <use href="#b" x="715" y="250" fill="#111"/>
+    <!-- pink: nudged by the white ball -->
+    <g><use href="#b" x="520" y="250" fill="#f07aa8"/>
+      <animateTransform attributeName="transform" type="translate" values="0 0;0 0;14 -22;14 -22;0 0" keyTimes="0;.42;.55;.92;1" dur="6s" repeatCount="indefinite"/></g>
+    <!-- red pack: front reds scatter a little -->
+    <g id="reds" fill="#c3141f">
+      <g><use href="#b" x="550" y="250"/><animateTransform attributeName="transform" type="translate" values="0 0;0 0;24 30;24 30;0 0" keyTimes="0;.45;.6;.92;1" dur="6s" repeatCount="indefinite"/></g>
+      <g><use href="#b" x="580" y="233"/><animateTransform attributeName="transform" type="translate" values="0 0;0 0;30 -36;30 -36;0 0" keyTimes="0;.46;.62;.92;1" dur="6s" repeatCount="indefinite"/></g>
+      <g><use href="#b" x="580" y="267"/><animateTransform attributeName="transform" type="translate" values="0 0;0 0;40 46;40 46;0 0" keyTimes="0;.46;.63;.92;1" dur="6s" repeatCount="indefinite"/></g>
+      <use href="#b" x="610" y="216"/><use href="#b" x="610" y="250"/><use href="#b" x="610" y="284"/>
+      <use href="#b" x="640" y="199"/><use href="#b" x="640" y="233"/><use href="#b" x="640" y="267"/><use href="#b" x="640" y="301"/>
+      <use href="#b" x="670" y="182"/><use href="#b" x="670" y="216"/><use href="#b" x="670" y="250"/><use href="#b" x="670" y="284"/><use href="#b" x="670" y="318"/>
+    </g>
+    <!-- cue ball: struck, rolls to the pink, rests, returns -->
+    <g><use href="#b" x="330" y="330" fill="#fbfaf3"/>
+      <animateTransform attributeName="transform" type="translate" values="0 0;0 0;156 -80;156 -80;0 0" keyTimes="0;.3;.45;.92;1" calcMode="spline" keySplines="0 0 1 1;.1 .6 .3 1;0 0 1 1;.4 0 .2 1" dur="6s" repeatCount="indefinite"/></g>
+  </g>
+  <!-- cue: draws back, strikes, follows through, fades and returns -->
+  <g>
+    <line x1="308" y1="342" x2="40" y2="472" stroke="#d9b277" stroke-width="9" stroke-linecap="round"/>
+    <line x1="308" y1="342" x2="296" y2="348" stroke="#3c78c8" stroke-width="9" stroke-linecap="round"/>
+    <animateTransform attributeName="transform" type="translate" values="0 0;-36 17;-36 17;6 -3;6 -3;0 0" keyTimes="0;.18;.26;.31;.92;1" dur="6s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="1;1;1;.25;1" keyTimes="0;.31;.4;.7;1" dur="6s" repeatCount="indefinite"/>
+  </g>
+</svg>

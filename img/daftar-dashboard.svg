@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="Arial, Helvetica, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0e1228"/><stop offset="1" stop-color="#2c1a50"/></linearGradient>
+    <radialGradient id="g1"><stop offset="0" stop-color="#d4af37" stop-opacity=".45"/><stop offset="1" stop-color="#d4af37" stop-opacity="0"/></radialGradient>
+    <radialGradient id="g2"><stop offset="0" stop-color="#7846dc" stop-opacity=".5"/><stop offset="1" stop-color="#7846dc" stop-opacity="0"/></radialGradient>
+    <filter id="sh" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="6" stdDeviation="8" flood-opacity=".35"/></filter>
+  </defs>
+  <style>
+    /* 8s loop: grow in, hold, fade back */
+    .bar{transform-box:fill-box;transform-origin:50% 100%;animation:grow 8s cubic-bezier(.2,.8,.2,1) infinite}
+    @keyframes grow{0%{transform:scaleY(0)}18%,88%{transform:scaleY(1)}96%,100%{transform:scaleY(0)}}
+    .line{stroke-dasharray:420;animation:draw 8s ease-in-out infinite}
+    @keyframes draw{0%,14%{stroke-dashoffset:420}38%,88%{stroke-dashoffset:0}96%,100%{stroke-dashoffset:420}}
+    .dot{opacity:0;animation:pop 8s ease infinite}
+    @keyframes pop{0%,30%{opacity:0}38%,88%{opacity:1}96%,100%{opacity:0}}
+    .seg{animation:ring 8s ease-in-out infinite}
+    @keyframes ring{0%,10%{stroke-dashoffset:var(--len)}40%,88%{stroke-dashoffset:0}96%,100%{stroke-dashoffset:var(--len)}}
+    .kpi{animation:rise 8s ease infinite;transform-box:fill-box}
+    @keyframes rise{0%{opacity:0;transform:translateY(12px)}10%,90%{opacity:1;transform:none}98%,100%{opacity:0}}
+    .live{animation:glow 2.4s ease-in-out infinite}
+    @keyframes glow{0%,100%{opacity:1}50%{opacity:.55}}
+    .tag{opacity:0;animation:pop 8s ease infinite;animation-delay:.6s}
+  </style>
+  <rect width="800" height="500" fill="url(#bg)"/>
+  <circle cx="60" cy="40" r="260" fill="url(#g1)"/><circle cx="780" cy="480" r="300" fill="url(#g2)"/>
+  <text x="40" y="66" font-family="Georgia, serif" font-weight="bold" font-size="36" fill="#fff">Daftar</text>
+  <text x="168" y="60" font-size="13" font-weight="bold" fill="#e8c86e" letter-spacing="1">OFFICE SYSTEM</text>
+  <rect x="596" y="34" width="164" height="32" rx="16" fill="#2ecc71"/>
+  <circle class="live" cx="617" cy="50" r="5" fill="#fff"/>
+  <text x="630" y="55" font-size="12" font-weight="bold" fill="#fff">LIVE DASHBOARD</text>
+  <g filter="url(#sh)">
+    <g class="kpi"><rect x="40" y="92" width="225" height="92" rx="16" fill="#fff"/><rect x="56" y="108" width="6" height="60" rx="3" fill="#2ea05a"/>
+      <text x="74" y="120" font-size="11" font-weight="bold" fill="#78788c">REVENUE</text><text x="74" y="150" font-size="24" font-weight="bold" fill="#19192d">OMR 48,250</text><text x="74" y="172" font-size="12" fill="#2ea05a">+12.4% this month</text></g>
+    <g class="kpi" style="animation-delay:.15s"><rect x="285" y="92" width="225" height="92" rx="16" fill="#fff"/><rect x="301" y="108" width="6" height="60" rx="3" fill="#e67e22"/>
+      <text x="319" y="120" font-size="11" font-weight="bold" fill="#78788c">PENDING BILLS</text><text x="319" y="150" font-size="24" font-weight="bold" fill="#19192d">37</text><text x="319" y="172" font-size="12" fill="#e67e22">8 waiting approval</text></g>
+    <g class="kpi" style="animation-delay:.3s"><rect x="530" y="92" width="230" height="92" rx="16" fill="#fff"/><rect x="546" y="108" width="6" height="60" rx="3" fill="#3478dc"/>
+      <text x="564" y="120" font-size="11" font-weight="bold" fill="#78788c">PAYROLL</text><text x="564" y="150" font-size="24" font-weight="bold" fill="#19192d">OMR 21,900</text><text x="564" y="172" font-size="12" fill="#3478dc">Paid on time</text></g>
+    <rect x="40" y="204" width="470" height="260" rx="16" fill="#fff"/>
+    <rect x="530" y="204" width="230" height="260" rx="16" fill="#fff"/>
+  </g>
+  <text x="60" y="236" font-size="15" font-weight="bold" fill="#19192d">Monthly sales vs expenses</text>
+  <g stroke="#eeeef5"><line x1="66" y1="440" x2="490" y2="440"/><line x1="66" y1="360" x2="490" y2="360"/><line x1="66" y1="280" x2="490" y2="280"/></g>
+  <g>
+    <rect class="bar" x="80"  y="356.8" width="22" height="83.2" rx="6" fill="#d4af37" style="animation-delay:0s"/>   <rect class="bar" x="106" y="376" width="22" height="64" rx="6" fill="#7c5ce6" style="animation-delay:.05s"/>
+    <rect class="bar" x="150" y="342.4" width="22" height="97.6" rx="6" fill="#d4af37" style="animation-delay:.12s"/> <rect class="bar" x="176" y="369.6" width="22" height="70.4" rx="6" fill="#7c5ce6" style="animation-delay:.17s"/>
+    <rect class="bar" x="220" y="347.2" width="22" height="92.8" rx="6" fill="#d4af37" style="animation-delay:.24s"/> <rect class="bar" x="246" y="364.8" width="22" height="75.2" rx="6" fill="#7c5ce6" style="animation-delay:.29s"/>
+    <rect class="bar" x="290" y="324.8" width="22" height="115.2" rx="6" fill="#d4af37" style="animation-delay:.36s"/><rect class="bar" x="316" y="360" width="22" height="80" rx="6" fill="#7c5ce6" style="animation-delay:.41s"/>
+    <rect class="bar" x="360" y="312" width="22" height="128" rx="6" fill="#d4af37" style="animation-delay:.48s"/>   <rect class="bar" x="386" y="356.8" width="22" height="83.2" rx="6" fill="#7c5ce6" style="animation-delay:.53s"/>
+    <rect class="bar" x="430" y="289.6" width="22" height="150.4" rx="6" fill="#d4af37" style="animation-delay:.6s"/> <rect class="bar" x="456" y="352" width="22" height="88" rx="6" fill="#7c5ce6" style="animation-delay:.65s"/>
+  </g>
+  <g font-size="11" fill="#8282a0"><text x="92" y="456">Jun</text><text x="164" y="456">Jul</text><text x="232" y="456">Aug</text><text x="302" y="456">Sep</text><text x="373" y="456">Oct</text><text x="442" y="456">Nov</text></g>
+  <polyline class="line" points="104,342.8 174,328.4 244,333.2 314,310.8 384,298 454,275.6" fill="none" stroke="#2ecc71" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <g class="dot" fill="#fff" stroke="#2ecc71" stroke-width="3">
+    <circle cx="104" cy="342.8" r="6"/><circle cx="174" cy="328.4" r="6"/><circle cx="244" cy="333.2" r="6"/><circle cx="314" cy="310.8" r="6"/><circle cx="384" cy="298" r="6"/><circle cx="454" cy="275.6" r="6"/>
+  </g>
+  <g class="tag"><rect x="408" y="236" width="92" height="26" rx="8" fill="#19192d"/><text x="418" y="254" font-size="12" font-weight="bold" fill="#fff">Best month</text></g>
+  <text x="550" y="236" font-size="15" font-weight="bold" fill="#19192d">Spend by company</text>
+  <!-- ring: r=55, circumference ~345.6 -->
+  <g transform="rotate(-90 645 328)" fill="none" stroke-width="26">
+    <circle cx="645" cy="328" r="55" stroke="#eeeef5"/>
+    <circle class="seg" style="--len:131" cx="645" cy="328" r="55" stroke="#d4af37" stroke-dasharray="131 345.6" stroke-dashoffset="0"/>
+    <circle class="seg" style="--len:93;animation-delay:.25s" cx="645" cy="328" r="55" stroke="#7c5ce6" stroke-dasharray="93 345.6" transform="rotate(136.8 645 328)"/>
+    <circle class="seg" style="--len:69;animation-delay:.5s" cx="645" cy="328" r="55" stroke="#3478dc" stroke-dasharray="69 345.6" transform="rotate(234 645 328)"/>
+    <circle class="seg" style="--len:52;animation-delay:.75s" cx="645" cy="328" r="55" stroke="#2ecc71" stroke-dasharray="52 345.6" transform="rotate(306 645 328)"/>
+  </g>
+  <text x="626" y="338" font-size="28" font-weight="bold" fill="#19192d">4</text><text x="646" y="338" font-size="12" fill="#8282a0">cos.</text>
+  <g font-size="12" font-weight="bold" fill="#3c3c50">
+    <circle cx="561" cy="420" r="5" fill="#d4af37"/><text x="572" y="424">38%</text>
+    <circle cx="665" cy="420" r="5" fill="#7c5ce6"/><text x="676" y="424">27%</text>
+    <circle cx="561" cy="442" r="5" fill="#3478dc"/><text x="572" y="446">20%</text>
+    <circle cx="665" cy="442" r="5" fill="#2ecc71"/><text x="676" y="446">15%</text>
+  </g>
+</svg>
