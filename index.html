@@ -241,6 +241,7 @@
                     <a href="#overview" class="hover:text-darkhub-accent transition-colors">Overview</a>
                     <a href="#catalogs" class="hover:text-darkhub-accent transition-colors">All Catalogs</a>
                     <a href="#catalogs" onclick="showGroup('E-commerce')" class="px-5 py-2.5 border border-darkhub-accent text-darkhub-accent rounded-lg font-bold hover:bg-darkhub-accent hover:text-stone-950 transition-all">E-commerce</a>
+                    <a href="#catalogs" onclick="showGroup('Gaming')" class="px-5 py-2.5 border border-darkhub-accent text-darkhub-accent rounded-lg font-bold hover:bg-darkhub-accent hover:text-stone-950 transition-all">Gaming</a>
                     <a href="mailto:kzstech000@gmail.com" class="px-6 py-2.5 bg-darkhub-accent text-stone-950 rounded-lg font-bold hover:brightness-110 transition-all shadow-lg">Contact Admin</a>
                 </nav>
 
@@ -260,6 +261,7 @@
             <a href="#overview" onclick="toggleMobileMenu()" class="block text-darkhub-muted hover:text-darkhub-accent">Overview</a>
             <a href="#catalogs" onclick="toggleMobileMenu()" class="block text-darkhub-muted hover:text-darkhub-accent">All Catalogs</a>
             <a href="#catalogs" onclick="toggleMobileMenu(); showGroup('E-commerce')" class="block text-center w-full py-3 border border-darkhub-accent text-darkhub-accent rounded-lg font-bold">E-commerce</a>
+            <a href="#catalogs" onclick="toggleMobileMenu(); showGroup('Gaming')" class="block text-center w-full py-3 border border-darkhub-accent text-darkhub-accent rounded-lg font-bold">Gaming</a>
             <a href="mailto:kzstech000@gmail.com" class="block text-center w-full py-3 bg-darkhub-accent text-stone-950 rounded-lg font-bold">Contact Admin</a>
         </div>
     </header>
@@ -379,8 +381,12 @@
               desc: 'All-in-one office app for multi-company groups: bills and approvals, salaries, inventory, transport, documents and an AI assistant in English, Arabic and Urdu.',
               img: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80',
               url: 'https://daftar-office.vercel.app/' },
-            { name: 'Account Ops', tag: 'Gaming & SaaS', group: 'Business Apps', badge: 'Live', live: true, btn: 'Open Live App',
-              desc: 'Dual-admin dashboard for gaming account inventory and lead management, with secure login.',
+            { name: 'The Snooker Cafe', tag: 'Gaming App', group: 'Gaming', badge: 'Live', live: true, btn: 'View Live Tables',
+              desc: 'Live table status for a Muscat snooker club: snooker, billiards, table tennis and PS5, updated in real time.',
+              img: 'img/snooker-cafe.jpg',
+              url: 'https://the-snooker-cafe.vercel.app/' },
+            { name: 'PUBG Ops', tag: 'Gaming App', group: 'Gaming', badge: 'Live', live: true, btn: 'Open Live App',
+              desc: 'PUBG account management app: account inventory, buyer leads and sales tracking on a dual-admin dashboard with secure login.',
               img: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80',
               url: 'https://account-ops.vercel.app/login' },
             { name: 'Bazaar Royale', tag: 'Marketplace', group: 'E-commerce', btn: 'Open Catalog',
@@ -391,7 +397,7 @@
               desc: 'Digital books, parenting guides and literary resources.',
               img: 'https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=800&q=80',
               url: 'design/libraria-bookshop.html' },
-            { name: 'Prestige Motors', tag: 'Automotive', group: 'Lifestyle', btn: 'Open Catalog',
+            { name: 'Prestige Motors', tag: 'Car Showroom', group: 'Car Showrooms', btn: 'Open Catalog',
               desc: 'Luxury vehicle inventory and high-performance 4x4 options.',
               img: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80',
               url: 'design/prestige-motors.html' },
