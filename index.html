@@ -538,10 +538,16 @@
                         <h3 class="font-heading text-xl sm:text-2xl font-bold text-darkhub-ink mt-3 mb-1.5">${c.name}</h3>
                         <p class="text-darkhub-muted text-xs sm:text-sm font-light leading-relaxed mb-6">${c.desc}</p>
                     </div>
-                    <a href="${encodeURI(c.url)}" target="_blank" rel="noopener" class="w-full flex items-center justify-center gap-2 py-3 bg-darkhub-bg border border-darkhub-border text-darkhub-ink rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-darkhub-accent hover:text-stone-950 hover:border-darkhub-accent transition-all active:scale-[0.98]">
+                    <div class="flex gap-2">
+                    <a href="${encodeURI(c.url)}" target="_blank" rel="noopener" class="flex-1 flex items-center justify-center gap-2 py-3 bg-darkhub-bg border border-darkhub-border text-darkhub-ink rounded-xl text-[11px] sm:text-xs font-bold uppercase tracking-widest hover:bg-darkhub-accent hover:text-stone-950 hover:border-darkhub-accent transition-all active:scale-[0.98]">
                         ${c.btn}
                         <svg class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5-5 5M6 12h12"/></svg>
                     </a>
+                    <button type="button" onclick="enquireAbout(${i})" class="flex-1 flex items-center justify-center gap-2 py-3 bg-darkhub-accent text-stone-950 border border-darkhub-accent rounded-xl text-[11px] sm:text-xs font-bold uppercase tracking-widest hover:brightness-110 transition-all active:scale-[0.98]">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 5h16v11H8l-4 4z"/></svg>
+                        Enquire Now
+                    </button>
+                    </div>
                 </div>
             </div>`;
         }
@@ -684,6 +690,15 @@
                 $('eqOk').classList.remove('hidden');
             });
         })();
+
+
+        // ===== "Enquire Now" on a card: jump to the form with that catalog chosen =====
+        function enquireAbout(i) {
+            const sel = document.getElementById('eqTopic');
+            if (sel) sel.value = catalogs[i].name;
+            document.getElementById('enquire').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            setTimeout(() => { const n = document.getElementById('eqName'); if (n) n.focus({ preventScroll: true }); }, 700);
+        }
 
         // ===== Theme toggle =====
         function toggleTheme() {
