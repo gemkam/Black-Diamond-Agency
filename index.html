@@ -167,6 +167,15 @@
             -webkit-text-fill-color: transparent;
             animation: goldFlow 9s ease-in-out infinite;
             padding-right: 4px;
+            -webkit-text-stroke: 0.7px rgb(var(--accent));
+            paint-order: stroke fill;
+        }
+        /* Light mode: deeper gold, bronze and rose tones so the word never fades into the ivory background */
+        html:not(.dark) .logo-gold {
+            background-image: linear-gradient(100deg,
+                #a87b2e 0%, #d9a94e 18%, #8a6224 34%,
+                #b9736a 50%, #8a6224 66%, #d9a94e 82%, #a87b2e 100%);
+            -webkit-text-stroke: 0.7px #7a5520;
         }
         @keyframes goldFlow {
             0%   { background-position: 0% 50%; }
@@ -310,6 +319,7 @@
         <div class="gold-line w-32 mx-auto my-5"></div>
         <a href="mailto:kzstech000@gmail.com" class="text-xs uppercase tracking-widest text-darkhub-accent font-bold hover:underline">Contact Admin</a>
         <p class="text-xs text-darkhub-muted font-light mt-5">&copy; 2026 Black Diamond Portfolio Hub. All Rights Reserved.</p>
+        <p class="text-xs text-darkhub-muted font-light mt-2">Designed &amp; developed by <span class="text-darkhub-accent font-semibold">KS TECH LLC</span>, Muscat, Sultanate of Oman</p>
     </footer>
 
     <!-- Back to top -->
