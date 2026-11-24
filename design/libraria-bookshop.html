@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Multan Bookshop | Independent Book Publishers & Literary Guild</title>
+    <title>Libraria Bookshop | Independent Book Publishers & Literary Guild</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- AOS Library CSS -->
@@ -59,14 +59,14 @@
 
     <!-- Top Announcement Bar -->
     <div class="bg-editorial-dark text-editorial-bg text-xs tracking-widest uppercase font-medium text-center py-2.5 px-4">
-        ✦ Multan Bookshop — Free Nationwide Delivery on Orders Over PKR 2,000 ✦
+        ✦ Libraria Bookshop ✦ Free Delivery Across Oman on Orders Over OMR 15 ✦
     </div>
 
     <!-- Navigation Header -->
     <header class="sticky top-0 z-50 bg-editorial-bg/90 backdrop-blur-md border-b border-editorial-dark/10">
         <div class="max-w-7xl mx-auto px-6 lg:px-12 h-20 flex items-center justify-between">
             <a href="#" class="text-2xl lg:text-3xl font-serif font-bold tracking-tight text-editorial-dark">
-                Multan <span class="text-editorial-accent italic font-normal">Bookshop</span>
+                Libraria <span class="text-editorial-accent italic font-normal">Bookshop</span>
             </a>
             <nav class="hidden md:flex space-x-10 text-xs font-semibold tracking-widest uppercase text-editorial-muted">
                 <a href="#catalog" class="hover:text-editorial-dark transition-colors">Catalog</a>
@@ -94,7 +94,7 @@
                     Stories That <br><span class="italic font-normal text-editorial-accent">Shape Minds</span>
                 </h1>
                 <p class="text-editorial-muted text-base leading-relaxed font-light">
-                    Explore thoughtful paperbacks, award-winning novels, children's storybooks, satirical humor collections, and classic Urdu & English literature bound for modern readers at Multan Bookshop.
+                    Explore thoughtful paperbacks, award-winning novels, children's storybooks, satirical humor collections, and classic Arabic & English literature bound for modern readers at Libraria Bookshop.
                 </p>
                 <div class="pt-4 flex items-center space-x-6">
                     <a href="#catalog" class="px-8 py-4 bg-editorial-dark text-editorial-bg text-xs font-bold uppercase tracking-widest rounded-none hover:bg-editorial-accent transition-all">
@@ -146,9 +146,9 @@
         <div class="bg-editorial-card border border-editorial-dark/10 p-8 sm:p-16 rounded-2xl grid grid-cols-1 lg:grid-cols-2 gap-12 items-center" data-aos="fade-up">
             <div class="space-y-6">
                 <span class="text-xs uppercase tracking-widest text-editorial-accent font-semibold">The Bookshop Heritage</span>
-                <h2 class="text-3xl font-serif font-bold text-editorial-dark">Championing Literature in Multan</h2>
+                <h2 class="text-3xl font-serif font-bold text-editorial-dark">Championing Literature in Muscat</h2>
                 <p class="text-editorial-muted text-sm leading-relaxed font-light">
-                    Multan Bookshop works closely with local authors, illustrators, and translators to produce high-grade physical editions. From illustrated children's adventures that spark imagination to sharp literary satire and immersive regional novels, our mission is to keep the printed word vibrant.
+                    Libraria Bookshop works closely with local authors, illustrators, and translators to produce high-grade physical editions. From illustrated children's adventures that spark imagination to sharp literary satire and immersive regional novels, our mission is to keep the printed word vibrant.
                 </p>
             </div>
             <div class="relative h-72 rounded-xl overflow-hidden bg-editorial-bg">
@@ -207,7 +207,7 @@
 
     <!-- Footer -->
     <footer class="border-t border-editorial-dark/10 py-12 text-center text-xs text-editorial-muted">
-        <p>&copy; 2026 Multan Bookshop. All Rights Reserved.</p>
+        <p>&copy; 2026 Libraria Bookshop. All Rights Reserved.</p>
     </footer>
 
     <!-- Slide-out Cart Drawer -->
@@ -223,7 +223,7 @@
                 <div class="p-6 border-t border-editorial-dark/10 bg-editorial-bg">
                     <div class="flex justify-between text-sm font-semibold mb-4 text-editorial-dark">
                         <span>Subtotal:</span>
-                        <span id="cart-subtotal" class="font-serif font-bold">PKR 0</span>
+                        <span id="cart-subtotal" class="font-serif font-bold">OMR 0</span>
                     </div>
                     <button onclick="checkoutWhatsApp()" class="w-full py-4 bg-editorial-dark text-editorial-bg text-xs uppercase tracking-widest font-bold hover:bg-editorial-accent transition-all text-center block">
                         Order via WhatsApp / COD
@@ -250,58 +250,58 @@
         // Book Catalog (10 Literary Items)
         const products = [
             {
-                id: 1, name: "Echoes of the Multan Walled City: A Historical Novel", category: "Contemporary Novel", price: 1850, oldPrice: 2400,
+                id: 1, name: "Echoes of the Old Walled City: A Historical Novel", category: "Contemporary Novel", price: 7, oldPrice: 9,
                 img1: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=1200&q=80",
                 img2: "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=1200&q=80", badge: "Bestseller"
             },
             {
-                id: 2, name: "The Grand Adventures of Little Ahmed (Illustrated Children's Book)", category: "Children's Book", price: 1200, oldPrice: 1600,
+                id: 2, name: "The Grand Adventures of Little Ahmed (Illustrated Children's Book)", category: "Children's Book", price: 5, oldPrice: 6,
                 img1: "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=1200&q=80",
                 img2: "https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=1200&q=80", badge: "Kids Favorite"
             },
             {
-                id: 3, name: "Pakistani Office Politics & Other Calamities (Satirical Humor)", category: "Funny & Satire", price: 950, oldPrice: 1300,
+                id: 3, name: "Office Politics & Other Calamities (Satirical Humor)", category: "Funny & Satire", price: 4, oldPrice: 5,
                 img1: "https://images.unsplash.com/photo-1495640388908-05fa85288e61?auto=format&fit=crop&w=1200&q=80",
                 img2: "https://images.unsplash.com/photo-1524578271613-d550eacf6090?auto=format&fit=crop&w=1200&q=80", badge: "Staff Pick"
             },
             {
-                id: 4, name: "Verses of the Northern Valleys: Bilingual Urdu & English Poetry", category: "Poetry Anthology", price: 1500, oldPrice: 2000,
+                id: 4, name: "Verses of the Northern Valleys: Bilingual Arabic & English Poetry", category: "Poetry Anthology", price: 6, oldPrice: 8,
                 img1: "https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&w=1200&q=80",
                 img2: "https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=1200&q=80", badge: "Award Winner"
             },
             {
-                id: 5, name: "The Art of Chai & Conversation: Cultural Essays", category: "Literature", price: 1100, oldPrice: 1500,
+                id: 5, name: "The Art of Tea & Conversation: Cultural Essays", category: "Literature", price: 5, oldPrice: 6,
                 img1: "https://images.unsplash.com/photo-1524578271613-d550eacf6090?auto=format&fit=crop&w=1200&q=80",
                 img2: "https://images.unsplash.com/photo-1519682337058-a94d519337bc?auto=format&fit=crop&w=1200&q=80", badge: "New Release"
             },
             {
-                id: 6, name: "Bedtime Folktales from Sindh & Punjab (Illustrated Hardcover)", category: "Children's Book", price: 1750, oldPrice: 2200,
+                id: 6, name: "Bedtime Folktales from Around the World (Illustrated Hardcover)", category: "Children's Book", price: 7, oldPrice: 9,
                 img1: "https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=1200&q=80",
                 img2: "https://images.unsplash.com/photo-1476275466078-4007374efbbe?auto=format&fit=crop&w=1200&q=80", badge: "Classic"
             },
             {
-                id: 7, name: "Shaheen's Flight: A Modern Corporate Thriller Novel", category: "Contemporary Novel", price: 1650, oldPrice: 2100,
+                id: 7, name: "Falcon's Flight: A Modern Corporate Thriller Novel", category: "Contemporary Novel", price: 6, oldPrice: 8,
                 img1: "https://images.unsplash.com/photo-1519682337058-a94d519337bc?auto=format&fit=crop&w=1200&q=80",
                 img2: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=1200&q=80", badge: "Suspense"
             },
             {
-                id: 8, name: "Shaadi Season Survival Guide: A Hilarious Memoir", category: "Funny & Satire", price: 1050, oldPrice: 1400,
+                id: 8, name: "Wedding Season Survival Guide: A Hilarious Memoir", category: "Funny & Satire", price: 4, oldPrice: 6,
                 img1: "https://images.unsplash.com/photo-1476275466078-4007374efbbe?auto=format&fit=crop&w=1200&q=80",
                 img2: "https://images.unsplash.com/photo-1495640388908-05fa85288e61?auto=format&fit=crop&w=1200&q=80", badge: "Trending"
             },
             {
-                id: 9, name: "Masterpieces of Classical Sufi Ghazals & Commentary", category: "Poetry Anthology", price: 2100, oldPrice: 2800,
+                id: 9, name: "Masterpieces of Classical Sufi Ghazals & Commentary", category: "Poetry Anthology", price: 9, oldPrice: 11,
                 img1: "https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=1200&q=80",
                 img2: "https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&w=1200&q=80", badge: "Collector Edition"
             },
             {
-                id: 10, name: "The Little Moon Explorer: Bedtime Stories for Smart Toddlers", category: "Children's Book", price: 1350, oldPrice: 1800,
+                id: 10, name: "The Little Moon Explorer: Bedtime Stories for Smart Toddlers", category: "Children's Book", price: 5, oldPrice: 7,
                 img1: "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=1200&q=80",
                 img2: "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=1200&q=80", badge: "Top Seller"
             }
         ];
 
-        let cart = JSON.parse(localStorage.getItem('multan_bookshop_cart')) || [];
+        let cart = JSON.parse(localStorage.getItem('libraria_bookshop_cart')) || [];
 
         function renderProducts() {
             const grid = document.getElementById('product-grid');
@@ -321,8 +321,8 @@
                         </div>
                         <div class="pt-6 flex items-center justify-between border-t border-editorial-dark/10 mt-6">
                             <div>
-                                <span class="text-editorial-dark font-serif font-bold text-xl">PKR ${p.price.toLocaleString()}</span>
-                                <span class="text-editorial-muted text-xs line-through ml-2">PKR ${p.oldPrice.toLocaleString()}</span>
+                                <span class="text-editorial-dark font-serif font-bold text-xl">OMR ${p.price.toLocaleString()}</span>
+                                <span class="text-editorial-muted text-xs line-through ml-2">OMR ${p.oldPrice.toLocaleString()}</span>
                             </div>
                             <button onclick="addToCart(${p.id})" class="px-5 py-2.5 bg-editorial-dark text-editorial-bg text-xs uppercase tracking-widest font-bold hover:bg-editorial-accent transition-all">
                                 Add to Cart
@@ -351,7 +351,7 @@
         }
 
         function updateCart() {
-            localStorage.setItem('multan_bookshop_cart', JSON.stringify(cart));
+            localStorage.setItem('libraria_bookshop_cart', JSON.stringify(cart));
             const countEl = document.getElementById('cart-count');
             const itemsEl = document.getElementById('cart-items');
             const subtotalEl = document.getElementById('cart-subtotal');
@@ -361,7 +361,7 @@
             const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
             countEl.textContent = totalCount;
-            subtotalEl.textContent = `PKR ${subtotal.toLocaleString()}`;
+            subtotalEl.textContent = `OMR ${subtotal.toLocaleString()}`;
 
             if (cart.length === 0) {
                 itemsEl.innerHTML = `<p class="text-center text-editorial-muted py-12 text-sm font-light">Your book cart is empty.</p>`;
@@ -374,7 +374,7 @@
                         <img src="${item.img1}" class="w-14 h-14 object-cover rounded" alt="">
                         <div>
                             <h4 class="font-serif font-bold text-xs text-editorial-dark">${item.name}</h4>
-                            <p class="text-editorial-accent text-xs font-semibold mt-1">PKR ${item.price.toLocaleString()}</p>
+                            <p class="text-editorial-accent text-xs font-semibold mt-1">OMR ${item.price.toLocaleString()}</p>
                         </div>
                     </div>
                     <div class="flex items-center space-x-2">
@@ -398,10 +398,10 @@
 
         function checkoutWhatsApp() {
             if (cart.length === 0) return alert('Your cart is empty!');
-            let message = "As-salamu alaykum! I would like to order the following books from Multan Bookshop:\n\n";
-            cart.forEach(i => { message += `- ${i.name} (x${i.quantity}) - PKR ${(i.price * i.quantity).toLocaleString()}\n`; });
+            let message = "As-salamu alaykum! I would like to order the following books from Libraria Bookshop:\n\n";
+            cart.forEach(i => { message += `- ${i.name} (x${i.quantity}) - OMR ${(i.price * i.quantity).toLocaleString()}\n`; });
             const total = cart.reduce((sum, i) => sum + (i.price * i.quantity), 0);
-            message += `\nTotal Subtotal: PKR ${total.toLocaleString()}`;
+            message += `\nTotal Subtotal: OMR ${total.toLocaleString()}`;
             window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, '_blank');
         }
 

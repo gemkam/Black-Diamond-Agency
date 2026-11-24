@@ -175,6 +175,7 @@
                 <nav class="hidden md:flex items-center gap-8 text-xs font-semibold uppercase tracking-widest text-darkhub-muted">
                     <a href="#overview" class="hover:text-darkhub-accent transition-colors">Overview</a>
                     <a href="#catalogs" class="hover:text-darkhub-accent transition-colors">All Catalogs</a>
+                    <a href="#catalogs" onclick="showGroup('E-commerce')" class="px-5 py-2.5 border border-darkhub-accent text-darkhub-accent rounded-lg font-bold hover:bg-darkhub-accent hover:text-stone-950 transition-all">E-commerce</a>
                     <a href="mailto:kzstech000@gmail.com" class="px-6 py-2.5 bg-darkhub-accent text-stone-950 rounded-lg font-bold hover:brightness-110 transition-all shadow-lg">Contact Admin</a>
                 </nav>
 
@@ -193,6 +194,7 @@
         <div id="mobileMenu" class="hidden md:hidden bg-darkhub-surface border-b border-darkhub-border px-6 py-5 space-y-4 text-xs font-semibold uppercase tracking-widest">
             <a href="#overview" onclick="toggleMobileMenu()" class="block text-darkhub-muted hover:text-darkhub-accent">Overview</a>
             <a href="#catalogs" onclick="toggleMobileMenu()" class="block text-darkhub-muted hover:text-darkhub-accent">All Catalogs</a>
+            <a href="#catalogs" onclick="toggleMobileMenu(); showGroup('E-commerce')" class="block text-center w-full py-3 border border-darkhub-accent text-darkhub-accent rounded-lg font-bold">E-commerce</a>
             <a href="mailto:kzstech000@gmail.com" class="block text-center w-full py-3 bg-darkhub-accent text-stone-950 rounded-lg font-bold">Contact Admin</a>
         </div>
     </header>
@@ -283,24 +285,28 @@
         // ===== Catalog data (edit here to add or remove cards) =====
         // group: used by the filter chips. live: true = real live app/store.
         const catalogs = [
-            { name: 'Aura Karachi', tag: 'Beauty & Salon', group: 'Beauty & Fashion', btn: 'Open Catalog',
+            { name: 'Aura Lumière', tag: 'Beauty & Salon', group: 'Beauty & Fashion', btn: 'Open Catalog',
               desc: 'Facials, hair styling, blow dry and a luxury bridal studio.',
               img: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=80',
-              url: 'design/Aura Karachi.html' },
+              url: 'design/aura-lumiere.html' },
             { name: 'Covo', tag: 'Coffee & Cafe', group: 'Food & Cafe', badge: 'Newest', live: true, btn: 'Open Live Store',
-              desc: 'Karachi specialty coffee shop: menu, signature brews and the full cafe experience.',
+              desc: 'Specialty coffee shop: menu, signature brews and the full cafe experience.',
               img: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80',
               url: 'https://covo-pk-demo.vercel.app/' },
-            { name: 'Zohra Couture', tag: 'Fashion', group: 'Beauty & Fashion', btn: 'Open Catalog',
-              desc: 'Shalwar kameez, luxury formals and seasonal designer wear.',
+            { name: 'Maison Elara', tag: 'Boutique', group: 'Beauty & Fashion', btn: 'Open Catalog',
+              desc: 'Ladies boutique: embroidered formal suits, festive wear, tunics and seasonal designer pieces.',
               img: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=800&q=80',
-              url: 'design/Zohra Couture.html' },
-            { name: 'BaZariFy', tag: 'E-commerce', group: 'Shopping', badge: 'Featured', live: true, btn: 'Open Live Store',
+              url: 'design/maison-elara.html' },
+            { name: 'SuuqiFy', tag: 'E-commerce', group: 'E-commerce', badge: 'Oman', live: true, btn: 'Open Live Store',
+              desc: 'Oman online store: home and kitchen, electronics, beauty care and lifestyle accessories in OMR, with Cash on Delivery nationwide.',
+              img: 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&w=800&q=80',
+              url: 'https://suuqify.vercel.app/' },
+            { name: 'BaZariFy', tag: 'E-commerce', group: 'E-commerce', badge: 'Featured', live: true, btn: 'Open Live Store',
               desc: 'Home, kitchen, beauty and electronics. Quality products with Cash on Delivery nationwide.',
               img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80',
               url: 'https://basera-bazar-lac.vercel.app/' },
-            { name: 'Bright Spot', tag: 'E-commerce', group: 'Shopping', badge: 'Live', live: true, btn: 'Open Live Store',
-              desc: 'Multan general store: fashion, electronics, beauty, home and kitchen, kids and wellness, with COD and WhatsApp ordering.',
+            { name: 'Bright Spot', tag: 'E-commerce', group: 'E-commerce', badge: 'Live', live: true, btn: 'Open Live Store',
+              desc: 'General store: fashion, electronics, beauty, home and kitchen, kids and wellness, with COD and WhatsApp ordering.',
               img: 'https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=800&q=80',
               url: 'https://bright-spot.vercel.app/' },
             { name: 'Daftar Office System', tag: 'Office System', group: 'Business Apps', badge: 'Live', live: true, btn: 'Open Live App',
@@ -311,22 +317,22 @@
               desc: 'Dual-admin dashboard for gaming account inventory and lead management, with secure login.',
               img: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80',
               url: 'https://account-ops.vercel.app/login' },
-            { name: 'Lahore Bazar', tag: 'Marketplace', group: 'Shopping', btn: 'Open Catalog',
-              desc: 'Online digital store with multi-niche products and a retail catalog.',
+            { name: 'Bazaar Royale', tag: 'Marketplace', group: 'E-commerce', btn: 'Open Catalog',
+              desc: 'Luxury heritage marketplace: velvet shawls, bridal formals, pottery, brass and handcrafted footwear.',
               img: 'https://images.unsplash.com/photo-1555529771-835f59fc5efe?auto=format&fit=crop&w=800&q=80',
-              url: 'design/lahore bazar.html' },
-            { name: 'Bookshop Catalog', tag: 'Literature', group: 'Lifestyle', btn: 'Open Catalog',
+              url: 'design/bazaar-royale.html' },
+            { name: 'Libraria Bookshop', tag: 'Literature', group: 'Lifestyle', btn: 'Open Catalog',
               desc: 'Digital books, parenting guides and literary resources.',
               img: 'https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=800&q=80',
-              url: 'design/bookshop.html' },
-            { name: 'Multan Motors', tag: 'Automotive', group: 'Lifestyle', btn: 'Open Catalog',
+              url: 'design/libraria-bookshop.html' },
+            { name: 'Prestige Motors', tag: 'Automotive', group: 'Lifestyle', btn: 'Open Catalog',
               desc: 'Luxury vehicle inventory and high-performance 4x4 options.',
               img: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80',
-              url: 'design/Multan Motors.html' },
-            { name: 'Shalimar Guild', tag: 'Enterprise', group: 'Services', btn: 'Open Catalog',
-              desc: 'Corporate portfolio and professional services interface.',
+              url: 'design/prestige-motors.html' },
+            { name: 'Atelier Guild', tag: 'Art & Craft', group: 'Lifestyle', btn: 'Open Catalog',
+              desc: 'Hand-painted folk art, ceramics, brass and heritage furniture from master artisans.',
               img: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80',
-              url: 'design/Shalimar Guild.html' },
+              url: 'design/atelier-guild.html' },
             { name: 'Super Painters', tag: 'Services', group: 'Services', btn: 'Open Catalog',
               desc: 'Professional commercial and residential painting services.',
               img: 'https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=800&q=80',
@@ -378,6 +384,12 @@
                 if (show) { card.classList.remove('in'); requestAnimationFrame(() => card.classList.add('in')); }
             });
         });
+
+        // Used by the E-commerce button in the header
+        function showGroup(g) {
+            const chip = filters.querySelector(`.chip[data-g="${g}"]`);
+            if (chip) chip.click();
+        }
 
         // ===== Stats counters =====
         const counts = { total: catalogs.length, live: catalogs.filter(c => c.live).length };
