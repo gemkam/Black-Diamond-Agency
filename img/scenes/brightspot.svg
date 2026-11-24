@@ -1,35 +1,45 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="Arial, sans-serif">
-<defs><radialGradient id="glow"><stop offset="0" stop-color="#ffe66d" stop-opacity=".9"/><stop offset="1" stop-color="#ffe66d" stop-opacity="0"/></radialGradient></defs>
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff8e7"/><stop offset="1" stop-color="#ffe3b3"/></linearGradient>
+<clipPath id="scr"><rect x="110" y="90" width="400" height="230" rx="6"/></clipPath></defs>
 <style>
- .bulb{animation:on 3s ease-in-out infinite}@keyframes on{0%,10%{opacity:.15}20%,100%{opacity:1}}
- .ray{animation:on 3s ease-in-out infinite;transform-origin:400px 95px}
- .item{animation:in 3s cubic-bezier(.3,1.4,.5,1) infinite;transform-box:fill-box;transform-origin:bottom}
- @keyframes in{0%,20%{transform:scale(0)}35%,92%{transform:scale(1)}100%{transform:scale(0)}}
- .sign{animation:sh 3s ease infinite}@keyframes sh{0%,15%{fill:#555}25%,100%{fill:#fff}}
+ /* product carousel slides through 4 categories */
+ .track{animation:track 8s cubic-bezier(.7,0,.3,1) infinite}
+ @keyframes track{0%,20%{transform:translateX(0)}25%,45%{transform:translateX(-400px)}50%,70%{transform:translateX(-800px)}75%,95%{transform:translateX(-1200px)}100%{transform:translateX(0)}}
+ .cursor{animation:cur 4s ease-in-out infinite}
+ @keyframes cur{0%{transform:translate(0,0)}35%{transform:translate(-60px,-40px)}45%{transform:translate(-60px,-36px)}50%,100%{transform:translate(0,0)}}
+ .click{animation:click 4s ease infinite;transform-box:fill-box;transform-origin:center}@keyframes click{0%,40%{transform:scale(1)}44%{transform:scale(.9)}50%,100%{transform:scale(1)}}
+ .bub{animation:bub 4s cubic-bezier(.3,1.4,.5,1) infinite;transform-box:fill-box;transform-origin:0% 100%}
+ @keyframes bub{0%,46%{transform:scale(0);opacity:0}56%,92%{transform:scale(1);opacity:1}100%{transform:scale(0);opacity:0}}
+ .bub2{animation-delay:.35s}
+ .ticks{animation:ticks 4s ease infinite}@keyframes ticks{0%,66%{fill:#9aa}72%,100%{fill:#34b7f1}}
 </style>
-<rect width="800" height="500" fill="#1d2440"/>
-<circle cx="400" cy="95" r="160" fill="url(#glow)" class="bulb"/>
-<g class="ray" stroke="#ffe66d" stroke-width="6" stroke-linecap="round"><line x1="400" y1="20" x2="400" y2="0"/><line x1="460" y1="40" x2="478" y2="26"/><line x1="340" y1="40" x2="322" y2="26"/><line x1="480" y1="95" x2="505" y2="95"/><line x1="320" y1="95" x2="295" y2="95"/></g>
-<path d="M370 95 a30 30 0 1 1 60 0 c0 18 -14 24 -14 40 h-32 c0 -16 -14 -22 -14 -40z" fill="#ffe66d" class="bulb"/>
-<path d="M370 95 a30 30 0 1 1 60 0 c0 18 -14 24 -14 40 h-32 c0 -16 -14 -22 -14 -40z" fill="none" stroke="#fff" stroke-width="3"/>
-<rect x="386" y="138" width="28" height="14" rx="3" fill="#aaa"/>
-<text x="400" y="190" text-anchor="middle" font-size="30" font-weight="bold" class="sign">BRIGHT SPOT</text>
-<!-- shelves -->
-<g fill="#8b5e34"><rect x="80" y="280" width="640" height="12"/><rect x="80" y="390" width="640" height="12"/><rect x="80" y="220" width="12" height="270"/><rect x="708" y="220" width="12" height="270"/></g>
-<g class="item" style="animation-delay:0s"><rect x="120" y="222" width="50" height="58" rx="6" fill="#ff6b6b"/></g>
-<g class="item" style="animation-delay:.12s"><rect x="190" y="236" width="40" height="44" rx="20" fill="#4ecdc4"/></g>
-<g class="item" style="animation-delay:.24s"><rect x="250" y="216" width="36" height="64" rx="8" fill="#ffd93d"/></g>
-<g class="item" style="animation-delay:.36s"><path d="M310 280 l30 -60 30 60z" fill="#a66cff"/></g>
-<g class="item" style="animation-delay:.48s"><rect x="390" y="230" width="60" height="50" rx="6" fill="#6bcB77"/></g>
-<g class="item" style="animation-delay:.6s"><circle cx="490" cy="252" r="28" fill="#ff8fab"/></g>
-<g class="item" style="animation-delay:.72s"><rect x="540" y="224" width="44" height="56" rx="10" fill="#4d96ff"/></g>
-<g class="item" style="animation-delay:.84s"><rect x="610" y="240" width="70" height="40" rx="6" fill="#ffb562"/></g>
-<g class="item" style="animation-delay:.3s"><rect x="120" y="340" width="70" height="50" rx="6" fill="#4d96ff"/></g>
-<g class="item" style="animation-delay:.42s"><circle cx="240" cy="362" r="28" fill="#ffd93d"/></g>
-<g class="item" style="animation-delay:.54s"><rect x="300" y="330" width="40" height="60" rx="8" fill="#ff6b6b"/></g>
-<g class="item" style="animation-delay:.66s"><rect x="370" y="346" width="80" height="44" rx="6" fill="#a66cff"/></g>
-<g class="item" style="animation-delay:.78s"><rect x="480" y="334" width="40" height="56" rx="18" fill="#4ecdc4"/></g>
-<g class="item" style="animation-delay:.9s"><rect x="550" y="350" width="60" height="40" rx="6" fill="#6bcB77"/></g>
-<g class="item" style="animation-delay:1s"><path d="M640 390 l25 -50 25 50z" fill="#ff8fab"/></g>
-<text x="400" y="460" text-anchor="middle" font-size="18" fill="#cfd6ff">Fashion · Electronics · Beauty · Home · Kids</text>
+<rect width="800" height="500" fill="url(#bg)"/>
+<text x="40" y="58" font-size="30" font-weight="bold" fill="#e8590c">Bright Spot</text><text x="222" y="58" font-size="16" fill="#9a5a20">online store</text>
+<!-- laptop -->
+<rect x="96" y="76" width="428" height="258" rx="14" fill="#2b2b33"/>
+<rect x="110" y="90" width="400" height="230" rx="6" fill="#fff"/>
+<path d="M60 334 H560 l-24 26 H84 Z" fill="#9aa0a6"/><rect x="270" y="334" width="80" height="8" rx="3" fill="#7a8087"/>
+<g clip-path="url(#scr)">
+ <rect x="110" y="90" width="400" height="34" fill="#ff922b"/><text x="126" y="113" font-size="15" font-weight="bold" fill="#fff">BRIGHT SPOT</text>
+ <g fill="#fff"><rect x="330" y="101" width="120" height="14" rx="7" opacity=".7"/></g><circle cx="482" cy="107" r="9" fill="#fff"/>
+ <g class="track">
+  <!-- fashion --><g><rect x="130" y="140" width="170" height="160" rx="10" fill="#ffe8f0"/><path d="M190 160 l25 -8 25 8 15 25 -15 6 v60 h-50 v-60 l-15 -6z" fill="#e64980"/><text x="215" y="290" text-anchor="middle" font-size="13" fill="#555">Fashion</text>
+   <rect x="320" y="140" width="170" height="160" rx="10" fill="#fff0e0"/><text x="405" y="190" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">Summer Kurta</text><text x="405" y="216" text-anchor="middle" font-size="15" fill="#e8590c">OMR 6.500</text><g class="click"><rect x="350" y="240" width="110" height="34" rx="17" fill="#25d366"/><text x="405" y="262" text-anchor="middle" font-size="13" font-weight="bold" fill="#fff">Order now</text></g></g>
+  <!-- electronics --><g transform="translate(400 0)"><rect x="130" y="140" width="170" height="160" rx="10" fill="#e7f5ff"/><rect x="180" y="170" width="70" height="90" rx="10" fill="#228be6"/><rect x="188" y="180" width="54" height="64" rx="4" fill="#d0ebff"/><text x="215" y="290" text-anchor="middle" font-size="13" fill="#555">Electronics</text>
+   <rect x="320" y="140" width="170" height="160" rx="10" fill="#fff0e0"/><text x="405" y="190" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">Smart Phone</text><text x="405" y="216" text-anchor="middle" font-size="15" fill="#e8590c">OMR 79.000</text><rect x="350" y="240" width="110" height="34" rx="17" fill="#25d366"/><text x="405" y="262" text-anchor="middle" font-size="13" font-weight="bold" fill="#fff">Order now</text></g>
+  <!-- beauty --><g transform="translate(800 0)"><rect x="130" y="140" width="170" height="160" rx="10" fill="#f3f0ff"/><rect x="196" y="190" width="38" height="70" rx="8" fill="#7950f2"/><rect x="204" y="170" width="22" height="24" rx="4" fill="#d0bfff"/><text x="215" y="290" text-anchor="middle" font-size="13" fill="#555">Beauty</text>
+   <rect x="320" y="140" width="170" height="160" rx="10" fill="#fff0e0"/><text x="405" y="190" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">Glow Serum</text><text x="405" y="216" text-anchor="middle" font-size="15" fill="#e8590c">OMR 4.200</text><rect x="350" y="240" width="110" height="34" rx="17" fill="#25d366"/><text x="405" y="262" text-anchor="middle" font-size="13" font-weight="bold" fill="#fff">Order now</text></g>
+  <!-- home & kitchen --><g transform="translate(1200 0)"><rect x="130" y="140" width="170" height="160" rx="10" fill="#ebfbee"/><path d="M180 200 h70 v50 a10 10 0 0 1 -10 10 h-50 a10 10 0 0 1 -10 -10z" fill="#2f9e44"/><rect x="172" y="192" width="86" height="12" rx="6" fill="#2b8a3e"/><text x="215" y="290" text-anchor="middle" font-size="13" fill="#555">Home &amp; Kitchen</text>
+   <rect x="320" y="140" width="170" height="160" rx="10" fill="#fff0e0"/><text x="405" y="190" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">Cookware Set</text><text x="405" y="216" text-anchor="middle" font-size="15" fill="#e8590c">OMR 14.900</text><rect x="350" y="240" width="110" height="34" rx="17" fill="#25d366"/><text x="405" y="262" text-anchor="middle" font-size="13" font-weight="bold" fill="#fff">Order now</text></g>
+ </g>
+</g>
+<!-- cursor -->
+<g class="cursor"><path d="M465 300 l0 34 9 -8 7 15 7 -3 -7 -15 12 0z" fill="#111" stroke="#fff" stroke-width="2"/></g>
+<!-- WhatsApp phone with order chat -->
+<rect x="590" y="110" width="170" height="320" rx="24" fill="#1f1f2b"/><rect x="600" y="128" width="150" height="286" rx="14" fill="#ece5dd"/>
+<rect x="600" y="128" width="150" height="40" rx="14" fill="#075e54"/><circle cx="622" cy="148" r="11" fill="#ff922b"/><text x="640" y="153" font-size="13" font-weight="bold" fill="#fff">Bright Spot</text>
+<g class="bub"><rect x="612" y="190" width="126" height="56" rx="10" fill="#dcf8c6"/><text x="622" y="212" font-size="12" fill="#222">I want to order</text><text x="622" y="230" font-size="12" fill="#222">Summer Kurta</text><path class="ticks" d="M708 236 l4 4 7 -8 M714 236 l4 4 7 -8" stroke-width="2" fill="none" stroke="#34b7f1"/></g>
+<g class="bub bub2"><rect x="612" y="256" width="126" height="56" rx="10" fill="#fff"/><text x="622" y="278" font-size="12" fill="#222">Order confirmed ✓</text><text x="622" y="296" font-size="12" fill="#e8590c">Cash on Delivery</text></g>
+<text x="310" y="420" text-anchor="middle" font-size="16" fill="#7a4a10">Fashion · Electronics · Beauty · Home · Kids · Wellness</text>
+<text x="310" y="448" text-anchor="middle" font-size="15" fill="#2f9e44" font-weight="bold">Order on WhatsApp · Cash on Delivery</text>
 </svg>
