@@ -1,35 +1,62 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="Arial, sans-serif">
-<defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0f1a33"/><stop offset="1" stop-color="#3a2a52"/></linearGradient>
-<linearGradient id="car" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e8c04a"/><stop offset="1" stop-color="#a87a14"/></linearGradient>
-<linearGradient id="beam" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff6c8" stop-opacity=".8"/><stop offset="1" stop-color="#fff6c8" stop-opacity="0"/></linearGradient></defs>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="Georgia, serif">
+<defs>
+ <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#05070f"/><stop offset=".55" stop-color="#1a1530"/><stop offset="1" stop-color="#2a2238"/></linearGradient>
+ <linearGradient id="body" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a0f1e"/><stop offset=".5" stop-color="#5c1a2e"/><stop offset="1" stop-color="#1c0710"/></linearGradient>
+ <linearGradient id="hood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d9dbe3"/><stop offset="1" stop-color="#8d909c"/></linearGradient>
+ <linearGradient id="chrome" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8f939e"/><stop offset=".5" stop-color="#ffffff"/><stop offset="1" stop-color="#8f939e"/></linearGradient>
+ <linearGradient id="glass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3b4766"/><stop offset="1" stop-color="#0d1222"/></linearGradient>
+ <radialGradient id="flare"><stop offset="0" stop-color="#ffffff"/><stop offset=".25" stop-color="#fff6d0" stop-opacity=".9"/><stop offset="1" stop-color="#fff6d0" stop-opacity="0"/></radialGradient>
+ <radialGradient id="beam" cx="50%" cy="0%" r="100%"><stop offset="0" stop-color="#fff6d0" stop-opacity=".55"/><stop offset="1" stop-color="#fff6d0" stop-opacity="0"/></radialGradient>
+</defs>
 <style>
- .far{animation:mv 14s linear infinite}.near{animation:mv 5s linear infinite}@keyframes mv{to{transform:translateX(-800px)}}
- .dash{animation:dash .5s linear infinite}@keyframes dash{to{transform:translateX(-100px)}}
- .wheel{transform-box:fill-box;transform-origin:center;animation:spin .4s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
- .body{animation:bob .35s ease-in-out infinite alternate}@keyframes bob{to{transform:translateY(-2px)}}
- .beam{animation:fl 2s ease-in-out infinite}@keyframes fl{50%{opacity:.6}}
- .wind{animation:wind .7s linear infinite}@keyframes wind{from{transform:translateX(60px);opacity:0}30%{opacity:.8}to{transform:translateX(-160px);opacity:0}}
+ /* car drives in from the horizon, holds, flashes, then fades and repeats */
+ .car{transform-origin:400px 236px;animation:approach 7s cubic-bezier(.2,.7,.2,1) infinite}
+ @keyframes approach{0%{transform:translateY(0) scale(.12);opacity:0}6%{opacity:1}45%,92%{transform:translateY(118px) scale(1);opacity:1}100%{transform:translateY(118px) scale(1.05);opacity:0}}
+ .flash{animation:flash 7s ease infinite}
+ @keyframes flash{0%,48%{opacity:.35}50%{opacity:1}53%{opacity:.3}56%{opacity:1}59%{opacity:.35}66%{opacity:1}69%{opacity:.35}100%{opacity:.35}}
+ .road{animation:road .9s linear infinite;transform-origin:400px 236px}
+ @keyframes road{from{transform:scale(1)}to{transform:scale(1.35)}}
+ .rd{animation:fade 7s ease infinite}@keyframes fade{0%,45%{opacity:1}55%,100%{opacity:.25}}
+ .star{animation:tw 3s ease-in-out infinite}@keyframes tw{50%{opacity:.2}}
 </style>
 <rect width="800" height="500" fill="url(#sky)"/>
-<g fill="#fff" opacity=".7"><circle cx="100" cy="60" r="2"/><circle cx="300" cy="40" r="1.5"/><circle cx="520" cy="80" r="2"/><circle cx="700" cy="50" r="1.5"/><circle cx="640" cy="120" r="1.2"/></g>
-<circle cx="660" cy="90" r="34" fill="#fff4cf" opacity=".9"/>
-<g class="far" fill="#24304f"><path d="M0 330 L60 250 L120 300 L200 220 L290 310 L380 240 L470 320 L560 230 L660 300 L740 250 L800 330 Z"/><path d="M800 330 L860 250 L920 300 L1000 220 L1090 310 L1180 240 L1270 320 L1360 230 L1460 300 L1540 250 L1600 330 Z"/></g>
-<g class="near" fill="#1a2238"><rect x="20" y="250" width="50" height="100"/><rect x="90" y="220" width="40" height="130"/><rect x="160" y="270" width="70" height="80"/><rect x="260" y="230" width="44" height="120"/><rect x="340" y="260" width="60" height="90"/><rect x="430" y="210" width="40" height="140"/><rect x="500" y="250" width="70" height="100"/><rect x="600" y="235" width="50" height="115"/><rect x="690" y="265" width="70" height="85"/>
- <rect x="820" y="250" width="50" height="100"/><rect x="890" y="220" width="40" height="130"/><rect x="960" y="270" width="70" height="80"/><rect x="1060" y="230" width="44" height="120"/><rect x="1140" y="260" width="60" height="90"/><rect x="1230" y="210" width="40" height="140"/><rect x="1300" y="250" width="70" height="100"/><rect x="1400" y="235" width="50" height="115"/><rect x="1490" y="265" width="70" height="85"/></g>
-<rect y="350" width="800" height="150" fill="#2b2b33"/>
-<g class="dash" fill="#e8c04a"><rect x="0" y="425" width="50" height="7"/><rect x="100" y="425" width="50" height="7"/><rect x="200" y="425" width="50" height="7"/><rect x="300" y="425" width="50" height="7"/><rect x="400" y="425" width="50" height="7"/><rect x="500" y="425" width="50" height="7"/><rect x="600" y="425" width="50" height="7"/><rect x="700" y="425" width="50" height="7"/><rect x="800" y="425" width="50" height="7"/></g>
-<path class="beam" d="M610 360 L800 320 L800 420 Z" fill="url(#beam)"/>
-<g stroke="#cfd8ff" stroke-width="3" stroke-linecap="round"><line class="wind" x1="160" y1="320" x2="220" y2="320"/><line class="wind" style="animation-delay:.25s" x1="140" y1="350" x2="210" y2="350"/><line class="wind" style="animation-delay:.5s" x1="170" y1="380" x2="220" y2="380"/></g>
-<!-- sports car -->
-<g class="body">
- <path d="M220 380 Q225 340 300 330 L380 300 Q430 284 500 296 L570 322 Q620 330 625 360 L625 385 L220 385 Z" fill="url(#car)"/>
- <path d="M392 306 Q430 292 488 300 L540 324 L370 326 Z" fill="#1d2b44"/>
- <line x1="455" y1="300" x2="452" y2="326" stroke="#a87a14" stroke-width="4"/>
- <rect x="600" y="350" width="22" height="10" rx="4" fill="#fff6c8"/><rect x="222" y="352" width="16" height="9" rx="3" fill="#ff4d4d"/>
- <path d="M260 362 h330" stroke="#fff" stroke-opacity=".35" stroke-width="3"/>
+<g fill="#fff" class="star"><circle cx="80" cy="50" r="1.6"/><circle cx="210" cy="90" r="1.2"/><circle cx="330" cy="40" r="1.4"/><circle cx="560" cy="70" r="1.6"/><circle cx="700" cy="40" r="1.2"/><circle cx="640" cy="130" r="1"/></g>
+<!-- skyline silhouette -->
+<path d="M0 236 V200 h40 v-30 h30 v40 h40 v-60 h26 v60 h50 v-20 h40 v20 h60 V236 Z M520 236 V190 h30 v-40 h34 v60 h40 v-30 h36 v30 h50 v-50 h30 v50 h60 v26 Z" fill="#141022"/>
+<!-- road in perspective -->
+<path d="M370 236 L430 236 L800 500 L0 500 Z" fill="#1e1e26"/>
+<path d="M370 236 L0 500" stroke="#e8c04a" stroke-width="3" opacity=".7"/><path d="M430 236 L800 500" stroke="#e8c04a" stroke-width="3" opacity=".7"/>
+<g class="rd"><g class="road" fill="#f2f2f2" opacity=".8">
+ <path d="M398 245 h4 l1 10 h-6z"/><path d="M396 270 h8 l2 18 h-12z"/><path d="M393 310 h14 l3 28 h-20z"/><path d="M388 370 h24 l5 45 h-34z"/><path d="M380 460 h40 l8 60 h-56z"/></g></g>
+<!-- headlight beams on the road -->
+<path class="flash" d="M300 330 L0 500 L340 500 Z M500 330 L800 500 L460 500 Z" fill="url(#beam)"/>
+<!-- the car (front view) -->
+<g class="car">
+ <ellipse cx="400" cy="232" rx="200" ry="14" fill="#000" opacity=".55"/>
+ <!-- roof and windscreen -->
+ <path d="M292 78 Q296 64 312 64 L488 64 Q504 64 508 78 L526 150 L274 150 Z" fill="url(#body)"/>
+ <path d="M304 80 Q306 74 316 74 L484 74 Q494 74 496 80 L510 144 L290 144 Z" fill="url(#glass)"/>
+ <path d="M318 120 L352 82" stroke="#fff" stroke-opacity=".25" stroke-width="5" stroke-linecap="round"/>
+ <!-- mirrors -->
+ <path d="M262 142 h-30 a8 8 0 0 0 0 16 h30 z" fill="url(#body)"/><path d="M538 142 h30 a8 8 0 0 1 0 16 h-30 z" fill="url(#body)"/>
+ <!-- body -->
+ <path d="M240 150 L560 150 Q585 152 590 175 L594 215 Q594 228 580 228 L220 228 Q206 228 206 215 L210 175 Q215 152 240 150 Z" fill="url(#body)"/>
+ <!-- silver bonnet band -->
+ <path d="M352 150 L448 150 L444 158 L356 158 Z" fill="url(#hood)"/>
+ <!-- tall chrome grille -->
+ <rect x="362" y="140" width="76" height="80" rx="5" fill="url(#chrome)"/>
+ <rect x="368" y="148" width="64" height="66" fill="#1b1d24"/>
+ <rect x="394" y="128" width="12" height="12" rx="2" fill="url(#chrome)"/>
+ <g stroke="url(#chrome)" stroke-width="3"><line x1="374" y1="148" x2="374" y2="214"/><line x1="384" y1="148" x2="384" y2="214"/><line x1="394" y1="148" x2="394" y2="214"/><line x1="404" y1="148" x2="404" y2="214"/><line x1="414" y1="148" x2="414" y2="214"/><line x1="424" y1="148" x2="424" y2="214"/></g>
+ <!-- headlights -->
+ <g><rect x="246" y="166" width="88" height="24" rx="4" fill="#e9ecf5"/><rect x="466" y="166" width="88" height="24" rx="4" fill="#e9ecf5"/>
+  <rect x="244" y="194" width="84" height="5" rx="2.5" fill="#fff6d0" class="flash"/><rect x="472" y="194" width="84" height="5" rx="2.5" fill="#fff6d0" class="flash"/></g>
+ <circle class="flash" cx="286" cy="179" r="62" fill="url(#flare)"/><circle class="flash" cx="514" cy="179" r="62" fill="url(#flare)"/>
+ <!-- bumper, plate, wheels -->
+ <rect x="226" y="214" width="348" height="10" rx="5" fill="url(#chrome)"/>
+ <rect x="370" y="222" width="60" height="16" rx="3" fill="#f5f5f5"/><text x="400" y="235" text-anchor="middle" font-size="11" fill="#222" font-family="Arial">PRESTIGE</text>
+ <rect x="222" y="224" width="44" height="26" rx="6" fill="#0b0b0f"/><rect x="534" y="224" width="44" height="26" rx="6" fill="#0b0b0f"/>
 </g>
-<g class="wheel"><circle cx="300" cy="388" r="30" fill="#111"/><circle cx="300" cy="388" r="16" fill="#c9c9d1"/><g stroke="#555" stroke-width="4"><line x1="300" y1="372" x2="300" y2="404"/><line x1="284" y1="388" x2="316" y2="388"/></g></g>
-<g class="wheel"><circle cx="548" cy="388" r="30" fill="#111"/><circle cx="548" cy="388" r="16" fill="#c9c9d1"/><g stroke="#555" stroke-width="4"><line x1="548" y1="372" x2="548" y2="404"/><line x1="532" y1="388" x2="564" y2="388"/></g></g>
-<text x="40" y="70" font-size="34" font-weight="bold" fill="#e8c04a" letter-spacing="3">PRESTIGE MOTORS</text>
-<text x="40" y="100" font-size="16" fill="#cfd8ff">Luxury cars · 4x4 · Sports</text>
+<text x="400" y="48" text-anchor="middle" font-size="34" fill="#e8c04a" letter-spacing="4">PRESTIGE MOTORS</text>
+<text x="400" y="482" text-anchor="middle" font-size="16" fill="#cfd2e6" font-style="italic">Luxury cars · Limousines · 4x4 · Sports</text>
 </svg>
