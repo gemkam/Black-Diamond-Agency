@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Amara Campus Pass</title>
+<meta name="theme-color" content="#2A1E17">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Amara">
+<link rel="manifest" href='data:application/manifest+json,{"name":"Amara Campus Pass","short_name":"Amara","start_url":".","display":"standalone","background_color":"%232A1E17","theme_color":"%232A1E17"}'>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --espresso:#2A1E17;
+    --espresso-soft:#3A2A20;
+    --cream:#F3E9D8;
+    --paper:#FBF5EA;
+    --latte:#E7D6BB;
+    --latte-line:#DCC7A4;
+    --gold:#C98A3C;
+    --gold-deep:#A96E27;
+    --teal:#12857B;
+    --teal-soft:#E1F0EE;
+    --open:#2F9E56;
+    --busy:#C0492F;
+    --wait:#C98A3C;
+    --shadow:0 18px 40px -22px rgba(42,30,23,.55);
+    --font-ui:"DM Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+    --font-display:"Fraunces",Georgia,"Times New Roman",serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:var(--font-ui);
+    color:var(--espresso);
+    background:
+      radial-gradient(1200px 600px at 50% -10%, #4a3527 0%, #2A1E17 45%, #1c130d 100%);
+    min-height:100vh;
+    display:flex;justify-content:center;align-items:flex-start;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* phone shell so desktop reads as an app preview */
+  .app{
+    width:100%;max-width:430px;min-height:100vh;
+    background:var(--cream);
+    position:relative;overflow:hidden;
+    display:flex;flex-direction:column;
+    box-shadow:0 40px 90px -30px rgba(0,0,0,.7);
+  }
+  @media(min-width:480px){
+    body{padding:26px 0}
+    .app{min-height:calc(100vh - 52px);border-radius:34px;border:9px solid #12100e}
+  }
+
+  /* ---- top bar ---- */
+  .topbar{
+    position:sticky;top:0;z-index:40;
+    background:var(--espresso);color:var(--cream);
+    padding:14px 18px 12px;
+    display:flex;align-items:center;justify-content:space-between;
+    border-bottom:1px solid rgba(255,255,255,.06);
+  }
+  .brand{display:flex;align-items:center;gap:10px}
+  .brand .mark{width:44px;height:44px;flex:none;display:grid;place-items:center}
+  .brand .mark img{width:100%;height:100%;object-fit:contain}
+  .tb-actions{display:flex;align-items:center;gap:16px}
+  .tb-ic{display:grid;place-items:center;width:28px;height:28px;color:var(--cream);transition:transform .12s}
+  .tb-ic:active{transform:scale(.86)}
+  .tb-ic svg{width:22px;height:22px;display:block}
+  .tb-ic.call{color:var(--gold)}
+  .tb-ic.wa{color:#3fd071}
+  .tb-ic.ig{color:#f06ba0}
+  .brand .name{font-family:var(--font-display);font-weight:600;font-size:22px;letter-spacing:.5px;line-height:1}
+  .brand .sub{font-size:10.5px;opacity:.72;letter-spacing:.3px;margin-top:2px}
+  .install-chip{
+    font-size:12px;font-weight:600;color:var(--espresso);
+    background:var(--gold);border:none;border-radius:999px;
+    padding:8px 13px;cursor:pointer;display:flex;align-items:center;gap:6px;
+  }
+  .install-chip:active{transform:scale(.96)}
+
+  /* ---- scroll area / views ---- */
+  .scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:96px}
+  .view{display:none;animation:fade .32s ease}
+  .view.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  @media(prefers-reduced-motion:reduce){.view{animation:none}}
+  .pad{padding:18px}
+  .section-head{font-family:var(--font-display);font-size:20px;font-weight:600;margin:6px 0 12px}
+
+  /* ---- hero ---- */
+  .hero{
+    background:linear-gradient(160deg,var(--espresso) 0%,#3c2a1e 100%);
+    color:var(--cream);padding:22px 20px 26px;position:relative;overflow:hidden;
+  }
+  .hero .steam{position:absolute;right:-10px;top:-30px;font-size:190px;opacity:.05;font-family:var(--font-display);line-height:1;pointer-events:none}
+  .hero h1{font-family:var(--font-display);font-weight:400;font-size:32px;line-height:1.05;letter-spacing:.3px}
+  .hero h1 em{font-style:italic;color:var(--gold)}
+  .hero p{margin-top:10px;font-size:13.5px;opacity:.82;max-width:30ch;line-height:1.5}
+  .hero .loc{margin-top:14px;display:inline-flex;align-items:center;gap:7px;font-size:12px;
+    background:rgba(255,255,255,.09);padding:7px 12px;border-radius:999px;
+    color:var(--cream);text-decoration:none;transition:background .15s}
+  .hero .loc:active{background:rgba(255,255,255,.18)}
+  .hero .loc .dir{opacity:.62;font-weight:600}
+
+  /* ---- vibe strip ---- */
+  .vibe{padding:16px 18px 4px}
+  .vibe .lbl{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+  .vibe .lbl span{font-size:12px;font-weight:600;color:var(--espresso-soft)}
+  .live-dot{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--teal);font-weight:700}
+  .live-dot i{width:7px;height:7px;border-radius:50%;background:var(--teal);animation:pulse 1.6s infinite}
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.7)}}
+  .zones{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .zone{
+    background:var(--paper);border:1px solid var(--latte-line);border-radius:16px;
+    padding:12px 13px;display:flex;flex-direction:column;gap:8px;
+  }
+  .zone .z-top{display:flex;align-items:center;gap:9px}
+  .zone .z-ic{font-size:19px;line-height:1}
+  .zone .z-name{font-size:12.5px;font-weight:600}
+  .status{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;border-radius:999px;padding:4px 9px;width:fit-content}
+  .status i{width:7px;height:7px;border-radius:50%}
+  .s-open{color:var(--open);background:rgba(47,158,86,.12)} .s-open i{background:var(--open)}
+  .s-wait{color:var(--gold-deep);background:rgba(201,138,60,.14)} .s-wait i{background:var(--wait)}
+  .s-busy{color:var(--busy);background:rgba(192,73,47,.12)} .s-busy i{background:var(--busy)}
+
+  /* ---- quick actions ---- */
+  .qa{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:18px}
+  .qa button{
+    text-align:left;border:none;cursor:pointer;border-radius:18px;padding:16px 14px;
+    display:flex;flex-direction:column;gap:10px;min-height:104px;justify-content:space-between;
+    font-family:var(--font-ui);transition:transform .12s;
+  }
+  .qa button:active{transform:scale(.97)}
+  .qa .ic{font-size:24px}
+  .qa .t{font-weight:600;font-size:14.5px;line-height:1.15}
+  .qa .d{font-size:11px;opacity:.7;line-height:1.3}
+  .qa .a1{background:var(--espresso);color:var(--cream)}
+  .qa .a2{background:var(--teal);color:#eafffb}
+  .qa .a3{background:var(--gold);color:var(--espresso)}
+  .qa .a4{background:var(--paper);color:var(--espresso);border:1px solid var(--latte-line)}
+  .qa .a4 .d{opacity:.6}
+
+  /* ---- horizontal event rail ---- */
+  .rail-wrap{padding:6px 0 8px}
+  .rail-wrap .section-head{padding:0 18px}
+  .rail{display:flex;gap:13px;overflow-x:auto;padding:6px 18px 10px;scroll-snap-type:x mandatory}
+  .rail::-webkit-scrollbar{display:none}
+  .ev-card{
+    flex:0 0 210px;scroll-snap-align:start;background:var(--espresso);color:var(--cream);
+    border-radius:18px;overflow:hidden;cursor:pointer;transition:transform .12s;
+  }
+  .ev-card:active{transform:scale(.98)}
+  .ev-card .poster{height:144px;position:relative;display:flex;align-items:flex-end;padding:12px;
+    background-size:cover;background-position:center;overflow:hidden}
+  .ev-card .tag{position:absolute;top:9px;left:9px;font-size:10px;font-weight:700;letter-spacing:.4px;
+    background:var(--gold);color:var(--espresso);padding:4px 8px;border-radius:999px}
+  .ev-card .poster h3{font-family:var(--font-display);font-size:18px;font-weight:600;line-height:1.05;
+    text-shadow:0 2px 12px rgba(0,0,0,.6);z-index:1}
+  .ev-card .meta{padding:11px 12px 13px;display:flex;flex-direction:column;gap:5px}
+  .ev-card .meta .row{display:flex;align-items:center;gap:7px;font-size:11.5px;opacity:.85}
+  .ev-card .price{font-family:var(--font-display);font-size:16px;color:var(--gold);font-weight:600;margin-top:3px}
+  .poster::after,.banner::after{content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg,transparent 38%,rgba(15,9,5,.74));pointer-events:none}
+  .p-glyph{position:absolute;top:-10px;right:-4px;font-size:78px;opacity:.15;line-height:1;
+    transform:rotate(-7deg);pointer-events:none}
+  .p-body{position:relative;z-index:1}
+  .p-eyebrow{display:block;font-family:var(--font-display);font-size:10px;font-weight:600;
+    letter-spacing:1.5px;color:var(--gold);text-transform:uppercase;margin-bottom:3px;opacity:.95}
+  .ev-card .tag,.ev-row .banner .tag{z-index:2}
+
+  /* ---- events full list ---- */
+  .ev-list{display:flex;flex-direction:column;gap:14px}
+  .ev-row{background:var(--paper);border:1px solid var(--latte-line);border-radius:18px;overflow:hidden;cursor:pointer}
+  .ev-row:active{background:#f6eedf}
+  .ev-row .banner{height:134px;background-size:cover;background-position:center;position:relative;display:flex;align-items:flex-end;padding:12px;overflow:hidden}
+  .ev-row .banner .tag{position:absolute;top:9px;left:9px;font-size:10px;font-weight:700;background:var(--gold);color:var(--espresso);padding:4px 8px;border-radius:999px}
+  .ev-row .banner h3{font-family:var(--font-display);color:#fff;font-size:19px;font-weight:600;text-shadow:0 2px 12px rgba(0,0,0,.7)}
+  .ev-row .body{padding:12px 14px 14px}
+  .ev-row .body .when{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px}
+  .pill{font-size:11.5px;background:var(--teal-soft);color:var(--teal);font-weight:600;padding:5px 10px;border-radius:999px}
+  .ev-row .body p{font-size:12.5px;color:#5b4a3c;line-height:1.5}
+  .ev-row .foot{display:flex;align-items:center;justify-content:space-between;margin-top:12px}
+  .ev-row .foot .price{font-family:var(--font-display);font-size:19px;font-weight:600}
+  .btn{
+    border:none;cursor:pointer;font-family:var(--font-ui);font-weight:600;border-radius:12px;
+    background:var(--espresso);color:var(--cream);padding:11px 18px;font-size:13.5px;transition:transform .12s;
+  }
+  .btn:active{transform:scale(.96)}
+  .btn.gold{background:var(--gold);color:var(--espresso)}
+  .btn.ghost{background:transparent;color:var(--espresso);border:1.5px solid var(--espresso)}
+  .btn.block{width:100%;padding:15px;font-size:15px;border-radius:14px}
+
+  /* ---- menu ---- */
+  .moods{display:flex;gap:9px;overflow-x:auto;padding:2px 0 14px}
+  .moods::-webkit-scrollbar{display:none}
+  .mood{flex:none;border:1.5px solid var(--latte-line);background:var(--paper);cursor:pointer;
+    border-radius:999px;padding:9px 15px;font-size:13px;font-weight:600;font-family:var(--font-ui);color:var(--espresso-soft);
+    display:flex;align-items:center;gap:7px;transition:all .15s}
+  .mood.on{background:var(--espresso);color:var(--cream);border-color:var(--espresso)}
+  .mood-note{background:var(--teal-soft);border-radius:14px;padding:12px 14px;margin-bottom:16px;display:none;
+    font-size:12.5px;color:var(--teal);line-height:1.5}
+  .mood-note.show{display:block}
+  .mood-note b{color:var(--teal)}
+  .menu-cat{margin-bottom:22px}
+  .menu-cat h4{font-family:var(--font-display);font-size:15px;letter-spacing:2px;color:var(--gold-deep);
+    text-transform:uppercase;margin-bottom:4px}
+  .menu-cat .cat-sub{font-size:11px;color:#8a7461;margin-bottom:10px}
+  .menu-item{display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px dashed var(--latte-line)}
+  .menu-item:last-child{border-bottom:none}
+  .menu-item.rec{background:linear-gradient(90deg,rgba(201,138,60,.13),transparent);margin:0 -8px;padding:9px 8px;border-radius:10px;border-bottom:none}
+  .menu-item .mi-l{display:flex;flex-direction:column;gap:2px}
+  .menu-item .mi-name{font-size:13.5px;font-weight:500}
+  .menu-item .mi-rec{font-size:10.5px;color:var(--gold-deep);font-weight:700;letter-spacing:.3px}
+  .menu-item .mi-price{font-family:var(--font-display);font-weight:600;font-size:14px;color:var(--teal);display:flex;gap:10px}
+  .menu-item .mi-price .lg{opacity:.55}
+
+  /* ---- loyalty pass ---- */
+  .stampcard{
+    background:linear-gradient(155deg,var(--espresso),#432f21);color:var(--cream);
+    border-radius:22px;padding:20px;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+  .stampcard::after{content:"amara";position:absolute;right:-8px;bottom:-26px;font-family:var(--font-display);
+    font-size:120px;opacity:.06}
+  .stampcard .sc-top{display:flex;justify-content:space-between;align-items:flex-start}
+  .stampcard .sc-top h3{font-family:var(--font-display);font-size:20px;font-weight:600}
+  .stampcard .sc-top p{font-size:11.5px;opacity:.75;margin-top:2px}
+  .stampcard .sc-num{font-size:11px;background:rgba(255,255,255,.12);padding:5px 10px;border-radius:999px}
+  .stamps{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin:20px 0 6px}
+  .stamp{aspect-ratio:1;border-radius:50%;border:1.5px dashed rgba(243,233,216,.4);
+    display:grid;place-items:center;font-size:20px;position:relative}
+  .stamp.filled{border-style:solid;border-color:var(--gold);background:var(--gold);color:var(--espresso);animation:stampin .35s ease}
+  .stamp.reward{border-color:var(--gold);color:var(--gold)}
+  .stamp.reward.filled{background:var(--gold);color:var(--espresso)}
+  @keyframes stampin{0%{transform:scale(0) rotate(-25deg);opacity:0}60%{transform:scale(1.18) rotate(6deg)}100%{transform:scale(1) rotate(0);opacity:1}}
+  .sc-foot{font-size:12px;opacity:.85;margin-top:8px;line-height:1.5}
+  .bonus{background:var(--paper);border:1px solid var(--latte-line);border-radius:16px;padding:14px;
+    margin-top:16px;display:flex;gap:12px;align-items:center}
+  .bonus .b-ic{font-size:26px}
+  .bonus .b-t{font-weight:600;font-size:13.5px}
+  .bonus .b-d{font-size:11.5px;color:#7a6553;margin-top:2px;line-height:1.4}
+  .deal{background:var(--gold);color:var(--espresso);border-radius:16px;padding:16px;margin-top:14px}
+  .deal .d-k{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;opacity:.7}
+  .deal .d-t{font-family:var(--font-display);font-size:19px;font-weight:600;margin:3px 0 4px}
+  .deal .d-d{font-size:12px;line-height:1.4}
+
+  /* ---- bottom nav ---- */
+  .nav{
+    position:absolute;bottom:0;left:0;right:0;z-index:50;
+    background:var(--espresso);display:flex;justify-content:space-around;
+    padding:9px 6px calc(9px + env(safe-area-inset-bottom));border-top:1px solid rgba(255,255,255,.06)}
+  .nav button{background:none;border:none;cursor:pointer;color:rgba(243,233,216,.5);
+    display:flex;flex-direction:column;align-items:center;gap:3px;font-family:var(--font-ui);
+    font-size:10.5px;font-weight:600;padding:5px 12px;border-radius:12px;transition:color .15s}
+  .nav button .ni{font-size:20px;line-height:1}
+  .nav button.on{color:var(--gold)}
+
+  /* ---- sheet / modal ---- */
+  .sheet-bg{position:absolute;inset:0;background:rgba(20,13,8,.55);z-index:60;display:none;
+    align-items:flex-end;justify-content:center;backdrop-filter:blur(2px)}
+  .sheet-bg.open{display:flex}
+  .sheet{background:var(--cream);width:100%;max-width:430px;border-radius:26px 26px 0 0;
+    padding:20px 20px calc(24px + env(safe-area-inset-bottom));max-height:92%;overflow-y:auto;
+    animation:up .32s cubic-bezier(.2,.9,.3,1)}
+  @keyframes up{from{transform:translateY(100%)}to{transform:none}}
+  .sheet .grab{width:42px;height:4px;background:var(--latte-line);border-radius:9px;margin:0 auto 16px}
+  .sheet h2{font-family:var(--font-display);font-size:23px;font-weight:600;margin-bottom:4px}
+  .sheet .muted{font-size:12.5px;color:#7a6553;line-height:1.5}
+  .qtyrow{display:flex;align-items:center;justify-content:space-between;background:var(--paper);
+    border:1px solid var(--latte-line);border-radius:14px;padding:13px 15px;margin:18px 0}
+  .qtyrow .q-l{font-size:13.5px;font-weight:600}
+  .stepper{display:flex;align-items:center;gap:16px}
+  .stepper button{width:34px;height:34px;border-radius:50%;border:none;background:var(--espresso);color:var(--cream);
+    font-size:19px;cursor:pointer;display:grid;place-items:center}
+  .stepper span{font-family:var(--font-display);font-size:18px;font-weight:600;min-width:20px;text-align:center}
+  .total{display:flex;justify-content:space-between;align-items:baseline;margin:6px 0 16px}
+  .total .tk{font-size:13px;color:#7a6553}
+  .total .tv{font-family:var(--font-display);font-size:24px;font-weight:600}
+
+  .slot-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0}
+  .slot-opt{border:1.5px solid var(--latte-line);background:var(--paper);border-radius:14px;padding:13px;
+    cursor:pointer;text-align:center;font-family:var(--font-ui)}
+  .slot-opt .so-ic{font-size:22px} .slot-opt .so-n{font-size:12.5px;font-weight:600;margin-top:6px}
+  .slot-opt.on{border-color:var(--teal);background:var(--teal-soft)}
+  .times{display:flex;flex-wrap:wrap;gap:9px;margin:6px 0 18px}
+  .time{border:1.5px solid var(--latte-line);background:var(--paper);border-radius:11px;padding:9px 13px;
+    font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font-ui)}
+  .time.on{background:var(--espresso);color:var(--cream);border-color:var(--espresso)}
+
+  /* ---- ticket pass (the moment) ---- */
+  .ticket-wrap{padding:8px 0 4px;perspective:1000px}
+  .ticket{
+    background:linear-gradient(158deg,#33241a,var(--espresso));color:var(--cream);
+    border-radius:22px;overflow:hidden;position:relative;box-shadow:0 26px 50px -24px rgba(0,0,0,.7);
+    animation:reveal .6s cubic-bezier(.2,.9,.3,1)}
+  @keyframes reveal{from{opacity:0;transform:rotateX(14deg) translateY(20px)}to{opacity:1;transform:none}}
+  .ticket .t-head{padding:18px 20px 16px;display:flex;justify-content:space-between;align-items:flex-start;
+    background:linear-gradient(90deg,rgba(201,138,60,.16),transparent)}
+  .ticket .t-head .ev{font-family:var(--font-display);font-size:21px;font-weight:600;line-height:1.05;max-width:15ch}
+  .ticket .t-head .badge{font-size:10px;font-weight:700;letter-spacing:.5px;background:var(--gold);color:var(--espresso);
+    padding:5px 9px;border-radius:999px;flex:none}
+  .ticket .t-mid{display:flex;gap:16px;padding:6px 20px 18px;align-items:center}
+  .ticket .qr{width:118px;height:118px;background:#fff;border-radius:14px;padding:9px;flex:none}
+  .ticket .qr canvas{width:100%;height:100%;display:block;image-rendering:pixelated}
+  .ticket .t-info{display:flex;flex-direction:column;gap:9px;font-size:12px}
+  .ticket .t-info .k{opacity:.6;font-size:10px;letter-spacing:.4px}
+  .ticket .t-info .v{font-weight:600;font-size:13px}
+  .ticket .perf{border-top:2px dashed rgba(243,233,216,.28);position:relative}
+  .ticket .perf::before,.ticket .perf::after{content:"";position:absolute;top:-11px;width:22px;height:22px;
+    border-radius:50%;background:var(--cream)}
+  .ticket .perf::before{left:-11px} .ticket .perf::after{right:-11px}
+  .ticket .t-foot{padding:12px 20px 18px;display:flex;justify-content:space-between;align-items:center;font-size:11px}
+  .ticket .t-foot .id{font-family:var(--font-display);letter-spacing:1px;opacity:.8}
+  .wa-line{display:flex;align-items:center;gap:9px;background:#e9f8ef;color:#1a7a3f;border-radius:13px;
+    padding:12px 14px;font-size:12.5px;font-weight:600;margin-top:16px;line-height:1.4}
+  .wa-line .wic{font-size:19px}
+
+  .toast{position:absolute;left:50%;bottom:110px;transform:translateX(-50%) translateY(20px);
+    background:var(--espresso);color:var(--cream);padding:13px 20px;border-radius:14px;font-size:13px;font-weight:600;
+    z-index:80;opacity:0;pointer-events:none;transition:all .3s;box-shadow:var(--shadow);text-align:center;max-width:88%}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+  .ev-hero{background:linear-gradient(150deg,#f2d9bd,#e7c8a3);color:var(--espresso);padding:20px;display:flex;gap:15px;align-items:center}
+  .badge67{width:66px;height:66px;border-radius:50%;background:#f8e8d4;flex:none;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;box-shadow:inset 0 0 0 2px rgba(42,30,23,.12)}
+  .badge67 .b-num{font-family:var(--font-display);font-weight:900;font-size:30px;line-height:.8}
+  .badge67 .b-sub{font-family:var(--font-display);font-size:12px;letter-spacing:1px;margin-top:2px}
+  .ev-hero-txt h2{font-family:var(--font-display);font-size:22px;font-weight:600;line-height:1.05}
+  .ev-hero-txt p{font-size:12px;margin-top:6px;opacity:.82;line-height:1.45;max-width:34ch}
+  .booking-note{background:var(--teal-soft);color:var(--teal);border-radius:13px;padding:11px 14px;
+    font-size:12px;font-weight:600;margin-bottom:16px;line-height:1.4}
+  .ev67{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.4px;color:var(--gold-deep);margin-bottom:6px}
+  .demo-flag{font-size:10.5px;color:#a08a74;text-align:center;padding:14px 24px 4px;line-height:1.5}
+  .visit{background:var(--espresso);color:var(--cream);border-radius:20px;padding:18px;box-shadow:var(--shadow)}
+  .visit .v-eyebrow{font-family:var(--font-display);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+  .visit h3{font-family:var(--font-display);font-size:19px;font-weight:600}
+  .v-addr{display:block;text-decoration:none;color:var(--cream);font-size:12.5px;line-height:1.5;opacity:.82;margin:12px 0 16px}
+  .v-addr:active{opacity:1}
+  .v-actions{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px}
+  .v-btn{text-decoration:none;text-align:center;font-weight:600;font-size:12px;padding:11px 6px;border-radius:13px;
+    display:flex;flex-direction:column;align-items:center;gap:4px;transition:transform .12s}
+  .v-btn span{font-size:12px}
+  .v-btn:active{transform:scale(.95)}
+  .v-btn.call{background:var(--gold);color:var(--espresso)}
+  .v-btn.wa{background:#25D366;color:#06340f}
+  .v-btn.ig{background:linear-gradient(120deg,#f58529,#dd2a7b,#8134af);color:#fff}
+  .close-x{position:absolute;top:14px;right:16px;background:rgba(0,0,0,.06);border:none;width:32px;height:32px;
+    border-radius:50%;font-size:17px;cursor:pointer;color:var(--espresso);z-index:2}
+</style>
+</head>
+<body>
+<div class="app" id="app">
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="brand">
+      <div class="mark"><span style="width:44px;height:44px;border-radius:50%;background:var(--gold);color:var(--espresso);display:grid;place-items:center;font-family:var(--font-display);font-weight:900;font-size:24px">A</span></div>
+      <div>
+        <div class="name">amara</div>
+        <div class="sub">Coffee &amp; Conversation</div>
+      </div>
+    </div>
+    <div class="tb-actions">
+      <a class="tb-ic call" href="tel:+96897312049" aria-label="Call"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.9c1.5 2.9 3.9 5.3 6.8 6.8l2.3-2.3c.3-.3.7-.4 1-.2 1.1.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.4 21 3 13.6 3 4.5c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.7.1.4 0 .8-.3 1L6.6 10.9z"/></svg></a>
+      <a class="tb-ic wa" href="https://wa.me/96897312049" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.4A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 0 1 6.9 12.6l.5 2.6-2.7-.7A8.2 8.2 0 1 1 12 3.8zM8.9 7.6c-.2 0-.5.1-.7.3-.3.3-.9.9-.9 2.1s.9 2.5 1 2.6c.1.2 1.7 2.7 4.2 3.7 2.1.8 2.5.7 2.9.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.6-.3s-1-.5-1.2-.6c-.2-.1-.4-.1-.5.1l-.7.9c-.1.1-.3.1-.5 0-.2-.1-.9-.4-1.7-1.1-.6-.6-1-1.3-1.2-1.5-.1-.2 0-.4.1-.5l.4-.5c.1-.1.1-.3.2-.4v-.4L11 8c-.1-.3-.3-.3-.5-.3h-.4z"/></svg></a>
+      <a class="tb-ic ig" href="#" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg></a>
+    </div>
+  </div>
+
+  <div class="scroll">
+
+    <!-- ============ HOME ============ -->
+    <div class="view active" id="v-home">
+      <div class="hero">
+        <div class="steam">☕</div>
+        <h1>Your spot between <em>classes.</em></h1>
+        <p>Coffee, PS5, board games, jamming and movie nights. One tap from your SQU schedule.</p>
+        <a class="loc" href="https://www.google.com/maps/search/?api=1&query=Al+Khoud+Muscat+Oman" target="_blank" rel="noopener">📍 Al Khoud, near SQU, Muscat<span class="dir">· Directions</span></a>
+      </div>
+
+      <div class="vibe">
+        <div class="lbl">
+          <span>What's open right now</span>
+          <span class="live-dot"><i></i>Live</span>
+        </div>
+        <div class="zones" id="zones"></div>
+      </div>
+
+      <div class="qa">
+        <button class="a1" onclick="go('events')">
+          <div class="ic">🎟️</div>
+          <div><div class="t">Book an event</div><div class="d">Movies, jamming, workshops</div></div>
+        </button>
+        <button class="a2" onclick="openSlot()">
+          <div class="ic">🎮</div>
+          <div><div class="t">Reserve a slot</div><div class="d">PS5 · TT · board tables</div></div>
+        </button>
+        <button class="a3" onclick="go('menu')">
+          <div class="ic">☕</div>
+          <div><div class="t">See the menu</div><div class="d">Pick by your mood</div></div>
+        </button>
+        <button class="a4" onclick="go('pass')">
+          <div class="ic">🎫</div>
+          <div><div class="t">My pass</div><div class="d">Stamps &amp; rewards</div></div>
+        </button>
+      </div>
+
+      <div class="rail-wrap">
+        <div class="section-head">This week at Amara</div>
+        <div class="rail" id="rail"></div>
+      </div>
+
+      <div class="demo-flag">Interactive demo. Live status, stamps and plans are simulated to show the full experience.</div>
+    </div>
+
+    <!-- ============ EVENTS ============ -->
+    <div class="view" id="v-events">
+      <div class="ev-hero">
+        <div class="badge67"><span class="b-num">A</span><span class="b-sub">amara</span></div>
+        <div class="ev-hero-txt">
+          <h2>The Amara event space</h2>
+          <p>A 6-7 kinda evening: movie nights, live jamming and workshops. Powered by Amara.</p>
+        </div>
+      </div>
+      <div class="pad">
+        <div class="booking-note">🎟️ Book your seat on WhatsApp. Tap any event to reserve.</div>
+        <div class="ev-list" id="evlist"></div>
+      </div>
+    </div>
+
+    <!-- ============ MENU ============ -->
+    <div class="view" id="v-menu">
+      <div class="pad">
+        <div class="section-head">The menu</div>
+        <div class="moods" id="moods"></div>
+        <div class="mood-note" id="moodnote"></div>
+        <div id="menu"></div>
+      </div>
+    </div>
+
+    <!-- ============ PASS ============ -->
+    <div class="view" id="v-pass">
+      <div class="pad">
+        <div class="section-head">Amara Campus Pass</div>
+        <div class="stampcard">
+          <div class="sc-top">
+            <div>
+              <h3>Coffee stamps</h3>
+              <p>Buy 5, your 6th is on us</p>
+            </div>
+            <div class="sc-num" id="stampnum">0 / 6</div>
+          </div>
+          <div class="stamps" id="stamps"></div>
+          <div class="sc-foot">Tap below to add a stamp like the counter would when they scan your pass.</div>
+        </div>
+        <button class="btn gold block" style="margin-top:14px" onclick="addStamp()">Simulate a counter scan</button>
+
+        <div class="bonus">
+          <div class="b-ic">🎮</div>
+          <div>
+            <div class="b-t">10 cups = 1 free hour on the PS5</div>
+            <div class="b-d">Your stamps keep counting toward game time too.</div>
+          </div>
+        </div>
+
+        <div class="deal">
+          <div class="d-k">Student daily deal</div>
+          <div class="d-t">Any iced latte + 1 hr board games — OMR 3.500</div>
+          <div class="d-d">Valid with a student ID, weekdays before 5 PM.</div>
+        </div>
+
+        <button class="btn ghost block" style="margin-top:16px" onclick="installApp()">Add Amara to your home screen</button>
+      </div>
+    </div>
+
+  </div><!-- /scroll -->
+
+  <!-- BOTTOM NAV -->
+  <div class="nav">
+    <button class="on" id="n-home" onclick="go('home')"><span class="ni">🏠</span>Home</button>
+    <button id="n-events" onclick="go('events')"><span class="ni">🎟️</span>Events</button>
+    <button id="n-menu" onclick="go('menu')"><span class="ni">☕</span>Menu</button>
+    <button id="n-pass" onclick="go('pass')"><span class="ni">🎫</span>Pass</button>
+  </div>
+
+  <!-- SHEET -->
+  <div class="sheet-bg" id="sheetbg" onclick="if(event.target===this)closeSheet()">
+    <div class="sheet" id="sheet"></div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+</div>
+
+<script>
+/* ---------------- DATA ---------------- */
+const EVENTS = [
+  {id:'awarapan', tag:'Movie night', glyph:'🎬', title:'Awarapan 2 — Movie Night', date:'Sun, 6 Dec', time:'8:00 PM – 12:00 AM',
+   price:5, extra:'Live jamming by local musicians, plus unlimited coffee.',
+   ticket:'https://wa.me/96897312049', color:'linear-gradient(120deg,#5a1f1f,#20100c)'},
+  {id:'cozy', tag:'Movie + jamming', glyph:'🍿', title:'Cozy Movie Night', date:'Sat, 5 Dec', time:'7:00 PM – 11:00 PM',
+   price:3, extra:'A feature film with a live acoustic set.',
+   ticket:'https://wa.me/96897312049', color:'linear-gradient(120deg,#2b3a52,#13161f)'},
+  {id:'canvas', tag:'Workshop', glyph:'🎨', title:'Canvas Painting Workshop', date:'Fri, 4 Dec', time:'5:00 PM – 7:00 PM',
+   price:8, extra:'Paint, create, unwind. Coffee included. Girls and couples only.',
+   ticket:'https://wa.me/96897312049', color:'linear-gradient(120deg,#6a4b7a,#2a1b33)'},
+  {id:'sipgroove', tag:'DJ night', glyph:'🎧', title:'Sip & Groove · DJ Night', date:'Thu, 10 Dec', time:'5:00 PM onward',
+   price:0, priceText:'Drink minimum', extra:'Just grab a drink and vibe. Stags not allowed.',
+   ticket:'https://wa.me/96897312049', color:'linear-gradient(120deg,#b5622a,#2a1509)'},
+  {id:'jam', tag:'Live music', glyph:'🎤', title:'Live Jamming Night', date:'Sun, 13 Dec', time:'7:00 PM',
+   price:2, extra:'Cover charge, redeemable on drinks.',
+   ticket:'https://wa.me/96897312049', color:'linear-gradient(120deg,#3d5a3f,#141d15)'}
+];
+function priceOf(e){return e.priceText || ('OMR '+e.price.toFixed(3));}
+
+const ZONES = [
+  {ic:'🎮', name:'PS5 Station'},
+  {ic:'🏓', name:'Table Tennis'},
+  {ic:'🎲', name:'Board Games'},
+  {ic:'🎸', name:'Jamming Lounge'}
+];
+const STATUSES = [
+  {cls:'s-open', label:'Open now'},
+  {cls:'s-wait', label:'Free in ~15 min'},
+  {cls:'s-busy', label:'In use'},
+  {cls:'s-open', label:'2 tables left'}
+];
+
+const MENU = [
+  {cat:'ICED', sub:'Regular · Large · OMR', two:true, items:[
+    ['Cappuccino','1.900','2.300'],['Americano','1.700','2.100'],['Spanish Latte','2.100','2.500'],['French Latte','2.100','2.500'],
+    ['Butterscotch Latte','2.100','2.500'],['Caramel Latte','2.100','2.500'],['Mocha Latte','2.100','2.500'],['Hazelnut Latte','2.100','2.500']
+  ]},
+  {cat:'FRAPPE', sub:'Blended & topped · OMR', two:false, items:[
+    ['Chunky Monkey','2.500'],['Banoffee','2.500'],['Caramel','2.400'],['French','2.400'],['Butterscotch','2.400'],['Mocha','2.400'],['Hazelnut','2.400']
+  ]},
+  {cat:'HOT COFFEE', sub:'OMR', two:false, items:[
+    ['Cappuccino','1.800'],['Latte','1.800'],['Cortado','1.600'],['Americano','1.500'],['Espresso','1.200'],['Doppio','1.900']
+  ]},
+  {cat:'HOT CHOCOLATE', sub:'OMR', two:false, items:[
+    ['Classic','1.900'],['Classic Basic','1.700'],["Devil's Dark",'2.100'],['Peanut Butter','2.100'],['Luters','2.100'],['Caramel','2.000'],['Hazelnut','2.000']
+  ]}
+];
+
+const MOODS = [
+  {id:'cram', ic:'📚', label:'Exam cram',
+   note:'Sit in the quiet corner and stay wired: a <b>Hot Cortado</b>, a <b>Doppio</b>, or an <b>Americano</b>.',
+   picks:['Cortado','Doppio','Americano','Espresso']},
+  {id:'game', ic:'🎮', label:'Gaming fuel',
+   note:'Cold, sweet and one-handed for the controller: <b>Iced Spanish Latte</b> and a <b>Chunky Monkey Frappe</b>.',
+   picks:['Spanish Latte','Chunky Monkey','Caramel Latte']},
+  {id:'chill', ic:'🎲', label:'Chill with friends',
+   note:'Grab a board game and a round of iced lattes, then split a <b>Banoffee Frappe</b>.',
+   picks:['French Latte','Banoffee','Mocha Latte','Hazelnut Latte']},
+  {id:'sweet', ic:'🍫', label:'Sweet tooth',
+   note:'Full dessert mode: <b>Chunky Monkey Frappe</b>, <b>Devil\'s Dark</b> hot chocolate, <b>Butterscotch Latte</b>.',
+   picks:['Chunky Monkey',"Devil's Dark",'Butterscotch Latte','Butterscotch']}
+];
+
+/* ---------------- NAV ---------------- */
+function go(v){
+  document.querySelectorAll('.view').forEach(el=>el.classList.remove('active'));
+  document.getElementById('v-'+v).classList.add('active');
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('on'));
+  const n=document.getElementById('n-'+v); if(n)n.classList.add('on');
+  document.querySelector('.scroll').scrollTop=0;
+}
+
+/* ---------------- RENDER: zones ---------------- */
+function renderZones(){
+  const el=document.getElementById('zones');
+  el.innerHTML=ZONES.map((z,i)=>{
+    const s=STATUSES[(Math.floor(Math.random()*STATUSES.length)+i)%STATUSES.length];
+    return `<div class="zone"><div class="z-top"><span class="z-ic">${z.ic}</span><span class="z-name">${z.name}</span></div>
+      <span class="status ${s.cls}"><i></i>${s.label}</span></div>`;
+  }).join('');
+}
+
+/* ---------------- RENDER: event rail + list ---------------- */
+function evPoster(e){
+  return `background:${e.color},radial-gradient(120% 90% at 80% 0%,rgba(255,255,255,.14),transparent 55%)`;
+}
+function renderRail(){
+  document.getElementById('rail').innerHTML=EVENTS.map(e=>`
+    <div class="ev-card" onclick="openEvent('${e.id}')">
+      <div class="poster" style="${evPoster(e)}">
+        <span class="p-glyph">${e.glyph}</span>
+        <span class="tag">${e.tag}</span>
+        <div class="p-body"><span class="p-eyebrow">Amara presents</span><h3>${e.title}</h3></div>
+      </div>
+      <div class="meta">
+        <div class="row">🗓️ ${e.date}</div>
+        <div class="row">⏰ ${e.time}</div>
+        <div class="price">${priceOf(e)}</div>
+      </div>
+    </div>`).join('');
+}
+function renderEvList(){
+  document.getElementById('evlist').innerHTML=EVENTS.map(e=>`
+    <div class="ev-row" onclick="openEvent('${e.id}')">
+      <div class="banner" style="${evPoster(e)}">
+        <span class="p-glyph">${e.glyph}</span>
+        <span class="tag">${e.tag}</span>
+        <div class="p-body"><span class="p-eyebrow">Amara presents</span><h3>${e.title}</h3></div>
+      </div>
+      <div class="body">
+        <div class="when"><span class="pill">🗓️ ${e.date}</span><span class="pill">⏰ ${e.time}</span></div>
+        <p>${e.extra}</p>
+        <div class="foot"><span class="price">${priceOf(e)}</span>
+          <button class="btn gold" onclick="event.stopPropagation();openEvent('${e.id}')">Get tickets</button></div>
+      </div>
+    </div>`).join('');
+}
+
+/* ---------------- RENDER: menu ---------------- */
+let activeMood=null;
+function renderMoods(){
+  document.getElementById('moods').innerHTML=MOODS.map(m=>
+    `<button class="mood" id="m-${m.id}" onclick="toggleMood('${m.id}')"><span>${m.ic}</span>${m.label}</button>`).join('');
+}
+function toggleMood(id){
+  activeMood = activeMood===id ? null : id;
+  document.querySelectorAll('.mood').forEach(b=>b.classList.remove('on'));
+  const note=document.getElementById('moodnote');
+  if(activeMood){
+    document.getElementById('m-'+id).classList.add('on');
+    const m=MOODS.find(x=>x.id===id);
+    note.innerHTML=m.note; note.classList.add('show');
+  } else {note.classList.remove('show');}
+  renderMenu();
+}
+function isRec(name){
+  if(!activeMood) return false;
+  const m=MOODS.find(x=>x.id===activeMood);
+  return m.picks.includes(name);
+}
+function renderMenu(){
+  document.getElementById('menu').innerHTML=MENU.map(c=>{
+    const rows=c.items.map(it=>{
+      const rec=isRec(it[0]);
+      const price = c.two
+        ? `<span>${it[1]}</span><span class="lg">${it[2]}</span>`
+        : `<span>${it[1]}</span>`;
+      return `<div class="menu-item ${rec?'rec':''}">
+        <div class="mi-l"><span class="mi-name">${it[0]}</span>${rec?'<span class="mi-rec">Picked for your mood</span>':''}</div>
+        <div class="mi-price">${price}</div></div>`;
+    }).join('');
+    return `<div class="menu-cat"><h4>${c.cat}</h4>${c.sub?`<div class="cat-sub">${c.sub}</div>`:''}${rows}</div>`;
+  }).join('');
+}
+
+/* ---------------- EVENT DETAIL SHEET (links out to WhatsApp) ---------------- */
+function openEvent(id){
+  const e=EVENTS.find(x=>x.id===id);
+  const s=document.getElementById('sheet');
+  s.innerHTML=`
+    <button class="close-x" onclick="closeSheet()">✕</button>
+    <div class="grab"></div>
+    <span class="ev67">Amara · Event space</span>
+    <h2>${e.title}</h2>
+    <div class="when" style="margin:12px 0 4px"><span class="pill">🗓️ ${e.date}</span><span class="pill">⏰ ${e.time}</span></div>
+    <div class="muted" style="margin-top:8px">${e.extra}</div>
+    <div class="total"><span class="tk">Entry</span><span class="tv">${priceOf(e)}</span></div>
+    <a class="btn block" style="text-align:center;text-decoration:none;display:block" href="${e.ticket}" target="_blank" rel="noopener">Book on WhatsApp</a>
+    <button class="btn ghost block" style="margin-top:10px" onclick="planEvent('${e.id}')">Add to my plans</button>
+    <div class="muted" style="text-align:center;margin-top:12px">Bookings are handled on WhatsApp. Your plans, stamps and menu stay here.</div>`;
+  openSheet();
+}
+function planEvent(id){const e=EVENTS.find(x=>x.id===id);closeSheet();toast('Added to your plans · '+e.title);}
+
+/* ---------------- SLOT RESERVATION SHEET ---------------- */
+let slotZone=null, slotTime=null;
+function openSlot(){
+  slotZone=null; slotTime=null;
+  const s=document.getElementById('sheet');
+  const zones=[['🎮','PS5 Station'],['🏓','Table Tennis'],['🎲','Board Table'],['🎧','Quiet Corner']];
+  const times=['Now','+15 min','+30 min','+45 min','+1 hr'];
+  s.innerHTML=`
+    <button class="close-x" onclick="closeSheet()">✕</button>
+    <div class="grab"></div>
+    <h2>Reserve a slot</h2>
+    <div class="muted">Hold a spot before you walk over. 15-minute quick slots.</div>
+    <div class="slot-grid">${zones.map((z,i)=>
+      `<div class="slot-opt" id="sz-${i}" onclick="pickZone(${i},'${z[1]}')"><div class="so-ic">${z[0]}</div><div class="so-n">${z[1]}</div></div>`).join('')}</div>
+    <div class="q-l" style="font-size:13px;font-weight:600;margin-bottom:8px">Pick a time</div>
+    <div class="times">${times.map((t,i)=>`<div class="time" id="st-${i}" onclick="pickTime(${i},'${t}')">${t}</div>`).join('')}</div>
+    <button class="btn block" onclick="confirmSlot()">Confirm reservation</button>`;
+  openSheet();
+}
+function pickZone(i,name){slotZone=name;document.querySelectorAll('.slot-opt').forEach(e=>e.classList.remove('on'));document.getElementById('sz-'+i).classList.add('on');}
+function pickTime(i,t){slotTime=t;document.querySelectorAll('.time').forEach(e=>e.classList.remove('on'));document.getElementById('st-'+i).classList.add('on');}
+function confirmSlot(){
+  if(!slotZone||!slotTime){toast('Pick a zone and a time');return;}
+  closeSheet(); toast(`${slotZone} held · ${slotTime}. See you soon!`);
+}
+
+/* ---------------- LOYALTY ---------------- */
+let stampCount=0;
+function renderStamps(){
+  const el=document.getElementById('stamps');
+  let html='';
+  for(let i=0;i<6;i++){
+    const reward=i===5;
+    const filled=i<stampCount;
+    html+=`<div class="stamp ${reward?'reward':''} ${filled?'filled':''}">${reward?'★':'☕'}</div>`;
+  }
+  el.innerHTML=html;
+  document.getElementById('stampnum').textContent=stampCount+' / 6';
+}
+function addStamp(){
+  if(stampCount>=6){stampCount=0;renderStamps();toast('Fresh card started ☕');return;}
+  stampCount++; renderStamps();
+  if(stampCount===6){toast('🎉 6th coffee unlocked — free on your next visit!');}
+  else{toast('Stamp added — '+(6-stampCount)+' to go');}
+}
+
+/* ---------------- QR (deterministic, always renders) ---------------- */
+function drawQR(cv,seed){
+  const n=26,ctx=cv.getContext('2d');
+  ctx.fillStyle='#fff';ctx.fillRect(0,0,n,n);
+  let h=0;for(let i=0;i<seed.length;i++){h=(h*31+seed.charCodeAt(i))>>>0;}
+  const rnd=()=>{h=(h*1103515245+12345)&0x7fffffff;return h/0x7fffffff;};
+  ctx.fillStyle='#20140d';
+  for(let y=0;y<n;y++)for(let x=0;x<n;x++){if(rnd()>0.55)ctx.fillRect(x,y,1,1);}
+  // finder squares
+  const finder=(ox,oy)=>{ctx.fillStyle='#20140d';ctx.fillRect(ox,oy,7,7);
+    ctx.fillStyle='#fff';ctx.fillRect(ox+1,oy+1,5,5);
+    ctx.fillStyle='#20140d';ctx.fillRect(ox+2,oy+2,3,3);};
+  ctx.fillStyle='#fff';ctx.fillRect(0,0,8,8);ctx.fillRect(n-8,0,8,8);ctx.fillRect(0,n-8,8,8);
+  finder(0,0);finder(n-7,0);finder(0,n-7);
+}
+
+/* ---------------- SHEET / TOAST / INSTALL ---------------- */
+function openSheet(){document.getElementById('sheetbg').classList.add('open');}
+function closeSheet(){document.getElementById('sheetbg').classList.remove('open');}
+let toastT;
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
+  clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),2600);}
+
+let deferredPrompt=null;
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;});
+function installApp(){
+  if(deferredPrompt){deferredPrompt.prompt();deferredPrompt=null;return;}
+  toast('On your phone: open in the browser menu → “Add to Home Screen”');
+}
+
+/* ---------------- INIT ---------------- */
+renderZones();renderRail();renderEvList();renderMoods();renderMenu();renderStamps();
+setInterval(renderZones, 9000);
+</script>
+</body>
+</html>
