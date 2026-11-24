@@ -149,14 +149,14 @@
         }
         .bd-card img { transition: transform .9s cubic-bezier(.25,1,.5,1); }
         /* Photos drift slowly like a film camera (Ken Burns); animated SVG cards keep their own motion */
-        .bd-card img:not([src$=".svg"]) { animation: kenburns 16s ease-in-out infinite alternate; animation-delay: var(--kb, 0s); }
+        .bd-card img:not([src$=".svg"]) { animation: kenburns 9s ease-in-out infinite alternate; animation-delay: var(--kb, 0s); }
         @keyframes kenburns {
             0%   { transform: scale(1.02) translate(0, 0); }
-            100% { transform: scale(1.14) translate(-2.5%, -2%); }
+            100% { transform: scale(1.24) translate(-5%, -4%); }
         }
         .bd-card:nth-child(even) img:not([src$=".svg"]) { animation-name: kenburns2; }
         @keyframes kenburns2 {
-            0%   { transform: scale(1.14) translate(2%, 1.5%); }
+            0%   { transform: scale(1.24) translate(5%, 3%); }
             100% { transform: scale(1.02) translate(0, 0); }
         }
         /* Light sweep across the image on hover */
@@ -169,6 +169,30 @@
         /* Light sweep also passes on its own every few seconds, staggered card by card */
         .bd-card.in .sweep { animation: autosweep 7s ease-in-out infinite; animation-delay: var(--sw, 1s); }
         @keyframes autosweep { 0%, 70% { transform: translateX(-120%); } 85%, 100% { transform: translateX(120%); } }
+
+
+        /* ===== Themed floating effects on photo cards ===== */
+        .fx { position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 2; }
+        .fx i {
+            position: absolute; bottom: -30px; font-style: normal; font-size: 22px; opacity: 0;
+            filter: drop-shadow(0 3px 6px rgba(0,0,0,.35));
+            animation: fxUp var(--d, 6s) ease-in infinite; animation-delay: var(--t, 0s);
+        }
+        @keyframes fxUp {
+            0%   { transform: translate(0, 0) rotate(0deg) scale(.7); opacity: 0; }
+            15%  { opacity: .95; }
+            60%  { transform: translate(var(--x, 14px), -140px) rotate(var(--r, 18deg)) scale(1); opacity: .9; }
+            100% { transform: translate(calc(var(--x, 14px) * -1), -260px) rotate(calc(var(--r, 18deg) * -1)) scale(.8); opacity: 0; }
+        }
+        /* cafe steam */
+        .fx .steam { width: 34px; height: 90px; bottom: 10px; border-radius: 50%; background: radial-gradient(ellipse, rgba(255,255,255,.7), rgba(255,255,255,0) 70%);
+            filter: blur(6px); animation: steam 4.5s ease-in-out infinite; animation-delay: var(--t, 0s); }
+        @keyframes steam { 0% { transform: translateY(20px) scaleX(.6); opacity: 0; } 35% { opacity: .8; } 100% { transform: translateY(-150px) scaleX(1.6) translateX(18px); opacity: 0; } }
+        /* car showroom light streaks */
+        .fx .streak { left: -40%; width: 40%; height: 3px; bottom: auto; border-radius: 3px; font-size: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,230,160,.95), transparent); filter: blur(.5px);
+            animation: streak 2.6s cubic-bezier(.6,0,.4,1) infinite; animation-delay: var(--t, 0s); }
+        @keyframes streak { 0% { transform: translateX(0); opacity: 0; } 10% { opacity: 1; } 100% { transform: translateX(380%); opacity: 0; } }
 
         /* Scroll reveal */
         .reveal { opacity: 0; transform: translateY(28px); transition: opacity .8s ease, transform .8s cubic-bezier(.2,.8,.2,1); }
@@ -367,27 +391,27 @@
         // ===== Catalog data (edit here to add or remove cards) =====
         // group: used by the filter chips. live: true = real live app/store.
         const catalogs = [
-            { name: 'Aura Lumière', tag: 'Beauty & Salon', group: 'Beauty & Fashion', btn: 'Open Catalog',
+            { name: 'Aura Lumière', fx: ['✨','💄','💅','🌸','✨','💖'], tag: 'Beauty & Salon', group: 'Beauty & Fashion', btn: 'Open Catalog',
               desc: 'Facials, hair styling, blow dry and a luxury bridal studio.',
               img: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=80',
               url: 'design/aura-lumiere.html' },
-            { name: 'Café Amara', tag: 'Coffee & Cafe', group: 'Food & Cafe', badge: 'Newest', live: true, btn: 'Open Live Store',
+            { name: 'Café Amara', fx: 'steam', tag: 'Coffee & Cafe', group: 'Food & Cafe', badge: 'Newest', live: true, btn: 'Open Live Store',
               desc: 'Muscat specialty coffee lounge: menu by mood, PS5, table tennis, movie nights and live jamming. Prices in OMR.',
               img: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80',
               url: 'design/cafe-amara.html' },
-            { name: 'Maison Elara', tag: 'Boutique', group: 'Beauty & Fashion', btn: 'Open Catalog',
+            { name: 'Maison Elara', fx: ['👗','✨','🛍️','💎','👠','✨'], tag: 'Boutique', group: 'Beauty & Fashion', btn: 'Open Catalog',
               desc: 'Ladies boutique: embroidered formal suits, festive wear, tunics and seasonal designer pieces.',
               img: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=800&q=80',
               url: 'design/maison-elara.html' },
-            { name: 'SuuqiFy', tag: 'E-commerce', group: 'E-commerce', badge: 'Oman', live: true, btn: 'Open Live Store',
+            { name: 'SuuqiFy', fx: ['🛒','🏷️','📦','🛍️','💳','🏷️'], tag: 'E-commerce', group: 'E-commerce', badge: 'Oman', live: true, btn: 'Open Live Store',
               desc: 'Oman online store: home and kitchen, electronics, beauty care and lifestyle accessories in OMR, with Cash on Delivery nationwide.',
               img: 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&w=800&q=80',
               url: 'https://suuqify.vercel.app/' },
-            { name: 'BaZariFy', tag: 'E-commerce', group: 'E-commerce', badge: 'Featured', live: true, btn: 'Open Live Store',
+            { name: 'BaZariFy', fx: ['🛍️','🏷️','📦','🛒','⭐','🏷️'], tag: 'E-commerce', group: 'E-commerce', badge: 'Featured', live: true, btn: 'Open Live Store',
               desc: 'Home, kitchen, beauty and electronics. Quality products with Cash on Delivery nationwide.',
               img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80',
               url: 'https://basera-bazar-lac.vercel.app/' },
-            { name: 'Bright Spot', tag: 'E-commerce', group: 'E-commerce', badge: 'Live', live: true, btn: 'Open Live Store',
+            { name: 'Bright Spot', fx: ['💡','🛍️','⭐','🏷️','📦','✨'], tag: 'E-commerce', group: 'E-commerce', badge: 'Live', live: true, btn: 'Open Live Store',
               desc: 'General store: fashion, electronics, beauty, home and kitchen, kids and wellness, with COD and WhatsApp ordering.',
               img: 'https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=800&q=80',
               url: 'https://bright-spot.vercel.app/' },
@@ -399,31 +423,43 @@
               desc: 'Live table status for a Muscat snooker club: snooker, billiards, table tennis and PS5, updated in real time.',
               img: 'img/snooker-cafe.svg',
               url: 'https://the-snooker-cafe.vercel.app/' },
-            { name: 'PUBG Ops', tag: 'Gaming App', group: 'Gaming', badge: 'Live', live: true, btn: 'Open Live App',
+            { name: 'PUBG Ops', fx: ['🎮','🏆','🎯','⚡','🎮','🏆'], tag: 'Gaming App', group: 'Gaming', badge: 'Live', live: true, btn: 'Open Live App',
               desc: 'PUBG account management app: account inventory, buyer leads and sales tracking on a dual-admin dashboard with secure login.',
               img: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80',
               url: 'https://account-ops.vercel.app/login' },
-            { name: 'Bazaar Royale', tag: 'Marketplace', group: 'E-commerce', btn: 'Open Catalog',
+            { name: 'Bazaar Royale', fx: ['👑','✨','🏺','🧣','💎','✨'], tag: 'Marketplace', group: 'E-commerce', btn: 'Open Catalog',
               desc: 'Luxury heritage marketplace: velvet shawls, bridal formals, pottery, brass and handcrafted footwear.',
               img: 'https://images.unsplash.com/photo-1555529771-835f59fc5efe?auto=format&fit=crop&w=800&q=80',
               url: 'design/bazaar-royale.html' },
-            { name: 'Libraria Bookshop', tag: 'Literature', group: 'Lifestyle', btn: 'Open Catalog',
+            { name: 'Libraria Bookshop', fx: ['📖','✨','📚','🔖','📖','✨'], tag: 'Literature', group: 'Lifestyle', btn: 'Open Catalog',
               desc: 'Digital books, parenting guides and literary resources.',
               img: 'https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=800&q=80',
               url: 'design/libraria-bookshop.html' },
-            { name: 'Prestige Motors', tag: 'Car Showroom', group: 'Car Showrooms', btn: 'Open Catalog',
+            { name: 'Prestige Motors', fx: 'streak', tag: 'Car Showroom', group: 'Car Showrooms', btn: 'Open Catalog',
               desc: 'Luxury vehicle inventory and high-performance 4x4 options.',
               img: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80',
               url: 'design/prestige-motors.html' },
-            { name: 'Atelier Guild', tag: 'Art & Craft', group: 'Lifestyle', btn: 'Open Catalog',
+            { name: 'Atelier Guild', fx: ['🎨','🖌️','🏺','✨','🎨','🖌️'], tag: 'Art & Craft', group: 'Lifestyle', btn: 'Open Catalog',
               desc: 'Hand-painted folk art, ceramics, brass and heritage furniture from master artisans.',
               img: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80',
               url: 'design/atelier-guild.html' },
-            { name: 'Super Painters', tag: 'Services', group: 'Services', btn: 'Open Catalog',
+            { name: 'Super Painters', fx: ['🎨','🖌️','💧','🪣','🎨','💧'], tag: 'Services', group: 'Services', btn: 'Open Catalog',
               desc: 'Professional commercial and residential painting services.',
               img: 'https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=800&q=80',
               url: 'design/super-painters.html' }
         ];
+
+
+        // ===== Themed floating effects for photo cards =====
+        function fxHTML(fx) {
+            if (!fx) return '';
+            if (fx === 'steam') return '<div class="fx">' + [30, 45, 60].map((l, k) => `<i class="steam" style="left:${l}%;--t:${k * 1.4}s"></i>`).join('') + '</div>';
+            if (fx === 'streak') return '<div class="fx">' + [22, 48, 70, 35].map((t, k) => `<i class="streak" style="top:${t}%;--t:${k * 0.65}s"></i>`).join('') + '</div>';
+            return '<div class="fx">' + fx.map((e, k) => {
+                const left = 8 + k * 15, d = 5 + (k % 3) * 1.2, t = k * 0.9, x = (k % 2 ? -1 : 1) * (10 + k * 3), r = (k % 2 ? -1 : 1) * 22;
+                return `<i style="left:${left}%;--d:${d}s;--t:${t}s;--x:${x}px;--r:${r}deg">${e}</i>`;
+            }).join('') + '</div>';
+        }
 
         // ===== Render cards =====
         const grid = document.getElementById('grid');
@@ -431,7 +467,7 @@
             const ring = c.live ? 'border-darkhub-accent/60' : 'border-darkhub-border';
             const badge = c.badge ? `<span class="absolute top-3 right-3 z-10 text-[10px] uppercase tracking-widest font-bold px-2.5 py-1 bg-darkhub-accent text-stone-950 rounded-full shadow flex items-center gap-1.5">${c.live ? '<span class="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse"></span>' : ''}${c.badge}</span>` : '';
             return `
-            <div class="bd-card reveal group bg-darkhub-card rounded-2xl overflow-hidden border ${ring} hover:border-darkhub-accent flex flex-col shadow-md" data-group="${c.group}" style="transition-delay:${(i % 3) * 90}ms; --kb:-${(i * 2.3) % 16}s; --sw:${1 + (i % 5) * 1.3}s">
+            <div class="bd-card reveal group bg-darkhub-card rounded-2xl overflow-hidden border ${ring} hover:border-darkhub-accent flex flex-col shadow-md" data-group="${c.group}" style="transition-delay:${(i % 3) * 90}ms; --kb:-${(i * 1.7) % 9}s; --sw:${1 + (i % 5) * 1.3}s">
                 ${badge}
                 <button onclick="shareCard(${i})" class="absolute top-3 left-3 z-10 w-9 h-9 rounded-full bg-black/55 backdrop-blur text-white flex items-center justify-center hover:bg-darkhub-accent hover:text-stone-950 transition-all active:scale-90" aria-label="Share ${c.name}" title="Share">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path stroke-linecap="round" d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>
@@ -439,6 +475,7 @@
                 <div class="h-48 sm:h-56 w-full overflow-hidden relative">
                     <img src="${c.img}" alt="${c.name}" loading="lazy" class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-gradient-to-t from-darkhub-card via-transparent to-transparent"></div>
+                    ${fxHTML(c.fx)}
                     <div class="sweep"></div>
                 </div>
                 <div class="p-5 sm:p-6 flex-1 flex flex-col justify-between">
