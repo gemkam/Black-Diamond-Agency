@@ -156,6 +156,41 @@
 
         #particles { position: absolute; inset: 0; z-index: 10; pointer-events: none; }
 
+
+        /* ===== Logo animation: liquid gold flow + slow 3D gem turn ===== */
+        .logo-gold {
+            background: linear-gradient(100deg,
+                rgb(var(--accent)) 0%, #f7e7b4 18%, rgb(var(--accent)) 34%,
+                #e8b4a8 50%, rgb(var(--accent)) 66%, #fff3cf 82%, rgb(var(--accent)) 100%);
+            background-size: 300% 100%;
+            -webkit-background-clip: text; background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: goldFlow 9s ease-in-out infinite;
+            padding-right: 4px;
+        }
+        @keyframes goldFlow {
+            0%   { background-position: 0% 50%; }
+            50%  { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .logo-gem {
+            transform-style: preserve-3d;
+            filter: drop-shadow(0 0 6px rgb(var(--glow) / .55));
+            animation: gemTurn 7s cubic-bezier(.45,0,.2,1) infinite;
+        }
+        @keyframes gemTurn {
+            0%, 55%  { transform: perspective(200px) rotateY(0deg); }
+            100%     { transform: perspective(200px) rotateY(360deg); }
+        }
+        /* Letters drift in softly once on page load */
+        .logo-word, .logo-gold, .logo-gem { display: inline-block; }
+        .logo-word { animation: logoIn 1.2s cubic-bezier(.2,.8,.2,1) both; }
+        .logo-gold { animation: logoIn 1.2s .25s cubic-bezier(.2,.8,.2,1) both, goldFlow 9s 1.5s ease-in-out infinite; }
+        @keyframes logoIn {
+            from { opacity: 0; transform: translateY(8px); filter: blur(4px); }
+            to   { opacity: 1; transform: none; filter: blur(0); }
+        }
+
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after { animation: none !important; transition: none !important; }
             .reveal { opacity: 1; transform: none; }
@@ -168,8 +203,8 @@
     <header id="siteHeader" class="sticky top-0 z-50 bg-darkhub-bg/85 backdrop-blur-md border-b border-darkhub-border transition-all">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
             <a href="#" class="text-xl sm:text-2xl font-heading font-bold text-darkhub-ink tracking-tight flex items-center gap-2">
-                <svg class="w-6 h-6 text-darkhub-accent" viewBox="0 0 24 24" fill="currentColor"><path d="M6 3h12l4 6-10 12L2 9l4-6zm1.2 2L4.6 9h3.9l1.6-4H7.2zm5 0l-1.6 4h2.8L11.8 5h.4zm2.7 0l1.6 4h3.9l-2.6-4h-2.9zM4.9 11l5.6 6.7L8.4 11H4.9zm5.6 0l1.5 5.4 1.5-5.4h-3zm5.1 0l-2.1 6.7 5.6-6.7h-3.5z"/></svg>
-                Black <span class="text-darkhub-accent font-normal italic">Diamond</span>
+                <svg class="logo-gem w-6 h-6 text-darkhub-accent" viewBox="0 0 24 24" fill="currentColor"><path d="M6 3h12l4 6-10 12L2 9l4-6zm1.2 2L4.6 9h3.9l1.6-4H7.2zm5 0l-1.6 4h2.8L11.8 5h.4zm2.7 0l1.6 4h3.9l-2.6-4h-2.9zM4.9 11l5.6 6.7L8.4 11H4.9zm5.6 0l1.5 5.4 1.5-5.4h-3zm5.1 0l-2.1 6.7 5.6-6.7h-3.5z"/></svg>
+                <span class="logo-word">Black</span> <span class="logo-gold font-normal italic">Diamond</span>
             </a>
 
             <div class="flex items-center gap-2 sm:gap-6">
