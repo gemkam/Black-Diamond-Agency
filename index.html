@@ -27,6 +27,16 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
     <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <!-- Always open at the top: no remembered scroll position, no #section jump -->
+    <script>
+        (function () {
+            try { if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; } catch (e) {}
+            if (location.hash) { try { history.replaceState(null, '', location.pathname + location.search); } catch (e) {} }
+            window.scrollTo(0, 0);
+            window.addEventListener('load', function () { window.scrollTo(0, 0); });
+            window.addEventListener('pageshow', function (e) { if (e.persisted) window.scrollTo(0, 0); });
+        })();
+    </script>
     <!-- Apply saved theme before paint (no flash) -->
     <script>
         (function () {
@@ -699,6 +709,18 @@
             document.getElementById('enquire').scrollIntoView({ behavior: 'smooth', block: 'start' });
             setTimeout(() => { const n = document.getElementById('eqName'); if (n) n.focus({ preventScroll: true }); }, 700);
         }
+
+
+        // ===== In-page links scroll smoothly without leaving #section in the address =====
+        document.addEventListener('click', e => {
+            const a = e.target.closest('a[href^="#"]');
+            if (!a) return;
+            const id = a.getAttribute('href').slice(1);
+            e.preventDefault();
+            if (!id) { window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
+            const el = document.getElementById(id);
+            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
 
         // ===== Theme toggle =====
         function toggleTheme() {
