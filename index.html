@@ -200,14 +200,14 @@
     <!-- Hero -->
     <section id="overview" class="relative w-full h-[580px] sm:h-[680px] flex items-center justify-center text-center overflow-hidden">
         <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-            <div class="hero-slide active" style="background-image: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1920&q=80');"></div>
-            <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1920&q=80');"></div>
-            <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=80');"></div>
-            <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1920&q=80');"></div>
+            <div class="hero-slide active" style="background-image: url('https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1920&q=80');"></div>
+            <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1920&q=80');"></div>
             <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1920&q=80');"></div>
+            <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1920&q=80');"></div>
             <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1920&q=80');"></div>
             <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=1920&q=80');"></div>
-            <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1920&q=80');"></div>
+            <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=80');"></div>
+            <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1920&q=80');"></div>
             <!-- Soft overlay so text stays readable in both modes -->
             <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/70"></div>
         </div>
@@ -283,10 +283,18 @@
         // ===== Catalog data (edit here to add or remove cards) =====
         // group: used by the filter chips. live: true = real live app/store.
         const catalogs = [
+            { name: 'Aura Karachi', tag: 'Beauty & Salon', group: 'Beauty & Fashion', btn: 'Open Catalog',
+              desc: 'Facials, hair styling, blow dry and a luxury bridal studio.',
+              img: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=80',
+              url: 'design/Aura Karachi.html' },
             { name: 'Covo', tag: 'Coffee & Cafe', group: 'Food & Cafe', badge: 'Newest', live: true, btn: 'Open Live Store',
               desc: 'Karachi specialty coffee shop: menu, signature brews and the full cafe experience.',
               img: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80',
               url: 'https://covo-pk-demo.vercel.app/' },
+            { name: 'Zohra Couture', tag: 'Fashion', group: 'Beauty & Fashion', btn: 'Open Catalog',
+              desc: 'Shalwar kameez, luxury formals and seasonal designer wear.',
+              img: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=800&q=80',
+              url: 'design/Zohra Couture.html' },
             { name: 'BaZariFy', tag: 'E-commerce', group: 'Shopping', badge: 'Featured', live: true, btn: 'Open Live Store',
               desc: 'Home, kitchen, beauty and electronics. Quality products with Cash on Delivery nationwide.',
               img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80',
@@ -303,14 +311,6 @@
               desc: 'Dual-admin dashboard for gaming account inventory and lead management, with secure login.',
               img: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80',
               url: 'https://account-ops.vercel.app/login' },
-            { name: 'Aura Karachi', tag: 'Beauty & Salon', group: 'Beauty & Fashion', btn: 'Open Catalog',
-              desc: 'Facials, hair styling, blow dry and a luxury bridal studio.',
-              img: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=80',
-              url: 'design/Aura Karachi.html' },
-            { name: 'Zohra Couture', tag: 'Fashion', group: 'Beauty & Fashion', btn: 'Open Catalog',
-              desc: 'Shalwar kameez, luxury formals and seasonal designer wear.',
-              img: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=800&q=80',
-              url: 'design/Zohra Couture.html' },
             { name: 'Lahore Bazar', tag: 'Marketplace', group: 'Shopping', btn: 'Open Catalog',
               desc: 'Online digital store with multi-niche products and a retail catalog.',
               img: 'https://images.unsplash.com/photo-1555529771-835f59fc5efe?auto=format&fit=crop&w=800&q=80',
