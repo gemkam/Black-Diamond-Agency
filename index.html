@@ -120,9 +120,6 @@
         .hero-slide.active { opacity: 1; transform: scale(1.12); }
         .ss-slide { background-image: url('img/sculpted-slice-hero-wide.jpg'); background-position: center; }
         @media (max-aspect-ratio: 1/1) { .ss-slide { background-image: url('img/sculpted-slice-hero-tall.jpg'); } }
-        #heroCopy, #heroShade { transition: opacity .9s ease, transform .9s ease; }
-        .hero-feature #heroCopy { opacity: 0; transform: translateY(12px); pointer-events: none; }
-        .hero-feature #heroShade { opacity: .2; }
         @media (prefers-reduced-motion: reduce) { .hero-slide, .hero-slide.active { transform: none; } }
         .hero-dot { transition: all .4s ease; }
         .hero-dot.active { width: 28px; background: rgb(var(--accent)); }
@@ -639,14 +636,11 @@
         const dotsWrap = document.getElementById('heroDots');
         dotsWrap.innerHTML = [...slides].map((_, i) => `<button class="hero-dot w-2.5 h-2.5 rounded-full bg-white/60 ${i === 0 ? 'active' : ''}" aria-label="Slide ${i + 1}"></button>`).join('');
         const dots = dotsWrap.querySelectorAll('.hero-dot');
-        const heroSec = slides[0].closest('section');
-        heroSec.classList.toggle('hero-feature', slides[0].classList.contains('ss-slide'));
         let current = 0, timer;
         function goTo(i) {
             slides[current].classList.remove('active'); dots[current].classList.remove('active');
             current = i;
             slides[current].classList.add('active'); dots[current].classList.add('active');
-            heroSec.classList.toggle('hero-feature', slides[current].classList.contains('ss-slide'));
         }
         function auto() { clearInterval(timer); timer = setInterval(() => goTo((current + 1) % slides.length), 4500); }
         dots.forEach((d, i) => d.addEventListener('click', () => { goTo(i); auto(); }));
