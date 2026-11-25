@@ -115,9 +115,15 @@
             position: absolute; inset: 0;
             background-size: cover; background-position: center;
             opacity: 0; transform: scale(1);
-            transition: opacity 1.5s ease-in-out, transform 6s ease-in-out;
+            transition: opacity 1.5s ease-in-out, transform 7s cubic-bezier(.25,.6,.35,1);
         }
-        .hero-slide.active { opacity: 1; transform: scale(1.08); }
+        .hero-slide.active { opacity: 1; transform: scale(1.12); }
+        .ss-slide { background-image: url('img/sculpted-slice-hero-wide.jpg'); background-position: center; }
+        @media (max-aspect-ratio: 1/1) { .ss-slide { background-image: url('img/sculpted-slice-hero-tall.jpg'); } }
+        #heroCopy, #heroShade { transition: opacity .9s ease, transform .9s ease; }
+        .hero-feature #heroCopy { opacity: 0; transform: translateY(12px); pointer-events: none; }
+        .hero-feature #heroShade { opacity: .2; }
+        @media (prefers-reduced-motion: reduce) { .hero-slide, .hero-slide.active { transform: none; } }
         .hero-dot { transition: all .4s ease; }
         .hero-dot.active { width: 28px; background: rgb(var(--accent)); }
 
@@ -324,7 +330,7 @@
     <!-- Hero -->
     <section id="overview" class="relative w-full h-[580px] sm:h-[680px] flex items-center justify-center text-center overflow-hidden">
         <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-            <div class="hero-slide active" style="background-image: url('img/sculpted-slice-hero.jpg');"></div>
+            <div class="hero-slide active ss-slide" role="img" aria-label="Sculpted Slice by Maryam Baker"></div>
             <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1920&q=80');"></div>
             <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1920&q=80');"></div>
             <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1920&q=80');"></div>
@@ -334,13 +340,13 @@
             <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=80');"></div>
             <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1920&q=80');"></div>
             <!-- Soft overlay so text stays readable in both modes -->
-            <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/70"></div>
+            <div id="heroShade" class="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/70"></div>
         </div>
 
         <!-- Floating gold dust -->
         <canvas id="particles"></canvas>
 
-        <div class="relative z-20 max-w-5xl mx-auto px-4 sm:px-6">
+        <div id="heroCopy" class="relative z-20 max-w-5xl mx-auto px-4 sm:px-6">
             <span class="reveal inline-block px-3 sm:px-4 py-1.5 bg-black/50 text-[#f3d27a] text-[10px] sm:text-xs font-bold tracking-widest uppercase rounded-full mb-4 sm:mb-6 border border-[#d4af37]/60 backdrop-blur-md shadow-lg">
                 Executive Digital Showroom
             </span>
@@ -633,11 +639,14 @@
         const dotsWrap = document.getElementById('heroDots');
         dotsWrap.innerHTML = [...slides].map((_, i) => `<button class="hero-dot w-2.5 h-2.5 rounded-full bg-white/60 ${i === 0 ? 'active' : ''}" aria-label="Slide ${i + 1}"></button>`).join('');
         const dots = dotsWrap.querySelectorAll('.hero-dot');
+        const heroSec = slides[0].closest('section');
+        heroSec.classList.toggle('hero-feature', slides[0].classList.contains('ss-slide'));
         let current = 0, timer;
         function goTo(i) {
             slides[current].classList.remove('active'); dots[current].classList.remove('active');
             current = i;
             slides[current].classList.add('active'); dots[current].classList.add('active');
+            heroSec.classList.toggle('hero-feature', slides[current].classList.contains('ss-slide'));
         }
         function auto() { clearInterval(timer); timer = setInterval(() => goTo((current + 1) % slides.length), 4500); }
         dots.forEach((d, i) => d.addEventListener('click', () => { goTo(i); auto(); }));
