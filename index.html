@@ -324,7 +324,8 @@
     <!-- Hero -->
     <section id="overview" class="relative w-full h-[580px] sm:h-[680px] flex items-center justify-center text-center overflow-hidden">
         <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-            <div class="hero-slide active" style="background-image: url('https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1920&q=80');"></div>
+            <div class="hero-slide active" style="background-image: url('img/sculpted-slice-hero.jpg');"></div>
+            <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1920&q=80');"></div>
             <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1920&q=80');"></div>
             <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1920&q=80');"></div>
             <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1920&q=80');"></div>
@@ -455,11 +456,15 @@
         // ===== Catalog data (edit here to add or remove cards) =====
         // group: used by the filter chips. live: true = real live app/store.
         const catalogs = [
+            { name: 'Sculpted Slice', fx: ['🧁','🍰','🍪','🎂','🍫'], tag: 'Bakery Menu', group: 'Food & Cafe', badge: 'Newest', live: true, btn: 'Open Live Menu',
+              desc: 'Digital card and tap-to-order menu for a Muscat home baker: brownies, cupcakes, cookies and customised cakes with photos, OMR prices and one-tap WhatsApp ordering.',
+              img: 'img/sculpted-slice.jpg',
+              url: 'https://baker-mocha.vercel.app/' },
             { name: 'Aura Lumière', tag: 'Beauty & Salon', group: 'Beauty & Fashion', btn: 'Open Catalog',
               desc: 'Facials, hair styling, blow dry and a luxury bridal studio.',
               img: 'img/scenes/salon.svg',
               url: 'design/aura-lumiere.html' },
-            { name: 'Café Amara', fx: 'steam', tag: 'Coffee & Cafe', group: 'Food & Cafe', badge: 'Newest', live: true, btn: 'Open Live Store',
+            { name: 'Café Amara', fx: 'steam', tag: 'Coffee & Cafe', group: 'Food & Cafe', badge: 'Live', live: true, btn: 'Open Live Store',
               desc: 'Muscat specialty coffee lounge: menu by mood, PS5, table tennis, movie nights and live jamming. Prices in OMR.',
               img: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80',
               url: 'design/cafe-amara.html' },
