@@ -176,6 +176,7 @@
         }
         /* Light sweep across the image on hover */
         .vtx { position: absolute; left: 0; bottom: 0; z-index: 3; pointer-events: none; display: flex; flex-direction: column; gap: 2px; padding: 26px 22px 12px 12px; color: #fff; text-shadow: 0 1px 6px rgba(0,0,0,.75); background: radial-gradient(120% 100% at 0% 100%, rgba(42,10,32,.6), rgba(42,10,32,0) 72%); }
+        .vtx.mid { top: 0; bottom: 0; width: 46%; justify-content: center; padding: 0 10px 0 14px; background: linear-gradient(90deg, rgba(20,8,16,.55), rgba(20,8,16,.2) 70%, rgba(20,8,16,0)); }
         .vtx b { font: italic 700 clamp(16px, 4.4vw, 20px)/1.05 "Playfair Display", serif; color: #ffd9e8; }
         .vtx span { font-size: 8.5px; letter-spacing: .26em; text-transform: uppercase; color: #f3d27a; font-weight: 700; }
         .vtx small { font: italic 500 9.5px/1.4 "Playfair Display", serif; color: #fde7ef; margin-top: 1px; }
@@ -480,7 +481,8 @@
               url: 'design/cafe-amara.html' },
             { name: 'Maison Elara', tag: 'Boutique', group: 'Beauty & Fashion', btn: 'Open Catalog',
               desc: 'Ladies boutique: embroidered formal suits, festive wear, tunics and seasonal designer pieces.',
-              img: 'img/scenes/boutique.svg',
+              img: 'img/video/maison-elara.jpg', video: 'img/video/maison-elara.mp4', vpos: 'mid',
+              vtext: '<b>Maison Elara</b><span>Ladies Boutique</span><small>Formal Suits · Festive Wear<br>Tunics · Designer Pieces</small>',
               url: 'design/maison-elara.html' },
             { name: 'SuuqiFy', tag: 'E-commerce', group: 'E-commerce', badge: 'Oman', live: true, btn: 'Open Live Store',
               desc: 'Oman online store: home and kitchen, electronics, beauty care and lifestyle accessories in OMR, with Cash on Delivery nationwide.',
@@ -555,7 +557,7 @@
                     ${c.video ? `<video src="${c.video}" poster="${c.img}" autoplay muted loop playsinline preload="metadata" aria-label="${c.name}" class="w-full h-full object-cover"></video>` : `<img src="${c.img}" alt="${c.name}" loading="lazy" class="w-full h-full object-cover">`}
                     ${c.img.endsWith('.svg') ? '' : '<div class="absolute inset-0 bg-gradient-to-t from-darkhub-card via-transparent to-transparent"></div>'}
                     ${fxHTML(c.fx)}
-                    ${c.vtext ? `<div class="vtx">${c.vtext}</div>` : ''}
+                    ${c.vtext ? `<div class="vtx ${c.vpos || ''}">${c.vtext}</div>` : ''}
                     <div class="sweep"></div>
                 </div>
                 <div class="p-5 sm:p-6 flex-1 flex flex-col justify-between">
