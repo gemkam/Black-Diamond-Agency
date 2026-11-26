@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Black Diamond">
+<meta property="og:title" content="AI Lead Agent | Black Diamond">
+<meta property="og:description" content="AI-assisted lead generation for B2B companies. Live demo with sample data.">
+<link rel="icon" type="image/png" href="/favicon-32.png">
+<title>AI Lead Agent | Demo</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#0a0f1c;--card:#111a2e;--line:#1f2b47;--gold:#e2bd5f;--gold2:#f1d27a;--txt:#e8edf7;--mut:#8b97b3;--ok:#34d399;--warn:#fbbf24;--bad:#f87171;--blue:#60a5fa}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Plus Jakarta Sans",sans-serif;background:radial-gradient(1200px 600px at 80% -10%,#16264a 0,transparent 60%),var(--bg);color:var(--txt);min-height:100vh}
+  h1,h2,h3{font-family:Outfit,sans-serif}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 18px}
+  .demo-bar{background:linear-gradient(90deg,#c9a24a,#f1d27a);color:#1a1405;text-align:center;font-size:12px;font-weight:700;padding:6px 10px;letter-spacing:.3px}
+  header{border-bottom:1px solid var(--line);background:rgba(10,15,28,.85);backdrop-filter:blur(8px);position:sticky;top:0;z-index:20}
+  .hd{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 0}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-family:Outfit}
+  .logo{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,#c9a24a,#f1d27a);display:grid;place-items:center;color:#1a1405;font-weight:900}
+  .brand small{display:block;color:var(--mut);font-weight:500;font-size:11px;font-family:"Plus Jakarta Sans"}
+  .back{color:var(--mut);text-decoration:none;font-size:13px;border:1px solid var(--line);padding:7px 12px;border-radius:9px}
+  .back:hover{color:var(--gold)}
+  nav.tabs{display:flex;gap:6px;overflow-x:auto;padding:12px 0 0}
+  .tab{background:none;border:1px solid var(--line);color:var(--mut);padding:8px 14px;border-radius:10px;font:600 13px "Plus Jakarta Sans";cursor:pointer;white-space:nowrap}
+  .tab.on{background:linear-gradient(135deg,#c9a24a,#f1d27a);color:#1a1405;border-color:transparent}
+  .tab .n{display:inline-block;margin-left:6px;background:var(--bad);color:#fff;border-radius:99px;font-size:10px;padding:1px 6px}
+  main{padding:22px 0 60px}
+  .view{display:none}.view.on{display:block;animation:fade .35s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+  .kpi .l{color:var(--mut);font-size:12px}
+  .kpi .v{font:700 28px Outfit;margin-top:4px}
+  .kpi .d{font-size:11px;color:var(--ok);margin-top:2px}
+  .grid2{display:grid;grid-template-columns:1.4fr 1fr;gap:12px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+  .card h3{font-size:15px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center}
+  .card h3 span{color:var(--mut);font:500 12px "Plus Jakarta Sans"}
+  .bars{display:flex;align-items:flex-end;gap:10px;height:170px;padding-top:8px}
+  .bar{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end}
+  .bar i{display:block;width:100%;border-radius:7px 7px 3px 3px;background:linear-gradient(180deg,#f1d27a,#8a6b25);height:0;transition:height 1s ease}
+  .bar b{font-size:11px;color:var(--mut);font-weight:500}
+  .funnel div{display:flex;justify-content:space-between;align-items:center;margin-bottom:9px;font-size:13px}
+  .funnel .track{flex:1;margin:0 10px;height:9px;background:#0b1324;border-radius:9px;overflow:hidden}
+  .funnel .fill{height:100%;background:linear-gradient(90deg,#60a5fa,#e2bd5f);width:0;transition:width 1.2s ease}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th{text-align:left;color:var(--mut);font-weight:600;padding:9px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+  td{padding:10px 8px;border-bottom:1px solid #18223b;vertical-align:top}
+  .tblwrap{overflow-x:auto}
+  .pill{display:inline-block;padding:3px 9px;border-radius:99px;font-size:11px;font-weight:700;white-space:nowrap}
+  .p-new{background:#1e3a8a55;color:#93c5fd}.p-sent{background:#78350f55;color:#fcd34d}.p-rep{background:#06533955;color:#6ee7b7}.p-meet{background:#5b21b655;color:#c4b5fd}.p-won{background:#14532d;color:#86efac}.p-hot{background:#7f1d1d66;color:#fca5a5}
+  .score{font-weight:800;font-family:Outfit}
+  .tools{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+  input.s,select.s{background:#0b1324;border:1px solid var(--line);color:var(--txt);padding:9px 12px;border-radius:10px;font:500 13px "Plus Jakarta Sans"}
+  input.s{flex:1;min-width:180px}
+  .mail{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:12px}
+  .mail .top{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+  .mail .to{font-weight:700}.mail .to small{display:block;color:var(--mut);font-weight:500}
+  .mail .subj{color:var(--gold2);font-weight:700;margin:8px 0 6px}
+  .mail .body{color:#c6cfe2;font-size:13px;line-height:1.6;white-space:pre-line;background:#0b1324;border:1px solid #18223b;border-radius:10px;padding:12px}
+  .mail textarea{width:100%;min-height:150px;background:#0b1324;border:1px solid var(--gold);color:var(--txt);border-radius:10px;padding:12px;font:13px/1.6 "Plus Jakarta Sans"}
+  .btns{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+  .b{border:0;border-radius:10px;padding:9px 14px;font:700 13px "Plus Jakarta Sans";cursor:pointer}
+  .b-ok{background:var(--ok);color:#052e1c}.b-ed{background:#1f2b47;color:var(--txt)}.b-no{background:transparent;border:1px solid #3b1d1d;color:var(--bad)}
+  .why{font-size:12px;color:var(--mut);margin-top:6px}
+  .done{color:var(--ok);font-weight:700;font-size:13px;margin-top:10px}
+  .empty{text-align:center;color:var(--mut);padding:40px;border:1px dashed var(--line);border-radius:14px}
+  .feed div{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid #18223b;font-size:13px}
+  .feed div:last-child{border:0}
+  .feed .ic{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;flex:none;background:#0b1324}
+  .feed small{display:block;color:var(--mut)}
+  .cta{margin-top:22px;background:linear-gradient(135deg,#16264a,#111a2e);border:1px solid #2b3a5e;border-radius:16px;padding:22px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+  .cta h2{font-size:20px}.cta p{color:var(--mut);font-size:13px;margin-top:4px}
+  .cta a{background:linear-gradient(135deg,#c9a24a,#f1d27a);color:#1a1405;text-decoration:none;font-weight:800;padding:12px 18px;border-radius:12px;font-size:14px}
+  .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(80px);background:#052e1c;border:1px solid var(--ok);color:#a7f3d0;padding:11px 16px;border-radius:12px;font-size:13px;font-weight:600;transition:.3s;z-index:50}
+  .toast.on{transform:translateX(-50%) translateY(0)}
+  @media(max-width:860px){.kpis{grid-template-columns:repeat(2,1fr)}.grid2{grid-template-columns:1fr}.kpi .v{font-size:23px}}
+</style>
+</head>
+<body>
+<div class="demo-bar">LIVE DEMO · All companies, people and numbers below are sample data</div>
+<header>
+  <div class="wrap">
+    <div class="hd">
+      <div class="brand"><div class="logo">AI</div><div>AI Lead Agent<small>Client dashboard · Al Noor Trading LLC (sample)</small></div></div>
+      <a class="back" href="/">← Black Diamond</a>
+    </div>
+    <nav class="tabs">
+      <button class="tab on" data-v="overview">Overview</button>
+      <button class="tab" data-v="leads">Leads</button>
+      <button class="tab" data-v="approve">Emails to approve<span class="n" id="apn">3</span></button>
+      <button class="tab" data-v="replies">Replies &amp; meetings</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- OVERVIEW -->
+  <section class="view on" id="overview">
+    <div class="kpis">
+      <div class="kpi"><div class="l">Leads found this month</div><div class="v" data-c="148">0</div><div class="d">▲ 22% vs last month</div></div>
+      <div class="kpi"><div class="l">Emails sent</div><div class="v" data-c="96">0</div><div class="d">All approved by you first</div></div>
+      <div class="kpi"><div class="l">Replies</div><div class="v" data-c="19">0</div><div class="d">19.8% reply rate</div></div>
+      <div class="kpi"><div class="l">Meetings booked</div><div class="v" data-c="6">0</div><div class="d">2 deals won</div></div>
+    </div>
+    <div class="grid2">
+      <div class="card">
+        <h3>New leads per week <span>Last 6 weeks</span></h3>
+        <div class="bars" id="bars"></div>
+      </div>
+      <div class="card">
+        <h3>Pipeline <span>This month</span></h3>
+        <div class="funnel" id="funnel"></div>
+      </div>
+    </div>
+    <div class="card" style="margin-top:12px">
+      <h3>What the agent did today <span>Thu</span></h3>
+      <div class="feed">
+        <div><span class="ic">🔎</span><div>Found 7 new companies matching your target (facility management, logistics)<small>08:10 · From public business listings</small></div></div>
+        <div><span class="ic">✍️</span><div>Drafted 3 personalised emails, waiting for your approval<small>08:25 · Open "Emails to approve"</small></div></div>
+        <div><span class="ic">💬</span><div>Gulf Coast Logistics replied: "Send me your rates for 20 sites"<small>10:42 · Marked as hot</small></div></div>
+        <div><span class="ic">📅</span><div>Meeting booked with Harbour View Hotel, Sunday 11:00<small>13:05 · Added to calendar</small></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LEADS -->
+  <section class="view" id="leads">
+    <div class="tools">
+      <input class="s" id="q" placeholder="Search company, person or sector">
+      <select class="s" id="st">
+        <option value="">All statuses</option><option>New</option><option>Email sent</option><option>Replied</option><option>Meeting</option><option>Won</option>
+      </select>
+    </div>
+    <div class="card tblwrap">
+      <table>
+        <thead><tr><th>Company</th><th>Contact</th><th>Sector</th><th>City</th><th>Fit score</th><th>Status</th></tr></thead>
+        <tbody id="ltb"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- APPROVE -->
+  <section class="view" id="approve">
+    <p style="color:var(--mut);font-size:13px;margin-bottom:12px">Nothing is sent without you. Approve, edit or skip each draft.</p>
+    <div id="mails"></div>
+  </section>
+
+  <!-- REPLIES -->
+  <section class="view" id="replies">
+    <div class="card tblwrap">
+      <h3>Replies <span>Newest first</span></h3>
+      <table>
+        <thead><tr><th>From</th><th>Message</th><th>When</th><th>Next step</th></tr></thead>
+        <tbody>
+          <tr><td><b>Gulf Coast Logistics</b><br><small style="color:var(--mut)">Operations Manager</small></td><td>Send me your rates for 20 sites. We may start next month.</td><td>Today 10:42</td><td><span class="pill p-hot">Hot · send quote</span></td></tr>
+          <tr><td><b>Harbour View Hotel</b><br><small style="color:var(--mut)">Admin Manager</small></td><td>Sunday 11 AM works. Please come to the main office.</td><td>Today 13:05</td><td><span class="pill p-meet">Meeting Sun 11:00</span></td></tr>
+          <tr><td><b>Seaside Medical Centre</b><br><small style="color:var(--mut)">IT Head</small></td><td>We renew our contract in March. Contact me in February.</td><td>Yesterday</td><td><span class="pill p-sent">Follow up 1 Feb</span></td></tr>
+          <tr><td><b>Peak Engineering</b><br><small style="color:var(--mut)">Procurement</small></td><td>Not needed at the moment, thanks.</td><td>Mon</td><td><span class="pill" style="background:#1f2b47;color:var(--mut)">Closed</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card" style="margin-top:12px">
+      <h3>Upcoming meetings <span>Next 7 days</span></h3>
+      <div class="feed">
+        <div><span class="ic">📅</span><div>Harbour View Hotel · Sunday 11:00<small>Main office · Admin Manager</small></div></div>
+        <div><span class="ic">📅</span><div>Desert Rose Facilities · Tuesday 10:30<small>Online call · Managing Director</small></div></div>
+        <div><span class="ic">📅</span><div>Blue Wave Trading · Wednesday 16:00<small>Their warehouse · Owner</small></div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta">
+    <div><h2>Want this working for your company?</h2><p>We set it up for your sector and target area. You only approve the emails.</p></div>
+    <a href="https://wa.me/96897312049?text=Hi%20I%20saw%20the%20AI%20Lead%20Agent%20demo%20on%20Black%20Diamond" target="_blank" rel="noopener">Talk to us on WhatsApp</a>
+  </div>
+</main>
+<div class="toast" id="toast"></div>
+
+<script>
+const leads = [
+  ['Gulf Coast Logistics','Operations Manager','Logistics','Sohar',92,'Replied'],
+  ['Harbour View Hotel','Admin Manager','Hospitality','Muscat',88,'Meeting'],
+  ['Desert Rose Facilities','Managing Director','Facility management','Muscat',86,'Meeting'],
+  ['Blue Wave Trading','Owner','Trading','Barka',81,'Meeting'],
+  ['Seaside Medical Centre','IT Head','Healthcare','Muscat',79,'Replied'],
+  ['Summit Builders','Projects Director','Construction','Nizwa',77,'Email sent'],
+  ['Crescent Foods','Purchasing Lead','Food distribution','Muscat',74,'Email sent'],
+  ['Oasis Clinics Group','General Manager','Healthcare','Salalah',72,'New'],
+  ['Northstar Freight','Branch Manager','Logistics','Sohar',70,'New'],
+  ['Palm Grove School','Principal','Education','Muscat',68,'Won'],
+  ['Atlas Steel Works','Plant Manager','Manufacturing','Rusayl',66,'New'],
+  ['Silverline Motors','Service Manager','Automotive','Muscat',64,'Won'],
+];
+const pc = {'New':'p-new','Email sent':'p-sent','Replied':'p-rep','Meeting':'p-meet','Won':'p-won'};
+function renderLeads(){
+  const q=document.getElementById('q').value.toLowerCase(), st=document.getElementById('st').value;
+  const rows=leads.filter(l=>(!st||l[5]===st)&&(!q||l.slice(0,4).join(' ').toLowerCase().includes(q)));
+  document.getElementById('ltb').innerHTML = rows.length ? rows.map(l=>`<tr><td><b>${l[0]}</b></td><td>${l[1]}</td><td>${l[2]}</td><td>${l[3]}</td><td class="score" style="color:${l[4]>=80?'#34d399':l[4]>=70?'#fbbf24':'#93c5fd'}">${l[4]}</td><td><span class="pill ${pc[l[5]]}">${l[5]}</span></td></tr>`).join('') : '<tr><td colspan="6" style="text-align:center;color:var(--mut);padding:26px">No leads match</td></tr>';
+}
+document.getElementById('q').oninput=renderLeads; document.getElementById('st').onchange=renderLeads; renderLeads();
+
+const mails = [
+  {to:'Oasis Clinics Group',who:'General Manager · Salalah',subj:'IT support for your clinics in Salalah',why:'Why this lead: 3 branches, hiring IT staff on job boards',
+   body:'Good day,\n\nI noticed Oasis Clinics Group has opened a third branch this year. Many clinics at that size find IT issues start slowing down reception and billing.\n\nWe offer monthly IT support with a fixed fee and a response time you can count on.\n\nWould a 15 minute call next week be useful?\n\nBest regards'},
+  {to:'Northstar Freight',who:'Branch Manager · Sohar',subj:'Faster network for the Sohar warehouse',why:'Why this lead: new warehouse listed in Sohar Freezone',
+   body:'Good day,\n\nCongratulations on the new Sohar warehouse. A reliable network and Wi-Fi across the yard makes scanning and dispatch much faster.\n\nWe can survey the site and send a clear quote within the week.\n\nShall I arrange a visit?\n\nBest regards'},
+  {to:'Atlas Steel Works',who:'Plant Manager · Rusayl',subj:'CCTV and network maintenance contract',why:'Why this lead: 120+ staff, no IT vendor listed',
+   body:'Good day,\n\nPlants like Atlas Steel Works often run CCTV, access control and office PCs with different vendors. We look after all of it under one annual contract.\n\nI would be glad to share how this has reduced downtime for similar plants.\n\nCould we meet for 20 minutes?\n\nBest regards'},
+];
+function renderMails(){
+  const left=mails.filter(m=>!m.done).length;
+  const n=document.getElementById('apn'); n.textContent=left; n.style.display=left?'inline-block':'none';
+  document.getElementById('mails').innerHTML = left ? mails.map((m,i)=>m.done?'':`
+    <div class="mail" id="m${i}">
+      <div class="top"><div class="to">${m.to}<small>${m.who}</small></div><span class="pill p-new">Draft</span></div>
+      <div class="subj">${m.subj}</div>
+      <div class="body" id="b${i}">${m.body}</div>
+      <div class="why">${m.why}</div>
+      <div class="btns">
+        <button class="b b-ok" onclick="act(${i},'ok')">Approve &amp; send</button>
+        <button class="b b-ed" onclick="edit(${i})" id="e${i}">Edit</button>
+        <button class="b b-no" onclick="act(${i},'no')">Skip</button>
+      </div>
+    </div>`).join('') : '<div class="empty">All caught up. The agent will draft new emails tomorrow morning.</div>';
+}
+function edit(i){
+  const b=document.getElementById('b'+i), e=document.getElementById('e'+i);
+  if(b.tagName==='TEXTAREA'){ mails[i].body=b.value; renderMails(); toast('Draft updated'); return; }
+  const t=document.createElement('textarea'); t.id='b'+i; t.value=mails[i].body; b.replaceWith(t); t.focus(); e.textContent='Save';
+}
+function act(i,a){
+  const t=document.getElementById('b'+i); if(t&&t.tagName==='TEXTAREA') mails[i].body=t.value;
+  mails[i].done=true; renderMails();
+  toast(a==='ok' ? 'Demo: email to '+mails[i].to+' would be sent now' : 'Skipped. The agent will not contact '+mails[i].to);
+}
+let tt; function toast(m){const t=document.getElementById('toast'); t.textContent=m; t.classList.add('on'); clearTimeout(tt); tt=setTimeout(()=>t.classList.remove('on'),2600);}
+renderMails();
+
+const weeks=[[18,'W1'],[24,'W2'],[21,'W3'],[31,'W4'],[27,'W5'],[38,'W6']], mx=40;
+document.getElementById('bars').innerHTML=weeks.map(w=>`<div class="bar"><b style="color:var(--txt)">${w[0]}</b><i data-h="${w[0]/mx*100}"></i><b>${w[1]}</b></div>`).join('');
+const fun=[['Found',148],['Contacted',96],['Replied',19],['Meetings',6],['Won',2]];
+document.getElementById('funnel').innerHTML=fun.map(f=>`<div><span style="width:76px">${f[0]}</span><span class="track"><span class="fill" style="display:block" data-w="${Math.max(3,f[1]/148*100)}"></span></span><b>${f[1]}</b></div>`).join('');
+function animate(){
+  document.querySelectorAll('#bars i').forEach(e=>e.style.height=e.dataset.h+'%');
+  document.querySelectorAll('.fill').forEach(e=>e.style.width=e.dataset.w+'%');
+  document.querySelectorAll('[data-c]').forEach(e=>{const end=+e.dataset.c;let v=0;const st=Math.max(1,Math.ceil(end/40));const iv=setInterval(()=>{v=Math.min(end,v+st);e.textContent=v;if(v>=end)clearInterval(iv)},25)});
+}
+setTimeout(animate,150);
+
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on',x===b));
+  document.querySelectorAll('.view').forEach(v=>v.classList.toggle('on',v.id===b.dataset.v));
+  window.scrollTo({top:0,behavior:'smooth'});
+});
+</script>
+</body>
+</html>
