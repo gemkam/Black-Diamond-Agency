@@ -24,7 +24,7 @@
   <rect width="800" height="500" fill="url(#bg)"/>
   <circle cx="60" cy="40" r="260" fill="url(#g1)"/><circle cx="780" cy="480" r="300" fill="url(#g2)"/>
   <text x="40" y="66" font-family="Georgia, serif" font-weight="bold" font-size="36" fill="#fff">Daftar</text>
-  <text x="168" y="60" font-size="13" font-weight="bold" fill="#e8c86e" letter-spacing="1">OFFICE SYSTEM</text>
+  <text x="168" y="60" font-size="13" font-weight="bold" fill="#e8c86e" letter-spacing="1">ERP OFFICE SYSTEM</text>
   <rect x="596" y="34" width="164" height="32" rx="16" fill="#2ecc71"/>
   <circle class="live" cx="617" cy="50" r="5" fill="#fff"/>
   <text x="630" y="55" font-size="12" font-weight="bold" fill="#fff">LIVE DASHBOARD</text>
