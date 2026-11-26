@@ -118,8 +118,10 @@
             transition: opacity 1.5s ease-in-out, transform 7s cubic-bezier(.25,.6,.35,1);
         }
         .hero-slide.active { opacity: 1; transform: scale(1.12); }
-        .ss-slide { background-image: url('img/sculpted-slice-hero-wide.jpg'); background-position: center; }
-        @media (max-aspect-ratio: 1/1) { .ss-slide { background-image: url('img/sculpted-slice-hero-tall.jpg'); } }
+        .ss-slide { background-image: url('img/sculpted-slice-logo.webp'), url('img/sculpted-slice-bg.jpg'); background-repeat: no-repeat; background-size: auto var(--lh, 28%), cover; background-position: center var(--ly, 4%), center; transform-origin: 50% 0; }
+        #heroCopy { margin-top: clamp(70px, 14vh, 150px); }
+        #heroShade { transition: opacity 1.2s ease; }
+        .ss-on #heroShade { opacity: .45; }
         @media (prefers-reduced-motion: reduce) { .hero-slide, .hero-slide.active { transform: none; } }
         .hero-dot { transition: all .4s ease; }
         .hero-dot.active { width: 28px; background: rgb(var(--accent)); }
@@ -641,9 +643,32 @@
             slides[current].classList.remove('active'); dots[current].classList.remove('active');
             current = i;
             slides[current].classList.add('active'); dots[current].classList.add('active');
+            slides[0].parentElement.closest('section').classList.toggle('ss-on', slides[current].classList.contains('ss-slide'));
         }
         function auto() { clearInterval(timer); timer = setInterval(() => goTo((current + 1) % slides.length), 4500); }
         dots.forEach((d, i) => d.addEventListener('click', () => { goTo(i); auto(); }));
+        // Sculpted Slice logo sits in the free space above the hero text, on every screen size
+        const ssSlide = document.querySelector('.ss-slide');
+        function placeLogo() {
+            if (!ssSlide) return;
+            const hero = ssSlide.parentElement.getBoundingClientRect();
+            const copy = document.getElementById('heroCopy');
+            const badge = copy && copy.querySelector('span');
+            if (!badge) return;
+            const band = badge.getBoundingClientRect().top - hero.top;
+            let lh = band * 0.86 / 1.12;
+            lh = Math.min(lh, hero.width * 0.86 / 1.25);
+            lh = Math.max(90, lh);
+            const ly = Math.max(6, (band / 1.12 - lh) / 2);
+            ssSlide.style.setProperty('--lh', lh + 'px');
+            ssSlide.style.setProperty('--ly', ly + 'px');
+        }
+        placeLogo();
+        slides[0].parentElement.closest('section').classList.toggle('ss-on', slides[0].classList.contains('ss-slide'));
+        addEventListener('resize', placeLogo);
+        addEventListener('load', placeLogo);
+        setTimeout(placeLogo, 1600);
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(placeLogo);
         auto();
 
         // ===== Floating gold dust in hero =====
