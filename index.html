@@ -175,6 +175,10 @@
             100% { transform: scale(1.02) translate(0, 0); }
         }
         /* Light sweep across the image on hover */
+        .vtx { position: absolute; left: 0; bottom: 0; z-index: 3; pointer-events: none; display: flex; flex-direction: column; gap: 2px; padding: 26px 22px 12px 12px; color: #fff; text-shadow: 0 1px 6px rgba(0,0,0,.75); background: radial-gradient(120% 100% at 0% 100%, rgba(42,10,32,.6), rgba(42,10,32,0) 72%); }
+        .vtx b { font: italic 700 clamp(16px, 4.4vw, 20px)/1.05 "Playfair Display", serif; color: #ffd9e8; }
+        .vtx span { font-size: 8.5px; letter-spacing: .26em; text-transform: uppercase; color: #f3d27a; font-weight: 700; }
+        .vtx small { font: italic 500 9.5px/1.4 "Playfair Display", serif; color: #fde7ef; margin-top: 1px; }
         .bd-card .sweep {
             position: absolute; inset: 0; pointer-events: none;
             background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,.28) 50%, transparent 70%);
@@ -467,7 +471,8 @@
               url: 'https://baker-mocha.vercel.app/' },
             { name: 'Aura Lumière', tag: 'Beauty & Salon', group: 'Beauty & Fashion', btn: 'Open Catalog',
               desc: 'Facials, hair styling, blow dry and a luxury bridal studio.',
-              img: 'img/scenes/salon.svg',
+              img: 'img/video/aura-lumiere.jpg', video: 'img/video/aura-lumiere.mp4',
+              vtext: '<b>Aura Lumière</b><span>Beauty · Bridal</span><small>Facials · Hair Styling<br>Makeup · Bridal Studio</small>',
               url: 'design/aura-lumiere.html' },
             { name: 'Café Amara', fx: 'steam', tag: 'Coffee & Cafe', group: 'Food & Cafe', badge: 'Live', live: true, btn: 'Open Live Store',
               desc: 'Muscat specialty coffee lounge: menu by mood, PS5, table tennis, movie nights and live jamming. Prices in OMR.',
@@ -547,9 +552,10 @@
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path stroke-linecap="round" d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>
                 </button>
                 <div class="h-48 sm:h-56 w-full overflow-hidden relative">
-                    <img src="${c.img}" alt="${c.name}" loading="lazy" class="w-full h-full object-cover">
+                    ${c.video ? `<video src="${c.video}" poster="${c.img}" autoplay muted loop playsinline preload="metadata" aria-label="${c.name}" class="w-full h-full object-cover"></video>` : `<img src="${c.img}" alt="${c.name}" loading="lazy" class="w-full h-full object-cover">`}
                     ${c.img.endsWith('.svg') ? '' : '<div class="absolute inset-0 bg-gradient-to-t from-darkhub-card via-transparent to-transparent"></div>'}
                     ${fxHTML(c.fx)}
+                    ${c.vtext ? `<div class="vtx">${c.vtext}</div>` : ''}
                     <div class="sweep"></div>
                 </div>
                 <div class="p-5 sm:p-6 flex-1 flex flex-col justify-between">
