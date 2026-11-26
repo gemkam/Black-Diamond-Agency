@@ -177,6 +177,7 @@
         /* Light sweep across the image on hover */
         .vtx { position: absolute; left: 0; bottom: 0; z-index: 3; pointer-events: none; display: flex; flex-direction: column; gap: 2px; padding: 26px 22px 12px 12px; color: #fff; text-shadow: 0 1px 6px rgba(0,0,0,.75); background: radial-gradient(120% 100% at 0% 100%, rgba(42,10,32,.6), rgba(42,10,32,0) 72%); }
         .vtx.mid { top: 0; bottom: 0; width: 46%; justify-content: center; padding: 0 10px 0 14px; background: linear-gradient(90deg, rgba(20,8,16,.55), rgba(20,8,16,.2) 70%, rgba(20,8,16,0)); }
+        .vtx.right { left: auto; right: 0; align-items: flex-end; text-align: right; padding: 26px 12px 12px 22px; background: radial-gradient(120% 100% at 100% 100%, rgba(30,10,45,.65), rgba(30,10,45,0) 72%); }
         .vtx b { font: italic 700 clamp(16px, 4.4vw, 20px)/1.05 "Playfair Display", serif; color: #ffd9e8; }
         .vtx span { font-size: 8.5px; letter-spacing: .26em; text-transform: uppercase; color: #f3d27a; font-weight: 700; }
         .vtx small { font: italic 500 9.5px/1.4 "Playfair Display", serif; color: #fde7ef; margin-top: 1px; }
@@ -512,7 +513,8 @@
               url: 'https://account-ops.vercel.app/login' },
             { name: 'Bazaar Royale', tag: 'Marketplace', group: 'E-commerce', btn: 'Open Catalog',
               desc: 'Luxury heritage marketplace: velvet shawls, bridal formals, pottery, brass and handcrafted footwear.',
-              img: 'img/scenes/bazaar.svg',
+              img: 'img/video/bazaar-royale.jpg', video: 'img/video/bazaar-royale.mp4', vpos: 'right',
+              vtext: '<b>Bazaar Royale</b><span>Luxury Heritage Market</span><small>Velvet Shawls · Bridal Formals<br>Pottery · Brass · Footwear</small>',
               url: 'design/bazaar-royale.html' },
             { name: 'Libraria Bookshop', tag: 'Literature', group: 'Lifestyle', btn: 'Open Catalog',
               desc: 'Digital books, parenting guides and literary resources.',
